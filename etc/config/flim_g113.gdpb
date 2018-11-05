@@ -1,0 +1,11 @@
+# Connect to gDPB 113 in slot 12 of crate 0 with cern16 mapping
+b=C0S12_gdpb113?etc/ipbus_cern16.xml
+
+# Load settings from config script
+@etc/config/config_g113.gdpb
+
+# Switch working mode to GET4 input to FLIM output
+gdpbio 0,0
+
+# Nicely exit after config
+quit

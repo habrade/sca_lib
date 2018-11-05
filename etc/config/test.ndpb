@@ -1,0 +1,64 @@
+
+# Connect a board and print its status
+b=ndpbC.udp.0?etc/ipbus_remchub_ndpb.xml
+
+# make sure the pulser is off
+fp -s
+
+setrocdef
+feb 0
+resetnxi2cbus
+resetnxi2creg
+sfd
+printstatus
+
+# change mode to disable pulser trigger in current nXYTER
+//sxmo ttri=0
+
+setnxactive 1,0
+
+getnx 18
+setnx 18 20
+autovbiass
+setnx 18 40
+
+resetrocnxts
+
+# from ROC/trunk/beamtime/cern-oct12/rocs/init_all.sh 
+# and /ROC/trunk/beamtime/cern-oct12/rocs/set_thresholds.sh
+# Value found for hodoscope B with source
+setnx 18 140
+getnx 18
+
+
+
+printdata -h -s 33000,30.0
+printdata -h -s 33000,30.0
+
+printdata -m -h -s 300,30.0
+
+#enable the ROC internal SYNC messages
+//setsyncs 0,1,thr=0,baud=50,loop=0
+//setaux 0,re=1,fe=1
+# disable ROC internal SYNC messages
+//setsyncs 0,0,thr=0,baud=50,loop=0
+
+# Prepare for taking pulser data
+sxmo ttri=1
+
+# Start nDPB internal pulser to AUX 
+fp -a
+
+# Print 300 messages during at most 30 seconds
+printdata -m -h -s 300,30.0
+
+# Stop nDPB internal pulser
+fp -s
+
+# change mode to disable pulser trigger in current nXYTER
+sxmo ttri=0
+
+# Test automatic setting of the best trim register values in the current FEB
+//autotrim -p -t 800,time=30
+
+ndpbio 0,1

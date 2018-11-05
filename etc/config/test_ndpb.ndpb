@@ -1,0 +1,50 @@
+# Initialize current board
+setrocdef 
+# Select the FEB on First connector
+feb 0
+# Reset the nXYTER
+resetnxi2cbus
+resetnxi2creg
+# Initialize current FEB
+sfd
+
+# Print current status
+printstatus
+
+# Enable nXYTER 0 data readout by FPGA
+//setnxactive 1,0
+# Search for the right VbiasS setting for current FEB
+//autovbiass
+
+# change mode to disable pulser trigger in current nXYTER
+sxmo ttri=0
+# make sure nDPB pulser to nXYTER is disabled
+fp -s
+
+# Configure the SYNC to loopback and write messages in FIFO
+setsyncs 0,1,thr=0,baud=50,loop=0
+//setaux 0,re=1,fe=1
+
+# Switch off all channels except the first in current FEB
+setnx  0 254
+setnx  1 255
+setnx  2 255
+setnx  3 255
+setnx  4 255
+setnx  5 255
+setnx  6 255
+setnx  7 255
+setnx  8 255
+setnx  9 255
+setnx 10 255
+setnx 11 255
+setnx 12 255
+setnx 13 255
+setnx 14 255
+setnx 15 255
+
+# Print 30 messages in hex format
+pd -h 30
+
+# Change IO mode back to default (nXYTER + FLIM)
+ndpbio

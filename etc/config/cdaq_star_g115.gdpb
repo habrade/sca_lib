@@ -1,0 +1,20 @@
+# Connect to gDPB 115 in standalone with lab17 mapping
+b=C0S00_gdpb115?etc/ipbus_star17_gdpb.xml
+
+# Load settings from config script
+@etc/config/config_star_g115.gdpb
+
+# Switch working mode to GET4 input to CDAQ output
+gdpbio 0,1
+
+# Try printing CDAQ data for a full second ~rate/channel
+printdata -c -d time=1
+#printdata -m -d time=1
+#printdata -c -m -d time=1
+
+# Try printing 300 CDAQ messages to see if epochs are ok
+printdata -c -d nmsg=300,time=1
+
+# Nicely exit after config
+//quit
+

@@ -1,0 +1,8 @@
+# Connect to gDPB 103 in standalone with hd17 mapping
+b=C0S06_gdpb103?etc/ipbus_hd17_gdpb.xml
+
+# Switch working mode to PGEN input to CDAQ output
+gdpbio 1,1
+
+# Nicely exit after config
+quit

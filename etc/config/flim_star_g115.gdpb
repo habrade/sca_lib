@@ -1,0 +1,11 @@
+# Connect to gDPB 115 in standalone with lab17 mapping
+b=C0S00_gdpb115?etc/ipbus_star17_gdpb.xml
+
+# Load settings from config script
+@etc/config/config_star_g115.gdpb
+
+# Switch working mode to GET4 input to FLIM output
+gdpbio 0,0
+
+# Nicely exit after config
+//quit

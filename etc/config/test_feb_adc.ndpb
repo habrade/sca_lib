@@ -1,0 +1,72 @@
+# Connect a board and print its status
+//b=ndpbC.udp.0?etc/ipbus_remchub_ndpb.xml
+
+setrocdef
+feb 0
+
+mucswrst
+
+resetnxi2cbus
+resetnxi2creg
+sfd
+printstatus
+
+# change mode to disable pulser trigger in current nXYTER
+sxmo ttri=0
+
+# enable nxyter 0 data readout
+setnxactive 1,0
+
+# Change ADC clock delay to get the readout OK
+setadcclock 14
+
+# disable all nxyter channels to avoid readout
+setnxmask 1
+
+resetrocnxts
+
+fiforst
+getadcdirect 
+
+setadcpatt tm0=0x44,tm1=0x44,tm2=0x44,tm3=0x44
+
+fiforst
+getadcdirect 
+
+fiforst
+getadcdirect 
+
+setadcpatt tm0=0x04,tm1=0x04,tm2=0x04,tm3=0x04
+
+//printdata -c 300,time=1.0
+
+fiforst
+getadcdirect 
+
+setadcpatt tm0=0,tm1=0,tm2=0,tm3=0
+
+fiforst
+getadcdirect 
+
+# ADC progra linked to LED blink command now
+mucled
+
+fiforst
+getadcdirect 
+
+fiforst
+getadcdirect 
+
+getadcdirect
+
+setadcpatt tm0=0x47,tm1=0x47,tm2=0x47,tm3=0x47
+getadcdirect
+
+fiforst
+getadcdirect 
+
+//mucfebadcrw 0x05,val=0x0F
+
+setadcpatt tm0=0x00,tm1=0x00,tm2=0x00,tm3=0x00
+
+ndpbio 0,1

@@ -1,0 +1,218 @@
+# Connect a board and print its status
+//b=ndpbC.udp.0?etc/ipbus_remchub_ndpb.xml
+
+feb 0
+setrocdef
+
+mucswrst
+
+resetnxi2cbus
+resetnxi2creg
+sfd
+printstatus
+
+# change mode to disable pulser trigger in current nXYTER
+sxmo ttri=0
+
+# Read threshold value and then change it
+getnx 18
+setnx 18 20
+
+# enable nxyter 0 data readout
+setnxactive 1,0
+
+# Change the ADC clock delay to one known to work with the 160MHz firmware
+setadcpatt tm0=4,tm1=4,tm2=4,tm3=4
+setadcclock 0
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 1
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 2
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 3
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 4
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 5
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 6
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 7
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 8
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 9
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 10
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 11
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 12
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 13
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 14
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 15
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 16
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 17
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 18
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 19
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 20
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 21
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 22
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 23
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 24
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 25
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 26
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 27
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 28
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 29
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 30
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcclock 31
+getadcdirect
+getadcdirect
+getadcdirect
+getadcdirect
+
+setadcpatt tm0=0,tm1=0,tm2=0,tm3=0

@@ -1,0 +1,64 @@
+########################################################################
+# Configuration script for gdpb113 at CERN SPS 2016                    #
+########################################################################
+
+#Slot 0/1 = BUC SS
+#Slot 2 Ceramic Single Channel + PMT + India
+
+# Set FEET number to default for Nov 2016 setup
+setfeetnb 3
+
+# Set the serial link latency for each FEET
+setseriallatfeet lat=0,feet=0
+setseriallatfeet lat=0,feet=1
+setseriallatfeet lat=1,feet=2
+
+# Try setting all componnents of the module to default (FPGA core, FEET-GET4 and FEET-PADI)
+setmoddef
+
+# disable input link for unused chips with noise
+setdatainmask 0x00ffffff
+
+# Set TOT range for PMT to 200 ps/bin and full range (0-255)
+sendsingleget4sccmd 0x3000000E,1,2 # Bin size to 200 ps
+sendsingleget4sccmd 0x310003FF,1,2 # Range offset to 255 + 2 bins shift
+
+# Set Slot 1 (BSS) to -300 mV threshold
+setpadifeetthr 0x110,0
+
+# Set Slot 2 (BSS) to -300 mV threshold
+setpadifeetthr 0x110,1
+
+# Set PMTs (FEET 2 PADI 0) to -490 mV threshold
+setpadisingleasicthr 0x080,3,2
+
+# Set Bakelite A (FEET 2 PADI 1) to -200 mV threshold
+setpadisingleasicthr 0x160,2,2
+# Set Bakelite A (FEET 2 PADI 1) to -100 mV threshold
+//setpadisingleasicthr 0x1B0,2,2
+
+# Set Bakelite B (FEET 2 PADI 2) to -200 mV threshold
+setpadisingleasicthr 0x160,1,2
+# Set Bakelite B (FEET 2 PADI 2) to -100 mV threshold
+//setpadisingleasicthr 0x1B0,1,2
+
+# Set side channels of Bakelite RPC to 100 mV
+//setpadisinglechanthr 0x1B0,2,5,2
+//setpadisinglechanthr 0x1B0,2,7,2
+//setpadisinglechanthr 0x1B0,1,0,2
+//setpadisinglechanthr 0x1B0,1,1,2
+
+setpadisinglechanthr 0x000,1,3,2
+
+# Set single channel Ceramic RPC (FEET 2 PADI 3) to around -150 mV threshold
+setpadisingleasicthr 0x190,0,2
+
+# disable oscillating channels 22 on FEET 2 => FEET 1 since 19/11/2016
+#maskget4chan  8
+#setfeetchanmask 0x70400000,2
+
+# disable all input channels for checking if GET4s are OK
+#maskallchan
+
+# enable epoch suppression for all GET4s
+setepochsupprall

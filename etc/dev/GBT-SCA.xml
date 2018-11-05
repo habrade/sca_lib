@@ -1,0 +1,29 @@
+<node id="GBT-SCA">
+        <node id="rxAddr"        address="0x0000000" mask="0xff000000" permission="r" />
+        <node id="rxCtrl"        address="0x0000000" mask="0x00ff0000" permission="r" />
+        <node id="rxTransID"     address="0x0000000" mask="0x0000ff00" permission="r" />
+        <node id="rxChn"         address="0x0000000" mask="0x000000ff" permission="r" />
+
+        <node id="rxData"        address="0x0000001" mask="0xffffffff" permission="r" />
+
+        <node id="rxLen"         address="0x0000002" mask="0xff000000" permission="r" />
+        <node id="rxErr"         address="0x0000002" mask="0x00ff0000" permission="r" />
+        <node id="rxFlag"        address="0x0000002" mask="0x00000001" permission="r" />
+
+
+        <node id="txTransID"     address="0x0000004" mask="0xff000000" permission="wr" />
+        <node id="txChn"         address="0x0000004" mask="0x00ff0000" permission="wr" />
+        <node id="txLen"         address="0x0000004" mask="0x0000ff00" permission="wr" />
+        <node id="txCmd"         address="0x0000004" mask="0x000000ff" permission="wr" />
+
+        <node id="txData"        address="0x0000005" mask="0xffffffff" permission="wr" />
+
+
+        <node id="connect"       address="0x0000006" mask="0x00000001" permission="wr" />
+        <node id="rst"           address="0x0000006" mask="0x00000002" permission="wr" />
+        <node id="sendCmd"       address="0x0000006" mask="0x00000004" permission="wr" />
+        <node id="txAddr"        address="0x0000006" mask="0xff000000" permission="wr" />
+
+</node>
+
+

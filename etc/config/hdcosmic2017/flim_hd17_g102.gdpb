@@ -1,0 +1,11 @@
+# Connect to gDPB 102 in standalone with hd17 mapping
+b=C0S04_gdpb102?etc/ipbus_hd17_gdpb.xml
+
+# Load settings from config script
+@etc/config/hdcosmic2017/config_hd17_g102.gdpb
+
+# Switch working mode to GET4 input to FLIM output
+gdpbio 0,0
+
+# Nicely exit after config
+quit

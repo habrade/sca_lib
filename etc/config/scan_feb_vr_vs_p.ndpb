@@ -1,0 +1,42 @@
+# Connect a board and print its status
+b=ndpbC.udp.0?etc/ipbus_remchub_ndpb.xml
+
+setrocdef
+feb 0
+mucswrst
+resetnxi2cbus
+resetnxi2creg
+sfd pos=1
+printstatus
+
+# change mode to disable pulser trigger in current nXYTER
+sxmo ttri=0
+
+# Read threshold value and then change it
+getnx 18
+setnx 18 20
+
+# enable nxyter 0 data readout
+setnxactive 1,0
+
+# Search for the right VbiasS setting for current FEB´
+autovbiass dacbeg=16300,dacend=18100
+
+#enable the ROC internal SYNC messages
+//setsyncs 0,1,thr=0,baud=50,loop=0
+//setaux 0,re=1,fe=1
+
+resetrocnxts
+
+# Set threshold value to old "standard" one
+setnx 18 25
+getnx 18
+
+printdata -d time=10.0
+
+ndpbio 0,1
+
+setnx 18 60
+fiforst
+
+mucscandual valC=0x388C,valD=0x3A55,chanA=0,minA=10000,maxA=20000,stepA=200,chanB=2,minB=5000,maxB=25000,stepB=200,file=scan_vr_vs_fridge_p

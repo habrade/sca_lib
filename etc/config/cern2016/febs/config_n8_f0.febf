@@ -1,0 +1,56 @@
+////////////////////////////////////////////////////////////////////////
+/////////////////////////// nDPB 9 FEB 0 ///////////////////////////////
+# Select a FEB slot
+feb 0
+
+# Software reset the micro-controller to avoid CRC errors
+mucswrst
+
+setrocdef
+resetnxi2cbus
+resetnxi2creg
+sfd
+
+# enable nxyter 0 data readout => done in feb command
+setnxactive 1,0
+
+# change mode to disable pulser trigger in current nXYTER
+sxmo ttri=0
+
+# Read threshold value and then change it
+setnx 18 255
+getnx 18
+setnx 18 50
+getnx 18
+
+# Read new config and print status
+#printstatus
+printmon
+
+# Use FEB Hardcoded default DAC values as OK fro 160MHz OP
+mucfebdacw 0x3A70,0x388C,0x3a55,0x3a55
+
+# Make sure we are in CDAQ output mode
+ndpbio 0,1
+
+# Search for the right VbiasS setting for current FEB´
+autovbiass
+
+# Change the LTS delay to a value matching the 160MHz firmware
+setltsdelay 0x0001
+resetrocnxts
+
+# Read Vbfb value and then change it
+getnx 19
+setnx 19 150
+
+# Enable the internal SYNC messages generation with a period of 
+# 1 EPOCH in order to get all EPOCH messages
+# This hack adds 2.5 M bits/s to the output data, cleaned in 
+# soft-DPB
+setsyncm 0,baud=50
+setsyncs 0,1,thr=0,baud=50,loop=1
+
+#printdata -c -d -s time=10.0
+printid
+

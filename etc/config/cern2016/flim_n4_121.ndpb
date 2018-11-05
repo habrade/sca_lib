@@ -1,0 +1,15 @@
+# Connect to nDPB 121 in slot 1 of crate 0 with cern16 mapping
+b=C0S04_ndpb121?etc/ipbus_cern16.xml
+
+########################################################################
+
+# Load settings from config script
+@etc/config/cern2016/config_n4.ndpb
+
+########################################################################
+
+# Make sure we are in FLIM output mode
+ndpbio 0,0
+
+# Nicely exit after config
+quit

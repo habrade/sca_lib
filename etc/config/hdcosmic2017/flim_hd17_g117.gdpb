@@ -1,0 +1,11 @@
+# Connect to gDPB 117 in standalone with hd17 mapping
+b=C0S10_gdpb117?etc/ipbus_hd17_gdpb.xml
+
+# Load settings from config script
+@etc/config/hdcosmic2017/config_hd17_g117.gdpb
+
+# Switch working mode to GET4 input to FLIM output
+gdpbio 0,0
+
+# Nicely exit after config
+quit

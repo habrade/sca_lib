@@ -1,0 +1,22 @@
+# Connect to nDPB 124 in slot 7 of crate 0 with cern16 mapping
+b=C0S06_ndpb124?etc/ipbus_cern16.xml
+
+########################################################################
+
+# Load settings from config script
+@etc/config/cern2016/config_n6.ndpb
+
+########################################################################
+
+# Read new config and print status for all FEBs
+printstatus
+
+########################################################################
+
+printdata -c -d -s time=2.0
+printdata -c -m -d -s nmsg=100,time=1.0
+
+########################################################################
+
+# Make sure we are in CDAQ output mode
+ndpbio 0,1

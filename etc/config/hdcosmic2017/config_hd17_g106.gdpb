@@ -1,0 +1,67 @@
+########################################################################
+# Configuration script for gdpb106 at LAB 2016-2017                    #
+########################################################################
+
+#Slot 0 = Test boards
+#Slot 1 = Test boards
+#Slot 2 = Test boards
+#Slot 3 = Test boards
+
+# Set FEET number to default for HD 2017 Cosmics setup => 3 (CERN FW) or 4 (STAR FW)
+setfeetnb 3
+//setfeetnb 4
+
+# Set the serial link latency for each FEET
+setseriallatfeet lat=2,feet=0
+setseriallatfeet lat=2,feet=1
+setseriallatfeet lat=2,feet=2
+//setseriallatfeet lat=2,feet=3
+
+# Try setting all componnents of the module to default (FPGA core, FEET-GET4 and FEET-PADI)
+setmoddef
+
+# disable input link for GET4 not connected  FEET 
+setdatainmask 0x00ffffff
+//setdatainmask 0x00efefff
+//setdatainmask 0xffffffff
+//setdatainmask 0x000000ff
+//setdatainmask 0x0000ff00
+//setdatainmask 0x00ff0000
+//setdatainmask 0xff000000
+//setdatainmask 0x0000ffff
+//setdatainmask 0xffff0000
+
+# Set Slot 0 to -300 mV threshold
+setpadifeetthr 0x110,0
+
+# Set Slot 1 to -300 mV threshold
+setpadifeetthr 0x110,1
+
+# Set Slot 2 to -300 mV threshold
+setpadifeetthr 0x110,2
+
+# Set Slot 3 to -210 mV threshold => Only with STAR or updated FW
+//setpadifeetthr 0x155,3
+
+# Enable the STAR trigger readout if available
+//startrigena
+# Disable the STAR trigger readout if available
+//startrigena -d
+
+# Swap the link polarity for the STAR trigger readout if available
+//startrigswap 0x1F
+# Unswap the link polarity for the STAR trigger readout if available
+//startrigswap 0x00
+
+# disable all input channels for checking if GET4s are OK
+//maskallchan
+
+# enable epoch suppression for all GET4s
+setepochsupprall
+
+# Change the TOT range to 102.0 ns with a 400 ps bining
+sendallget4sccmd 0x3000000D
+sendallget4sccmd 0x310001FF
+
+# Disable input link for GET4 7 as is runs crazy
+#setdatainmask 0xffffffef
