@@ -1,5 +1,3 @@
-# !/usr/bin/python
-
 import sys
 
 import uhal
@@ -10,8 +8,12 @@ import sca_defs
 
 
 class Sca:
+
     ScaAddr = 0x00
+
     TransId = 0x01
+
+    debug = 0
 
     connectionFilePath = "etc/ipbus_lab202_gdpb_gbtx.xml"
     deviceId = "C0S00_gdpb202"
@@ -44,8 +46,7 @@ class Sca:
         node.write(0)
         self.hw.dispatch()
 
-        debug = 1
-        if debug:
+        if self.debug:
             print("    txTransID = "), hex(self.getRegValue("txTransID")),;
             print("    txChn = "), hex(self.getRegValue("txChn")),;
             print("    txCmd = "), hex(self.getRegValue("txCmd")),;
@@ -101,7 +102,6 @@ class Sca:
     def readScaId(self):
         # Enable ADC channel, must do this before read chip ID
         self.send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRD, sca_defs.SCA_CTRL_CRD_ENADC)
-        # SCA V2
         self.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_CTRL_R_ID_V2, sca_defs.SCA_CTRL_DATA_R_ID)
         scaId = self.getRegValue("rxData")
         print("SCA ID = %x") % scaId

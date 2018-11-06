@@ -31,16 +31,3 @@ if __name__ == '__main__':
     sca_dev.testGPIO(0x00000000)
     sca_dev.testGPIO(0xffffffff)
 
-    print(" ")
-    print("test ADC")
-    print(" ")
-
-    while True:
-        sca_dev.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_ADC_W_MUX, 6)
-        sca_dev.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_ADC_GO, 1)
-        print("ADC CH 6 = "), hex(sca_dev.getRegValue("rxData"))
-
-        sca_dev.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_ADC_W_MUX, 31)
-        sca_dev.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_ADC_GO, 1)
-        print("CHIP TEMP = "), hex(sca_dev.getRegValue("rxData"))
-        time.sleep(1)
