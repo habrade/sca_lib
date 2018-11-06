@@ -1,92 +1,108 @@
 # !/usr/bin/python
 
-import sys  # For sys.argv and sys.exit
-import time
+import sys
 
 import uhal
 
-from sca_defs import *
+sys.path.append('./')
+
+import sca_defs
 
 
 class Sca:
+    ScaAddr = 0x00
+    TransId = 0x01
 
-    def __init__(self):
-        self.ScaAddr = 0x00
-        self.TransId = 0x01
+    connectionFilePath = "etc/ipbus_lab202_gdpb_gbtx.xml"
+    deviceId = "C0S00_gdpb202"
+    # Creating the HwInterface
+    connectionMgr = uhal.ConnectionManager("file://" + connectionFilePath)
+    hw = connectionMgr.getDevice(deviceId)
 
-    def send_command(self, hw, channel, command, data):
+    # def __init__(self):
 
-        node = hw.getNode("GBT-SCA.txAddr")
+    def send_command(self, channel, command, data):
+
+        node = self.hw.getNode("GBT-SCA.txAddr")
         node.write(self.ScaAddr)
-        node = hw.getNode("GBT-SCA.txTransID")
+        node = self.hw.getNode("GBT-SCA.txTransID")
         node.write(self.TransId)
 
         self.TransId += 1
         if self.TransId == 0xff:  # 0x0 and 0xFF are reserved IDs
             self.TransId = 1
 
-        node = hw.getNode("GBT-SCA.txChn")
+        node = self.hw.getNode("GBT-SCA.txChn")
         node.write(channel)
-        node = hw.getNode("GBT-SCA.txCmd")
+        node = self.hw.getNode("GBT-SCA.txCmd")
         node.write(command)
-        node = hw.getNode("GBT-SCA.txData")
+        node = self.hw.getNode("GBT-SCA.txData")
         node.write(data)
         # start_transaction
-        node = hw.getNode("GBT-SCA.sendCmd")
+        node = self.hw.getNode("GBT-SCA.sendCmd")
         node.write(1)
         node.write(0)
-        hw.dispatch()
+        self.hw.dispatch()
 
         debug = 1
         if debug:
-            print("    txTransID = "), hex(self.getRegValue(hw, "txTransID")),;
-            print("    txChn = "), hex(self.getRegValue(hw, "txChn")),;
-            print("    txCmd = "), hex(self.getRegValue(hw, "txCmd")),;
-            print("    txData = "), hex(self.getRegValue(hw, "txData"))
-            print("    rxAddr = "), hex(self.getRegValue(hw, "rxAddr")),;
-            print("    rxCtrl = "), hex(self.getRegValue(hw, "rxCtrl")),;
-            print("    rxTransID = "), hex(self.getRegValue(hw, "rxTransID")),;
-            print("    rxChn = "), hex(self.getRegValue(hw, "rxChn")),;
-            print("    rxData = "), hex(self.getRegValue(hw, "rxData")),;
-            print("    rxLen = "), hex(self.getRegValue(hw, "rxLen")),;
-            print("    rxErr = "), hex(self.getRegValue(hw, "rxErr"))
+            print("    txTransID = "), hex(self.getRegValue("txTransID")),;
+            print("    txChn = "), hex(self.getRegValue("txChn")),;
+            print("    txCmd = "), hex(self.getRegValue("txCmd")),;
+            print("    txData = "), hex(self.getRegValue("txData"))
+            print("    rxAddr = "), hex(self.getRegValue("rxAddr")),;
+            print("    rxCtrl = "), hex(self.getRegValue("rxCtrl")),;
+            print("    rxTransID = "), hex(self.getRegValue("rxTransID")),;
+            print("    rxChn = "), hex(self.getRegValue("rxChn")),;
+            print("    rxData = "), hex(self.getRegValue("rxData")),;
+            print("    rxLen = "), hex(self.getRegValue("rxLen")),;
+            print("    rxErr = "), hex(self.getRegValue("rxErr"))
             print("")
 
-        #while True:
-        #    if self.checkErr(hw) == 0x00:
+        # while True:
+        #    if self.checkErr(self.hw) == 0x00:
         #       break
 
-    def send_reset(self, hw):
-        node = hw.getNode("GBT-SCA.rst")
+    def send_reset(self):
+        node = self.hw.getNode("GBT-SCA.rst")
         node.write(0)
         node.write(1)
         node.write(0)
-        hw.dispatch()
+        self.hw.dispatch()
 
-    def send_connect(self, hw):
-        node = hw.getNode("GBT-SCA.connect")
+    def send_connect(self):
+        node = self.hw.getNode("GBT-SCA.connect")
         node.write(0)
         node.write(1)
         node.write(0)
-        hw.dispatch()
+        self.hw.dispatch()
 
-    def getRegValue(self, hw, regName):
+    def getRegValue(self, regName):
         nodeName = "GBT-SCA." + regName
-        node = hw.getNode(nodeName)
+        node = self.hw.getNode(nodeName)
         regVal = node.read()
-        hw.dispatch()
+        self.hw.dispatch()
         return regVal
 
-    def checkErr(self, hw):
+    def checkErr(self):
         nodeName = "GBT-SCA.rxFlag"
-        node = hw.getNode(nodeName)
+        node = self.hw.getNode(nodeName)
         rxFlag = node.read()
 
         nodeName = "GBT-SCA.rxErr"
-        node = hw.getNode(nodeName)
+        node = self.hw.getNode(nodeName)
         errVal = node.read()
 
-        hw.dispatch()
+        self.hw.dispatch()
 
         while rxFlag == 1:
             return errVal
+
+    def readScaId(self):
+        # Enable ADC channel, must do this before read chip ID
+        self.send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRD, sca_defs.SCA_CTRL_CRD_ENADC)
+        # SCA V2
+        self.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_CTRL_R_ID_V2, sca_defs.SCA_CTRL_DATA_R_ID)
+        scaId = self.getRegValue("rxData")
+        print("SCA ID = %x") % scaId
+        return scaId

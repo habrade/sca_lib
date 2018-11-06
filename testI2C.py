@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-import random  # For randint
 import sys  # For sys.argv and sys.exit
-import time
 
 import uhal
 
@@ -21,22 +19,15 @@ if __name__ == '__main__':
     sca_dev = sca.Sca()
 
     # Reset Chip
-    sca_dev.send_reset(hw)
+    sca_dev.send_reset()
     # Connect SCA chip
-    sca_dev.send_connect(hw)
+    sca_dev.send_connect()
 
-    # Enable ADC channel, must do this before read chip ID
-    sca_dev.send_command(hw, 0x00, 0x06, 0x10000000)
-    # Read the Chip ID
-    print("Read Chip ID")
-    # SCA V1
-    # send_command(hw, 0x14, 0x91, 0x00000001)
-    # SCA V2
-    sca_dev.send_command(hw, 0x14, 0xD1, 0x00000001)
-    print("Chip ID = "), hex(sca_dev.getRegValue(hw, "rxData"))
+    chipId = sca.readScaId()
+    print("chip id = %x") % chipId
 
     # Enable I2C ch. 0
-    sca_dev.send_command(hw, 0x00, 0x02, 0x08000000)
+    sca_dev.send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRB, sca_defs.SCA_CTRL_CRB_ENI2C0)
 
     # Control register:
     #   FREQ[1:0]   : "00" -> 100kHz, "01" -> 200kHz, "10" -> 400kHz, "11" -> 1MHz
@@ -49,15 +40,13 @@ if __name__ == '__main__':
     #       SCL mode        : Open-drain
     #
     #       Value           : 8'b00001000   -> 8'h08
-    sca_dev.send_command(hw, 0x03, 0x30, 0x88000000)
+    sca_dev.send_command(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_W_CTRL, 0x88000000)
 
     # send reset
-    sca_dev.send_command(hw, 0x03, 0x40, 0xE0B60000)
-    sca_dev.send_command(hw, 0x03, 0xDA, 0x77000000)
-    sca_dev.send_command(hw, 0x03, 0x41, 0x00000000)
-    time.sleep(1)
+    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x40, 0xE0B60000)
+    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0xDA, 0x77000000)
+    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x41, 0x00000000)
 
     # read ID
-    sca_dev.send_command(hw, 0x03, 0x82, 0x77D00000)
-    time.sleep(1)
-    sca_dev.send_command(hw, 0x03, 0x86, 0x77000000)
+    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x82, 0x77D00000)
+    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x86, 0x77000000)
