@@ -4,7 +4,6 @@ import sys
 import time
 
 sys.path.append('./lib')
-import sca_defs
 import scaAdc
 
 if __name__ == '__main__':
@@ -20,11 +19,7 @@ if __name__ == '__main__':
     sca_dev.readScaId()
 
     while True:
-        sca_dev.wSel(6)
-        print("ADC Ch 6 = %x") %sca_dev.startConv()
-        print("OFS = %x") %sca_dev.rOfs()
-        sca_dev.wSel(31)
-        print("SCA Temp  = %x") %sca_dev.startConv()
-        print("OFS = %x") %sca_dev.rOfs()
-
+        for i in range(32):
+            sca_dev.wSel(i)
+            print("ADC Ch %d = %x" % (i, sca_dev.startConv()))
         time.sleep(1)

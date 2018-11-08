@@ -143,21 +143,21 @@ SCA_DAC_R_D = 0x41
 #       CTRL = SCLMODE, NBYTE[4..0], FREQ[1..0]
 #       STATUS
 #       DATA
-SCA_I2C_W_MSK = 0x20
+SCA_I2C_W_MASK = 0x20
 SCA_I2C_W_CTRL = 0x30
 SCA_I2C_W_DATA0 = 0x40
 SCA_I2C_W_DATA1 = 0x50
 SCA_I2C_W_DATA2 = 0x60
 SCA_I2C_W_DATA3 = 0x70
 
-SCA_I2C_R_MSK = 0x21
+SCA_I2C_R_MASK = 0x21
 SCA_I2C_R_CTRL = 0x31
 SCA_I2C_R_DATA0 = 0x41
 SCA_I2C_R_DATA1 = 0x51
 SCA_I2C_R_DATA2 = 0x61
 SCA_I2C_R_DATA3 = 0x71
 
-SCA_I2C_R_STR = 0x11
+SCA_I2C_R_STATUS = 0x11
 
 SCA_I2C_M_7B_W = 0xda  # START multi byte write using 7b addressing
 SCA_I2C_M_7B_R = 0xde  # START multi byte read using 7b addressing
@@ -172,6 +172,9 @@ SCA_I2C_SPEED_100 = 0x0
 SCA_I2C_SPEED_200 = 0x1
 SCA_I2C_SPEED_400 = 0x2
 SCA_I2C_SPEED_1000 = 0x3
+
+SCA_I2C_MODE_OPEN_DRAIN = 0x00
+SCA_I2C_MODE_CMOS = 0x80
 
 # --- JTAG channel ------------------------------------------
 #    not yet implemented
