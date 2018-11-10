@@ -101,12 +101,11 @@ class ScaI2c(sca.Sca):
                     sca_defs.SCA_I2C_SPEED_1000]
         ctrl_reg = self.rCtrlReg(chn)
         if frq in frq_list:
-            frq_reg = frq
+            new_ctrl = (frq << 0) | (ctrl_reg & 0xfc)
+            self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_ctrl << 24)
         else:
-            frq_reg = ctrl_reg & 0x03
+            raise Exception("Frequency out of index")
 
-        new_ctrl = (ctrl_reg & 0b11111100) | frq_reg
-        self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_ctrl << 24)
 
     def setMode(self, chn, mode):
         mode_list = [sca_defs.SCA_I2C_MODE_OPEN_DRAIN, sca_defs.SCA_I2C_MODE_CMOS]
@@ -115,7 +114,7 @@ class ScaI2c(sca.Sca):
             new_reg = (mode << 7) | (current_reg & 0x7f)
             self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_reg << 24)
         else:
-            raise Exception("Channel out of range")
+            raise Exception("Mode out of index")
 
 
     def setTransByteLength(self, chn, nr):

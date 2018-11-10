@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d57f4064-b180-4299-8066-897d7e1c0df0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/scaI2c.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scaI2c.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sca_defs.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sca_defs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testI2C.py" beforeDir="false" afterPath="$PROJECT_DIR$/testBME280.py" afterDir="false" />
-    </list>
+    <list default="true" id="d57f4064-b180-4299-8066-897d7e1c0df0" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,13 +20,13 @@
         <counts>
           <entry key="Python Console" value="8" />
           <entry key="dummy" value="9" />
-          <entry key="py" value="4534" />
+          <entry key="py" value="4559" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="4542" />
+          <entry key="Python" value="4567" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -85,10 +80,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/scaI2c.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="112" column="40" lean-forward="true" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
+            <state relative-caret-position="148">
+              <caret line="114" column="55" selection-start-line="114" selection-start-column="55" selection-end-line="114" selection-end-column="55" />
               <folding>
-                <marker date="1541880157237" expanded="true" signature="87:88" ph="..." />
+                <marker date="1541880194303" expanded="true" signature="87:88" ph="..." />
               </folding>
             </state>
           </provider>
@@ -251,9 +246,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49237472" visible="true" weight="0.2536349" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49237472" visible="true" weight="0.2536349" />
       <window_info id="Structure" order="1" sideWeight="0.5076253" side_tool="true" visible="true" weight="0.2536349" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -266,7 +260,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49919224" visible="true" weight="0.329927" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49919224" visible="true" weight="0.329927" />
       <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.49919224" weight="0.329927" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50080776" side_tool="true" weight="0.329927" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -392,10 +386,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/scaI2c.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="112" column="40" lean-forward="true" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
+        <state relative-caret-position="148">
+          <caret line="114" column="55" selection-start-line="114" selection-start-column="55" selection-end-line="114" selection-end-column="55" />
           <folding>
-            <marker date="1541880157237" expanded="true" signature="87:88" ph="..." />
+            <marker date="1541880194303" expanded="true" signature="87:88" ph="..." />
           </folding>
         </state>
       </provider>
