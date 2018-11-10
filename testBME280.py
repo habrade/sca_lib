@@ -30,7 +30,14 @@ if __name__ == '__main__':
     #       SCL mode        : Open-drain
     #
     #       Value           : 8'b00001000   -> 8'h08
-    sca_dev.send_command(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_W_CTRL, 0x88000000)
+
+    #    sca_dev.send_command(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_W_CTRL, 0x88000000)
+    sca_dev.setFrq(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_SPEED_100)
+    sca_dev.setMode(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_MODE_OPEN_DRAIN)
+    sca_dev.nrByte(sca_defs.SCA_CH_I2C0, 2)
+
+    # BME280 I2C addr
+    addr = 0x77
 
     # send reset
     sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x40, 0xE0B60000)

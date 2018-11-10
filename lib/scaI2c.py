@@ -110,21 +110,19 @@ class ScaI2c(sca.Sca):
 
     def setMode(self, chn, mode):
         mode_list = [sca_defs.SCA_I2C_MODE_OPEN_DRAIN, sca_defs.SCA_I2C_MODE_CMOS]
-        ctrl_reg = self.rCtrlReg(chn)
+        current_reg = self.rCtrlReg(chn)
         if mode in mode_list:
-            mode_reg = mode
+            new_reg = (mode << 7) | (current_reg & 0x7f)
+            self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_reg << 24)
         else:
-            mode_reg = ctrl_reg & 0x80
+            raise Exception("Channel out of range")
 
-        new_ctrl = (ctrl_reg & 0b01111111) | mode_reg
-        self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_ctrl << 24)
 
-    def nrByte(self, chn, nr):
-        ctrl_reg = self.rCtrlReg(chn)
+    def setTransByteLength(self, chn, nr):
+        current_reg = self.rCtrlReg(chn)
         if nr in range(1, 17):
-            nr_reg = nr
+            new_reg = (nr << 2) | (current_reg & 0x83)
+            self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_reg << 24)
         else:
-            nr_reg = ctrl_reg & 0b01111110
+            raise Exception("Channel out of range")
 
-        new_ctrl = (ctrl_reg & 0b10000001) | nr_reg
-        self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, new_ctrl << 24)

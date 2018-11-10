@@ -173,8 +173,8 @@ SCA_I2C_SPEED_200 = 0x1
 SCA_I2C_SPEED_400 = 0x2
 SCA_I2C_SPEED_1000 = 0x3
 
-SCA_I2C_MODE_OPEN_DRAIN = 0x00
-SCA_I2C_MODE_CMOS = 0x80
+SCA_I2C_MODE_OPEN_DRAIN = 0x0
+SCA_I2C_MODE_CMOS = 0x1
 
 # --- JTAG channel ------------------------------------------
 #    not yet implemented
