@@ -2,32 +2,22 @@
 
 import sys  # For sys.argv and sys.exit
 
-import uhal
-
 sys.path.append('./lib')
-import sca
+import scaI2c
 import sca_defs
 
 if __name__ == '__main__':
-    connectionFilePath = "etc/ipbus_lab202_gdpb_gbtx.xml"
-    deviceId = "C0S00_gdpb202"
-
-    # Creating the HwInterface
-    connectionMgr = uhal.ConnectionManager("file://" + connectionFilePath)
-    hw = connectionMgr.getDevice(deviceId)
-
-    sca_dev = sca.Sca()
-
+    sca_dev = scaI2c.ScaI2c()
     # Reset Chip
     sca_dev.send_reset()
     # Connect SCA chip
     sca_dev.send_connect()
 
-    chipId = sca.readScaId()
-    print("chip id = %x") % chipId
+    chipId = sca_dev.readScaId()
+    print "SCA ID = %x" % chipId
 
     # Enable I2C ch. 0
-    sca_dev.send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRB, sca_defs.SCA_CTRL_CRB_ENI2C0)
+    sca_dev.enableChn(sca_defs.SCA_CH_I2C0)
 
     # Control register:
     #   FREQ[1:0]   : "00" -> 100kHz, "01" -> 200kHz, "10" -> 400kHz, "11" -> 1MHz

@@ -8,7 +8,6 @@ import sca_defs
 
 
 class Sca:
-
     ScaAddr = 0x00
 
     TransId = 0x01
@@ -21,7 +20,8 @@ class Sca:
     connectionMgr = uhal.ConnectionManager("file://" + connectionFilePath)
     hw = connectionMgr.getDevice(deviceId)
 
-    # def __init__(self):
+    def __init__(self):
+        pass
 
     def send_command(self, channel, command, data):
 
@@ -47,18 +47,20 @@ class Sca:
         self.hw.dispatch()
 
         if self.debug:
-            print("    txTransID = "), hex(self.getRegValue("txTransID")),;
-            print("    txChn = "), hex(self.getRegValue("txChn")),;
-            print("    txCmd = "), hex(self.getRegValue("txCmd")),;
-            print("    txData = "), hex(self.getRegValue("txData"))
-            print("    rxAddr = "), hex(self.getRegValue("rxAddr")),;
-            print("    rxCtrl = "), hex(self.getRegValue("rxCtrl")),;
-            print("    rxTransID = "), hex(self.getRegValue("rxTransID")),;
-            print("    rxChn = "), hex(self.getRegValue("rxChn")),;
-            print("    rxData = "), hex(self.getRegValue("rxData")),;
-            print("    rxLen = "), hex(self.getRegValue("rxLen")),;
-            print("    rxErr = "), hex(self.getRegValue("rxErr"))
-            print("")
+            print("    txTransID = %x\t") % self.getRegValue("txTransID")
+            print("    rxTransID = %x\n") % self.getRegValue("rxTransID")
+            print("    txChn = %x\t") % self.getRegValue("txChn")
+            print("    rxChn = %x\n") % self.getRegValue("rxChn")
+            print("    txCmd = %x\t") % self.getRegValue("txCmd")
+            print("    rxAddr = %x\n") % self.getRegValue("rxAddr")
+            print("    txData = %x\t") % self.getRegValue("txData")
+            print("    rxData = %x\n") % self.getRegValue("rxData")
+            print(" \t")
+            print("    rxCtrl = %x\n") % self.getRegValue("rxCtrl")
+            print(" \t")
+            print("    rxLen = %x\n") % self.getRegValue("rxLen")
+            print(" \t")
+            print("    rxErr = %x\n") % self.getRegValue("rxErr")
 
         # while True:
         #    if self.checkErr(self.hw) == 0x00:
@@ -106,3 +108,67 @@ class Sca:
         scaId = self.getRegValue("rxData")
         print("SCA ID = %x") % scaId
         return scaId
+
+    def getNodeControlCmd(self, chn, forWrite):
+        if (chn >= 1) and (chn <= 7):
+            if forWrite:
+                return sca_defs.SCA_CTRL_W_CRB
+            else:
+                return sca_defs.SCA_CTRL_R_CRB
+        elif (chn >= 8) and (chn <= 15):
+            if forWrite:
+                return sca_defs.SCA_CTRL_W_CRC
+            else:
+                return sca_defs.SCA_CTRL_R_CRC
+        elif (chn >= 16) and (chn <= 21):
+            if forWrite:
+                return sca_defs.SCA_CTRL_W_CRD
+            else:
+                return sca_defs.SCA_CTRL_R_CRD
+        else:
+            raise Exception("Channel out of range")
+
+    def getChnEnabled(self, chn):
+        if (chn >= 1) and (chn <= 31):
+            readCmd = self.getNodeControlCmd(chn, False)
+            self.send_command(sca_defs.SCA_CH_CTRL, readCmd, 0)
+            mask = self.getRegValue("rxData") >> 24
+            bit = chn & 0x07
+            return mask & (1 << bit)
+        else:
+            raise Exception("Channel out of range")
+
+    def enableChn(self, chn, enabled):
+        readCmd = self.getNodeControlCmd(chn, False)
+        self.send_command(sca_defs.SCA_CH_CTRL, readCmd, 0)
+        mask = self.getRegValue("rxData") >> 24
+        bit = chn & 0x07
+        if enabled:
+            mask |= 1 << bit
+        else:
+            mask &= ~(1 << bit)
+        writeCmd = self.getNodeControlCmd(chn, True)
+        self.send_command(sca_defs.SCA_CH_CTRL, writeCmd, mask)
+
+    def enableAllChannels(self):
+        self.enableChn(sca_defs.SCA_CH_SPI, True)
+        self.enableChn(sca_defs.SCA_CH_GPIO, True)
+        self.enableChn(sca_defs.SCA_CH_I2C0, True)
+        self.enableChn(sca_defs.SCA_CH_I2C1, True)
+        self.enableChn(sca_defs.SCA_CH_I2C2, True)
+        self.enableChn(sca_defs.SCA_CH_I2C3, True)
+        self.enableChn(sca_defs.SCA_CH_I2C4, True)
+        self.enableChn(sca_defs.SCA_CH_I2C5, True)
+        self.enableChn(sca_defs.SCA_CH_I2C6, True)
+        self.enableChn(sca_defs.SCA_CH_I2C7, True)
+        self.enableChn(sca_defs.SCA_CH_I2C8, True)
+        self.enableChn(sca_defs.SCA_CH_I2C9, True)
+        self.enableChn(sca_defs.SCA_CH_I2CA, True)
+        self.enableChn(sca_defs.SCA_CH_I2CB, True)
+        self.enableChn(sca_defs.SCA_CH_I2CC, True)
+        self.enableChn(sca_defs.SCA_CH_I2CD, True)
+        self.enableChn(sca_defs.SCA_CH_I2CE, True)
+        self.enableChn(sca_defs.SCA_CH_I2CF, True)
+        self.enableChn(sca_defs.SCA_CH_JTAG, True)
+        self.enableChn(sca_defs.SCA_CH_ADC, True)
+        self.enableChn(sca_defs.SCA_CH_DAC, True)

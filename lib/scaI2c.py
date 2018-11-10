@@ -8,9 +8,6 @@ import sca_defs
 
 class ScaI2c(sca.Sca):
 
-    def enableChn(self, chn):
-        self.send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRB, chn)
-
     def wCtrlReg(self, chn, val):
         self.send_command(chn, sca_defs.SCA_I2C_W_CTRL, val << 24)
 
