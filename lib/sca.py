@@ -1,10 +1,8 @@
 import sys
-
 import uhal
+import sca_defs
 
 sys.path.append('./')
-
-import sca_defs
 
 
 class Sca(object):
