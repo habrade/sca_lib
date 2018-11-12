@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d57f4064-b180-4299-8066-897d7e1c0df0" name="Default Changelist" comment="" />
+    <list default="true" id="d57f4064-b180-4299-8066-897d7e1c0df0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sca.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sca.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scaAdc.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sca_adc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scaGpio.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sca_gpio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scaI2c.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sca_i2c.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testADC.py" beforeDir="false" afterPath="$PROJECT_DIR$/testADC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testBME280.py" beforeDir="false" afterPath="$PROJECT_DIR$/testBME280.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testGPIO.py" beforeDir="false" afterPath="$PROJECT_DIR$/testGPIO.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/sca$sca.coverage" NAME="sca Coverage Results" MODIFIED="1542013622439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-588303226">
@@ -18,27 +30,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="8" />
-          <entry key="dummy" value="9" />
-          <entry key="py" value="4559" />
+          <entry key="Python Console" value="37" />
+          <entry key="dummy" value="182" />
+          <entry key="py" value="5351" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="4567" />
+          <entry key="PLAIN_TEXT" value="182" />
+          <entry key="Python" value="5388" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="11" />
-          <entry key="xml" value="1" />
+          <entry key="py" value="16" />
+          <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="11" />
-          <entry key="XML" value="1" />
+          <entry key="Python" value="16" />
+          <entry key="XML" value="3" />
         </counts>
       </usages-collector>
     </session>
@@ -48,22 +60,54 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/etc/dev/GBT-SCA.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="390">
+              <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/etc/dev/GBTx_dev.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/sca.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="138" column="24" lean-forward="true" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
+            <state relative-caret-position="390">
+              <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1541876825762" expanded="true" signature="394:413" ph="..." />
-                <marker date="1541876825762" expanded="true" signature="407:413" ph="..." />
+                <marker date="1542017662082" expanded="true" signature="442:461" ph="..." />
+                <marker date="1542017662082" expanded="true" signature="455:461" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/sca_adc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/sca_gpio.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/sca_i2c.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -71,20 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/sca_defs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="175" column="18" selection-start-line="175" selection-start-column="18" selection-end-line="175" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/scaI2c.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="114" column="55" selection-start-line="114" selection-start-column="55" selection-end-line="114" selection-end-column="55" />
-              <folding>
-                <marker date="1541880194303" expanded="true" signature="87:88" ph="..." />
-              </folding>
+            <state relative-caret-position="-1882">
+              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -92,49 +124,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testADC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/scaAdc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state relative-caret-position="255">
+              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
               <folding>
-                <marker date="1541539078804" expanded="true" signature="113:114" ph="..." />
-                <marker date="1541539078804" expanded="true" signature="113:122" ph="..." />
+                <element signature="e#19#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/scaGpio.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-              <folding>
-                <marker date="1541535825924" expanded="true" signature="87:93" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="114:223" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="258:267" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="438:447" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="438:568" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="592:601" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="699:708" ph="..." />
-                <marker date="1541535825924" expanded="true" signature="870:879" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testBME280.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="42" column="63" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
+            <state relative-caret-position="525">
+              <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+              <folding>
+                <marker date="1542015112435" expanded="true" signature="142:573" ph="..." />
+                <marker date="1542015112435" expanded="true" signature="380:573" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testGPIO.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#19#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -149,12 +168,16 @@
       <list>
         <option value="$PROJECT_DIR$/lib/__init__.py" />
         <option value="$PROJECT_DIR$/testSCA.py" />
-        <option value="$PROJECT_DIR$/testADC.py" />
-        <option value="$PROJECT_DIR$/lib/sca.py" />
         <option value="$PROJECT_DIR$/testI2C.py" />
-        <option value="$PROJECT_DIR$/testBME280.py" />
         <option value="$PROJECT_DIR$/lib/sca_defs.py" />
         <option value="$PROJECT_DIR$/lib/scaI2c.py" />
+        <option value="$PROJECT_DIR$/lib/sca_adc.py" />
+        <option value="$PROJECT_DIR$/lib/sca_gpio.py" />
+        <option value="$PROJECT_DIR$/lib/sca_i2c.py" />
+        <option value="$PROJECT_DIR$/testBME280.py" />
+        <option value="$PROJECT_DIR$/testADC.py" />
+        <option value="$PROJECT_DIR$/testGPIO.py" />
+        <option value="$PROJECT_DIR$/lib/sca.py" />
       </list>
     </option>
   </component>
@@ -231,6 +254,35 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="sca" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="sca" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lib" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lib/sca.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.sca" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -244,25 +296,36 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49237472" visible="true" weight="0.2536349" />
-      <window_info id="Structure" order="1" sideWeight="0.5076253" side_tool="true" visible="true" weight="0.2536349" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49343064" visible="true" weight="0.2536349" />
+      <window_info id="Structure" order="1" sideWeight="0.5065693" side_tool="true" visible="true" weight="0.2536349" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" weight="0.329927" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329927" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49919224" visible="true" weight="0.329927" />
-      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.49919224" weight="0.329927" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50080776" side_tool="true" weight="0.329927" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49919224" weight="0.329927" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.4983845" weight="0.329927" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5016155" side_tool="true" weight="0.329927" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -302,38 +365,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/etc/dev/GBT-SCA.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/back__init__.py" />
     <entry file="file://$PROJECT_DIR$/testSCA.py" />
-    <entry file="file://$PROJECT_DIR$/testGPIO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testADC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/scaAdc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding>
-            <marker date="1541539078804" expanded="true" signature="113:114" ph="..." />
-            <marker date="1541539078804" expanded="true" signature="113:122" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testI2C.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -345,51 +378,105 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/scaAdc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/scaI2c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/dev/get4_dev.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-14" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/dev/GBTx_dev.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/dev/GBT-SCA.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/sca_i2c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/sca_gpio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/sca_defs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1882">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testADC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
           <folding>
-            <marker date="1541535825924" expanded="true" signature="87:93" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="114:223" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="258:267" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="438:447" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="438:568" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="592:601" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="699:708" ph="..." />
-            <marker date="1541535825924" expanded="true" signature="870:879" ph="..." />
+            <element signature="e#19#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/sca_adc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/sca.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1542017662082" expanded="true" signature="442:461" ph="..." />
+            <marker date="1542017662082" expanded="true" signature="455:461" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testGPIO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#19#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testBME280.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="42" column="63" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/sca.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="138" column="24" lean-forward="true" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
+        <state relative-caret-position="525">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1541876825762" expanded="true" signature="394:413" ph="..." />
-            <marker date="1541876825762" expanded="true" signature="407:413" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/sca_defs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="175" column="18" selection-start-line="175" selection-start-column="18" selection-end-line="175" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/scaI2c.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="114" column="55" selection-start-line="114" selection-start-column="55" selection-end-line="114" selection-end-column="55" />
-          <folding>
-            <marker date="1541880194303" expanded="true" signature="87:88" ph="..." />
+            <marker date="1542015112435" expanded="true" signature="142:573" ph="..." />
+            <marker date="1542015112435" expanded="true" signature="380:573" ph="..." />
           </folding>
         </state>
       </provider>

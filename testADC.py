@@ -4,11 +4,11 @@ import sys
 import time
 
 sys.path.append('./lib')
-import scaAdc
+import sca_adc
 
 if __name__ == '__main__':
 
-    sca_dev = scaAdc.ScaAdc()
+    sca_dev = sca_adc.ScaAdc()
 
     # Reset Chip
     sca_dev.send_reset()
@@ -16,10 +16,10 @@ if __name__ == '__main__':
     sca_dev.send_connect()
 
     # Read Chip ID
-    sca_dev.readScaId()
+    sca_dev.read_sca_id()
 
     while True:
         for i in range(32):
-            sca_dev.wSel(i)
-            print("ADC Ch %d = %x" % (i, sca_dev.startConv()))
+            sca_dev.w_sel(i)
+            print("ADC Ch %d = %x" % (i, sca_dev.start_conv()))
         time.sleep(1)
