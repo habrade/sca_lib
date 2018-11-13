@@ -14,10 +14,7 @@ class Sca(object):
     """
     SCA basic methods
     """
-    SCA_ADDR = 0x00
-
     trans_id = 0x01
-
     debug = 0
 
     connectionFilePath = "etc/ipbus_lab202_gdpb_gbtx.xml"
@@ -26,12 +23,12 @@ class Sca(object):
     connectionMgr = uhal.ConnectionManager("file://" + connectionFilePath)
     hw = connectionMgr.getDevice(deviceId)
 
-    def __init__(self):
-        pass
+    def __init__(self, sca_addr=0x00):
+        self.__SCA_ADDR = sca_addr
 
     def send_command(self, channel, command, data):
         node = self.hw.getNode("GBT-SCA.txAddr")
-        node.write(self.SCA_ADDR)
+        node.write(self.__SCA_ADDR)
         node = self.hw.getNode("GBT-SCA.txTransID")
         node.write(self.trans_id)
 

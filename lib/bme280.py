@@ -14,6 +14,7 @@ class BME280(sca_i2c.ScaI2c):
                  h_mode=bme280_defs.BME280_OSAMPLE_1,
                  standby=bme280_defs.BME280_STANDBY_250, filter=bme280_defs.BME280_FILTER_off,
                  **kwargs):
+        sca_i2c.ScaI2c.__init__(chn=0)
         self._logger = logging.getLogger('__name__')
         # Check that t_mode is valid.
         if t_mode not in [bme280_defs.BME280_OSAMPLE_1, bme280_defs.BME280_OSAMPLE_2, bme280_defs.BME280_OSAMPLE_4,
