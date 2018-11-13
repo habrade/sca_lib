@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import sys
-import time
 
 sys.path.append('./lib')
 import sca_defs
@@ -18,8 +17,7 @@ if __name__ == '__main__':
     sca_dev.read_sca_id()
 
     # Enable GPIO
-    print("Enable GPIO")
-    sca_dev.enable_gpio()
+    sca_dev.enable_chn(sca_defs.SCA_CH_GPIO, True)
 
     # GPIO Direction Set
     sca_dev.set_direction(0xffffffff)

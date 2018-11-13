@@ -7,7 +7,7 @@ import sca_defs
 sys.path.append('./')
 
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class Sca(object):
