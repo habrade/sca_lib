@@ -1,9 +1,13 @@
 import sys
+import logging
 
 sys.path.append('./')
 
 import sca
 import sca_defs
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 
 class ScaGpio(sca.Sca):
@@ -28,13 +32,13 @@ class ScaGpio(sca.Sca):
 
     def test_gpio(self, pins):
         debug = 1
-        print "set GPIO value: %x" % pins
+        log.info("set GPIO value: %x" % pins)
         self.send_command(sca_defs.SCA_CH_GPIO, sca_defs.SCA_GPIO_W_DATAOUT, pins)
         if debug:
             print "Get GPIO value"
         self.send_command(sca_defs.SCA_CH_GPIO, sca_defs.SCA_GPIO_R_DATAOUT, 0)
-        print "GPIO = %x" % self.get_reg_value("rxData")
+        log.info("GPIO = %x" % self.get_reg_value("rxData"))
         if self.get_reg_value("rxData") == pins:
-            print "pass!"
+            log.info("pass!")
         else:
             raise ValueError('oops!')

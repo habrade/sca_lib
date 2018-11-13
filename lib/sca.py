@@ -1,8 +1,13 @@
 import sys
+import logging
+
 import uhal
 import sca_defs
 
 sys.path.append('./')
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 
 class Sca(object):
@@ -47,20 +52,20 @@ class Sca(object):
         self.hw.dispatch()
 
         if self.debug:
-            print "    txTransID = %x\t" % self.get_reg_value("txTransID")
-            print "    rxTransID = %x\n" % self.get_reg_value("rxTransID")
-            print "    txChn = %x\t" % self.get_reg_value("txChn")
-            print "    rxChn = %x\n" % self.get_reg_value("rxChn")
-            print "    txCmd = %x\t" % self.get_reg_value("txCmd")
-            print "    rxAddr = %x\n" % self.get_reg_value("rxAddr")
-            print "    txData = %x\t" % self.get_reg_value("txData")
-            print "    rxData = %x\n" % self.get_reg_value("rxData")
-            print " \t"
-            print "    rxCtrl = %x\n" % self.get_reg_value("rxCtrl")
-            print " \t"
-            print "    rxLen = %x\n" % self.get_reg_value("rxLen")
-            print " \t"
-            print "    rxErr = %x\n" % self.get_reg_value("rxErr")
+            log.debug("    txTransID = %x\t" % self.get_reg_value("txTransID"))
+            log.debug("    rxTransID = %x\n" % self.get_reg_value("rxTransID"))
+            log.debug("    txChn = %x\t" % self.get_reg_value("txChn"))
+            log.debug("    rxChn = %x\n" % self.get_reg_value("rxChn"))
+            log.debug("    txCmd = %x\t" % self.get_reg_value("txCmd"))
+            log.debug("    rxAddr = %x\n" % self.get_reg_value("rxAddr"))
+            log.debug("    txData = %x\t" % self.get_reg_value("txData"))
+            log.debug("    rxData = %x\n" % self.get_reg_value("rxData"))
+            log.debug(" \t")
+            log.debug("    rxCtrl = %x\n" % self.get_reg_value("rxCtrl"))
+            log.debug(" \t")
+            log.debug("    rxLen = %x\n" % self.get_reg_value("rxLen"))
+            log.debug(" \t")
+            log.debug("    rxErr = %x\n" % self.get_reg_value("rxErr"))
 
         # while True:
         #    if self.checkErr(self.hw) == 0x00:
@@ -106,7 +111,7 @@ class Sca(object):
         self.send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRD, sca_defs.SCA_CTRL_CRD_ENADC)
         self.send_command(sca_defs.SCA_CH_ADC, sca_defs.SCA_CTRL_R_ID_V2, sca_defs.SCA_CTRL_DATA_R_ID)
         sca_id = self.get_reg_value("rxData")
-        print "SCA ID = %x" % sca_id
+        log.info("SCA ID = %x" % sca_id)
         return sca_id
 
     @staticmethod
