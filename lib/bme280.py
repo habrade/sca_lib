@@ -111,11 +111,18 @@ class BME280(sca_i2c.ScaI2c):
         print 'dig_H6 = {0:d}'.format (self.dig_H6)
         '''
 
+    def _write_one_byte(self, data):
+        self.s_7b_w(bme280_defs.BME280_I2CADDR, data)
+
+    def _read_one_byte(self, reg_addr):
+        self._write_one_byte(reg_addr)
+        return self.s_7b_r(bme280_defs.BME280_I2CADDR)
+
     def read_raw_temp(self):
         """Waits for reading to become available on device."""
         """Does a single burst read of all data values from device."""
         """Returns the raw (uncompensated) temperature from the sensor."""
-        while (self._device.readU8(
+        while (self._read_one_reg(
                 bme280_defs.BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
             time.sleep(0.002)
         self.bme280_defs.BME280Data = self._device.readList(bme280_defs.BME280_REGISTER_DATA, 8)
@@ -206,4 +213,3 @@ class BME280(sca_i2c.ScaI2c):
         dewpoint_c = self.read_dewpoint()
         dewpoint_f = dewpoint_c * 1.8 + 32
         return dewpoint_f
-

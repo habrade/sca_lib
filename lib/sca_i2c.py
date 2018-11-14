@@ -1,3 +1,4 @@
+import logging
 import sys
 
 sys.path.append('./')
@@ -11,6 +12,7 @@ class ScaI2c(sca.Sca):
     def __init__(self, chn):
         sca.Sca.__init__()
         self.__chn = chn
+        self.__log = logging.getLogger(__name__)
 
     def w_ctrl_reg(self, val):
         self.send_command(self.__chn, sca_defs.SCA_I2C_W_CTRL, val << 24)
@@ -62,22 +64,42 @@ class ScaI2c(sca.Sca):
         temp = addr << 24 + data << 16
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_7B_W, temp)
         status = self.get_reg_value("rxData") >> 24
-        return status
+        if status == 0x04:
+            return status
+        else:
+            self.__log.error("Error happened at this I2C write transaction, check status")
 
     def s_7b_r(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_7B_R, addr << 24)
-        # Return status + data
-        return self.get_reg_value("rxData") >> 16
+        # temp =  status + data
+        temp = self.get_reg_value("rxData") >> 16
+        status = (temp & 0xff00) >> 8
+        data = (temp & 0x00ff)
+        if status == 0x04:
+            return data
+        else:
+            self.__log.error("Error happened at this I2C read transaction, check status")
 
     def s_10b_w(self, addr, data):
         temp = addr << 16 + data << 8
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_10B_W, temp)
         status = self.get_reg_value("rxData") >> 24
+        if status == 0x04:
+            return status
+        else:
+            self.__log.error("Error happened at this I2C write transaction, check status")
         return status
 
     def s_10b_r(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_10B_R, addr << 16)
         # Return status + data
+        temp = self.get_reg_value("rxData") >> 16
+        status = (temp & 0xff00) >> 8
+        data = (temp & 0x00ff)
+        if status == 0x04:
+            return data
+        else:
+            self.__log.error("Error happened at this I2C read transaction, check status")
         return self.get_reg_value("rxData") >> 16
 
     def m_7b_w(self, addr):
@@ -138,6 +160,3 @@ class ScaI2c(sca.Sca):
             if len(data) > 4:
                 self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA3, data[4:8])
             self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA3, data[0:4])
-
-
-
