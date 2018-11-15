@@ -65,7 +65,7 @@ class ScaI2c(sca.Sca):
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_7B_W, temp)
         status = self.get_reg_value("rxData") >> 24
         if status == 0x04:
-            return status
+            return True
         else:
             self.__log.error("Error happened at this I2C write transaction, check status")
 
@@ -85,7 +85,7 @@ class ScaI2c(sca.Sca):
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_10B_W, temp)
         status = self.get_reg_value("rxData") >> 24
         if status == 0x04:
-            return status
+            return True
         else:
             self.__log.error("Error happened at this I2C write transaction, check status")
         return status
@@ -105,7 +105,10 @@ class ScaI2c(sca.Sca):
     def m_7b_w(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_M_7B_W, addr << 24)
         status = self.get_reg_value("rxData") >> 24
-        return status
+        if status == 0x04:
+            return True
+        else:
+            self.__log.error("Error happened at this I2C write transaction, check status")
 
     def m_7b_r(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_M_7B_R, addr << 24)
@@ -156,7 +159,21 @@ class ScaI2c(sca.Sca):
             if len(data) > 12:
                 self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA3, data[12:16])
             if len(data) > 8:
-                self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA3, data[8:12])
+                self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA2, data[8:12])
             if len(data) > 4:
-                self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA3, data[4:8])
-            self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA3, data[0:4])
+                self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA1, data[4:8])
+            self.send_command(self.__chn, sca_defs.SCA_I2C_W_DATA0, data[0:4])
+
+    def get_data_reg(self, nr_bytes):
+        data = []
+        if (nr_bytes > 16) or (nr_bytes < 1):
+            raise Exception("Bytes of data should be from 1 to 16")
+        else:
+            if nr_bytes > 12:
+                data[12:16] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA3, 0)
+            if nr_bytes > 8:
+                data[8:12] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA2, 0)
+            if nr_bytes > 4:
+                data[4:8] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA1, 0)
+            data[0:4] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA0, 0)
+            return data

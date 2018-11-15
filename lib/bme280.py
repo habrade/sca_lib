@@ -15,7 +15,7 @@ class BME280(sca_i2c.ScaI2c):
                  standby=bme280_defs.BME280_STANDBY_250, filter=bme280_defs.BME280_FILTER_off,
                  **kwargs):
         sca_i2c.ScaI2c.__init__(chn=0)
-        self._logger = logging.getLogger('__name__')
+        self.__log = logging.getLogger('__name__')
         # Check that t_mode is valid.
         if t_mode not in [bme280_defs.BME280_OSAMPLE_1, bme280_defs.BME280_OSAMPLE_2, bme280_defs.BME280_OSAMPLE_4,
                           bme280_defs.BME280_OSAMPLE_8, bme280_defs.BME280_OSAMPLE_16]:
@@ -48,24 +48,14 @@ class BME280(sca_i2c.ScaI2c):
             raise ValueError(
                 'Unexpected filter value {0}.'.format(filter))
         self._filter = filter
-        # Create I2C device.
-        # if i2c is None:
-        #     import Adafruit_GPIO.I2C as I2C
-        #     i2c = I2C
-        # # Create device, catch permission errors
-        # try:
-        #     self._device = i2c.get_i2c_device(address, **kwargs)
-        # except IOError:
-        #     print("Unable to communicate with sensor, check permissions.")
-        #     exit()
-        # Load calibration values.
+
         self._load_calibration()
-        self._device.write8(bme280_defs.BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
+        self._write_one_byte(bme280_defs.BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
         time.sleep(0.002)
-        self._device.write8(bme280_defs.BME280_REGISTER_CONFIG, ((standby << 5) | (filter << 2)))
+        self._write_one_byte(bme280_defs.BME280_REGISTER_CONFIG, ((standby << 5) | (filter << 2)))
         time.sleep(0.002)
-        self._device.write8(bme280_defs.BME280_REGISTER_CONTROL_HUM, h_mode)  # Set Humidity Oversample
-        self._device.write8(bme280_defs.BME280_REGISTER_CONTROL, (
+        self._write_one_byte(bme280_defs.BME280_REGISTER_CONTROL_HUM, h_mode)  # Set Humidity Oversample
+        self._write_one_byte(bme280_defs.BME280_REGISTER_CONTROL, (
                 (t_mode << 5) | (p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
         self.t_fine = 0.0
 
@@ -115,6 +105,18 @@ class BME280(sca_i2c.ScaI2c):
         self.s_7b_w(bme280_defs.BME280_I2CADDR, data)
 
     def _read_one_byte(self, reg_addr):
+        """To be able to read registers, first the register must be sent in write mode"""
+        self._write_one_byte(reg_addr)
+        return self.s_7b_r(bme280_defs.BME280_I2CADDR)
+
+    def _write_multi_bytes(self, data):
+        nr_bytes = len(data)
+        self.set_trans_byte_length(nr_bytes)
+        self.set_data_reg(data)
+        return self.m_7b_w(bme280_defs.BME280_I2CADDR)
+
+    def _read_multi_bytes(self, reg_addr, nr_bytes):
+        self.set_trans_byte_length(nr_bytes)
         self._write_one_byte(reg_addr)
         return self.s_7b_r(bme280_defs.BME280_I2CADDR)
 
@@ -125,7 +127,7 @@ class BME280(sca_i2c.ScaI2c):
         while (self._read_one_reg(
                 bme280_defs.BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
             time.sleep(0.002)
-        self.bme280_defs.BME280Data = self._device.readList(bme280_defs.BME280_REGISTER_DATA, 8)
+        self.bme280_defs.BME280Data = self._read_multi_bytes(bme280_defs.BME280_REGISTER_DATA, 8)
         raw = ((self.bme280_defs.BME280Data[3] << 16) | (self.bme280_defs.BME280Data[4] << 8) |
                self.bme280_defs.BME280Data[5]) >> 4
         return raw
