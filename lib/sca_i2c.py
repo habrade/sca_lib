@@ -12,7 +12,20 @@ class ScaI2c(sca.Sca):
     def __init__(self, chn):
         sca.Sca.__init__()
         self.__chn = chn
-        self.__log = logging.getLogger(__name__)
+        self._log = logging.getLogger(__name__)
+
+    def _parse_status(self, status):
+        """Return 0 on success or positive value on error"""
+        if status & (0x1 << 2):
+            # log.debug("SCA I2C transaction status SUCCESS")
+            pass
+        elif status & (0x1 << 3):
+            self._log.warn("SCA I2C transaction LEVERR - SDA pulled to GND")
+        elif status & (0x1 << 5):
+            self._log.warn("SCA I2C transaction INVOM - invalid command")
+        elif status & (0x1 << 6):
+            self._log.warn("SCA I2C transaction NOACK - no acknowledge from slave")
+        return status & 0x68
 
     def w_ctrl_reg(self, val):
         self.send_command(self.__chn, sca_defs.SCA_I2C_W_CTRL, val << 24)
@@ -64,21 +77,18 @@ class ScaI2c(sca.Sca):
         temp = addr << 24 + data << 16
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_7B_W, temp)
         status = self.get_reg_value("rxData") >> 24
-        if status == 0x04:
-            return True
-        else:
-            self.__log.error("Error happened at this I2C write transaction, check status")
+        return self._parse_status(status)
 
     def s_7b_r(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_S_7B_R, addr << 24)
         # temp =  status + data
         temp = self.get_reg_value("rxData") >> 16
         status = (temp & 0xff00) >> 8
-        data = (temp & 0x00ff)
-        if status == 0x04:
+        data = (temp & 0xff)
+        if self._parse_status(status) == 0:
             return data
         else:
-            self.__log.error("Error happened at this I2C read transaction, check status")
+            self._log.error("Error happened at this I2C read transaction, check status")
 
     def s_10b_w(self, addr, data):
         temp = addr << 16 + data << 8
@@ -87,7 +97,7 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return True
         else:
-            self.__log.error("Error happened at this I2C write transaction, check status")
+            self._log.error("Error happened at this I2C write transaction, check status")
         return status
 
     def s_10b_r(self, addr):
@@ -99,7 +109,7 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return data
         else:
-            self.__log.error("Error happened at this I2C read transaction, check status")
+            self._log.error("Error happened at this I2C read transaction, check status")
         return self.get_reg_value("rxData") >> 16
 
     def m_7b_w(self, addr):
@@ -108,17 +118,23 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return True
         else:
-            self.__log.error("Error happened at this I2C write transaction, check status")
+            self._log.error("Error happened at this I2C write transaction, check status")
 
     def m_7b_r(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_M_7B_R, addr << 24)
         status = self.get_reg_value("rxData") >> 24
-        return status
+        if self._parse_status(status) == 0:
+            return True
+        else:
+            self._log.error("Error happened at this I2C read transaction, check status")
 
     def m_10b_w(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_M_10B_W, addr << 24)
         status = self.get_reg_value("rxData") >> 24
-        return status
+        if status == 0x04:
+            return True
+        else:
+            self._log.error("Error happened at this I2C read transaction, check status")
 
     def m_10b_r(self, addr):
         self.send_command(self.__chn, sca_defs.SCA_I2C_M_10B_R, addr << 24)
@@ -144,10 +160,10 @@ class ScaI2c(sca.Sca):
         else:
             raise Exception("Mode out of index")
 
-    def set_trans_byte_length(self, nr):
+    def set_trans_byte_length(self, nr_bytes):
         current_reg = self.r_ctrl_reg()
-        if nr in range(1, 17):
-            new_reg = (nr << 2) | (current_reg & 0x83)
+        if nr_bytes in range(1, 17):
+            new_reg = (nr_bytes << 2) | (current_reg & 0x83)
             self.send_command(self.__chn, sca_defs.SCA_I2C_W_CTRL, new_reg << 24)
         else:
             raise Exception("Channel out of range")
