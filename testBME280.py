@@ -3,8 +3,10 @@
 import sys  # For sys.argv and sys.exit
 
 sys.path.append('./lib')
-import sca_i2c
 import sca_defs
+
+import bme280
+import bme280_defs
 
 
 def rst_device(sca_dev):
@@ -21,24 +23,26 @@ def dev_init(sca_dev):
 
 
 if __name__ == '__main__':
-    sca_dev = sca_i2c.ScaI2c()
-    # Reset Chip
-    sca_dev.send_reset()
+    sensor = bme280.BME280(t_mode=bme280_defs.BME280_OSAMPLE_8, p_mode=bme280_defs.BME280_OSAMPLE_8,
+                           h_mode=bme280_defs.BME280_OSAMPLE_8)
+    # Reset SCA
+    sensor.SCA.send_reset()
     # Connect SCA chip
-    sca_dev.send_connect()
+    sensor.SCA.send_connect()
 
-    chipId = sca_dev.read_sca_id()
-    print "SCA ID = %x" % chipId
+    print "SCA ID = %x" % sensor.SCA.read_sca_id()
 
     # Enable I2C ch. 0
-    sca_dev.enable_chn(sca_defs.SCA_CH_I2C0)
-
-    # BME280 I2C addr
-    addr = 0x77
+    sensor.enable_chn(sca_defs.SCA_CH_I2C0)
 
     # send reset
     rst_device(sca_dev)
 
-    # read ID
-    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x82, 0x77D00000)
-    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x86, 0x77000000)
+    degrees = sensor.read_temperature()
+    pascals = sensor.read_pressure()
+    hectopascals = pascals / 100
+    humidity = sensor.read_humidity()
+
+    print 'Temp      = {0:0.3f} deg C'.format(degrees)
+    print 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
+    print 'Humidity  = {0:0.2f} %'.format(humidity)
