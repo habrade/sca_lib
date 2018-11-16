@@ -183,13 +183,13 @@ class ScaI2c(sca.Sca):
     def get_data_reg(self, nr_bytes):
         data = []
         if (nr_bytes > 16) or (nr_bytes < 1):
-            raise Exception("Bytes of data should be from 1 to 16")
+            self._log.error("Bytes of data should be from 1 to 16")
         else:
-            if nr_bytes > 12:
-                data[12:16] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA3, 0)
-            if nr_bytes > 8:
-                data[8:12] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA2, 0)
+            data[0:4] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA0, 0)
             if nr_bytes > 4:
                 data[4:8] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA1, 0)
-            data[0:4] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA0, 0)
+            if nr_bytes > 8:
+                data[8:12] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA2, 0)
+            if nr_bytes > 12:
+                data[12:16] = self.send_command(self.__chn, sca_defs.SCA_I2C_R_DATA3, 0)
             return data

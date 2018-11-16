@@ -104,20 +104,20 @@ class BME280(sca_i2c.ScaI2c):
 
     def _write_raw8(self, value):
         """Write an 8-bit value on the bus (without register)."""
-        self.s_7b_w(bme280_defs.BME280_I2CADDR, value)
+        self._log.debug("Write 0x%02 on the bus (without register)", value)
+        return self.s_7b_w(bme280_defs.BME280_I2CADDR, value)
 
     def _write8(self, register, value):
         """Write an 8-bit value to the specified register."""
+        self._log.debug("Write 0x%02X to register 0x%02X", value, register)
         value = value & 0xFF
-        self._write_block(register << 8 | value)
-        self._log.debug("Wrote 0x%02X to register 0x%02X", value, register)
+        return self._write_block(register << 8 | value)
 
     def _write16(self, register, value):
         """Write a 16-bit value to the specified register."""
+        self._log.debug("Write 0x%04X to register pair 0x%02X, 0x%02X", value, register, register + 1)
         value = value & 0xFFFF
-        self._write_block(register << 8 | (value & 0xff))
-        self._write_block((register + 1) << 8 | (value & 0xff))
-        self._log.debug("Wrote 0x%04X to register pair 0x%02X, 0x%02X", value, register, register + 1)
+        self._write_block((register << 24) | ((value & 0xff) << 16) | (register + 1) << 8 | (value >> 8 & 0xff))
 
     def _read_u8(self, register):
         """To be able to read registers, first the register must be sent in write mode"""
@@ -228,8 +228,7 @@ class BME280(sca_i2c.ScaI2c):
         var2 = var1 * var1 * float(self.dig_P6) / 32768.0
         var2 = var2 + var1 * float(self.dig_P5) * 2.0
         var2 = var2 / 4.0 + float(self.dig_P4) * 65536.0
-        var1 = (
-                       float(self.dig_P3) * var1 * var1 / 524288.0 + float(self.dig_P2) * var1) / 524288.0
+        var1 = (float(self.dig_P3) * var1 * var1 / 524288.0 + float(self.dig_P2) * var1) / 524288.0
         var1 = (1.0 + var1 / 32768.0) * float(self.dig_P1)
         if var1 == 0:
             return 0
