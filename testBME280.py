@@ -1,5 +1,6 @@
 #!/usr/bin/python
-
+import logging
+import time
 import sys  # For sys.argv and sys.exit
 
 sys.path.append('./lib')
@@ -8,19 +9,7 @@ import sca_defs
 import bme280
 import bme280_defs
 
-
-def rst_device(sca_dev):
-    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x40, 0xE0B60000)
-    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0xDA, 0x77000000)
-    sca_dev.send_command(sca_defs.SCA_CH_I2C0, 0x41, 0x00000000)
-
-
-def dev_init(sca_dev):
-    rst_device()
-    sca_dev.set_frq(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_SPEED_100)
-    sca_dev.set_mode(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_MODE_OPEN_DRAIN)
-    sca_dev.nrByte(sca_defs.SCA_CH_I2C0, 2)
-
+log = logging.getLogger(__name__)
 
 if __name__ == '__main__':
     sensor = bme280.BME280(t_mode=bme280_defs.BME280_OSAMPLE_8, p_mode=bme280_defs.BME280_OSAMPLE_8,
@@ -30,19 +19,28 @@ if __name__ == '__main__':
     # Connect SCA chip
     sensor.SCA.send_connect()
 
-    print "SCA ID = %x" % sensor.SCA.read_sca_id()
+    log.info("SCA ID = %x", sensor.SCA.read_sca_id())
 
     # Enable I2C ch. 0
-    sensor.enable_chn(sca_defs.SCA_CH_I2C0)
+    sensor.SCA.enable_chn(sca_defs.SCA_CH_I2C0)
+    sensor.I2C.set_frq(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_SPEED_100)
+    sensor.I2c.set_mode(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_MODE_OPEN_DRAIN)
 
-    # send reset
-    rst_device(sca_dev)
+    # reset bme280
+    sensor.BME280.rst_dev()
 
-    degrees = sensor.read_temperature()
-    pascals = sensor.read_pressure()
-    hectopascals = pascals / 100
-    humidity = sensor.read_humidity()
+    # check BME280 ID
+    if sensor.BME280.read_id() != 0x60:
+        log.error("BME280's ID is not right, should be 0x60 after reset")
 
-    print 'Temp      = {0:0.3f} deg C'.format(degrees)
-    print 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
-    print 'Humidity  = {0:0.2f} %'.format(humidity)
+    # read Temp, Pressure, Humidity
+    while True:
+        degrees = sensor.read_temperature()
+        pascals = sensor.read_pressure()
+        hectopascals = pascals / 100
+        humidity = sensor.read_humidity()
+
+        print 'Temp      = {0:0.3f} deg C'.format(degrees)
+        print 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
+        print 'Humidity  = {0:0.2f} %'.format(humidity)
+        time.sleep(0.04)

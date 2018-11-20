@@ -183,6 +183,12 @@ class BME280(sca_i2c.ScaI2c):
         else:
             self._log.error("Error during read")
 
+    def rst_dev(self):
+        self._write8(bme280_defs.BME280_REGISTER_SOFTRESET, 0xB6)
+
+    def read_id(self):
+        return self._read_u8(bme280_defs.BME280_REGISTER_CHIPID)
+
     def read_raw_temp(self):
         """Waits for reading to become available on device."""
         """Does a single burst read of all data values from device."""
