@@ -10,14 +10,14 @@ if __name__ == '__main__':
     sca_dev = sca_gpio.ScaGpio()
 
     # Reset Chip
-    sca_dev.send_reset()
+    sca_dev._send_reset()
     # Connect SCA chip
-    sca_dev.send_connect()
+    sca_dev._send_connect()
 
-    sca_dev.read_sca_id()
+    sca_dev._read_sca_id()
 
     # Enable GPIO
-    sca_dev.enable_chn(sca_defs.SCA_CH_GPIO, True)
+    sca_dev._enable_chn(sca_defs.SCA_CH_GPIO, True)
 
     # GPIO Direction Set
     sca_dev.set_direction(0xffffffff)
