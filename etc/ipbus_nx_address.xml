@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<node id="top">
-    <node id="nxyter" module="file://nxyter.xml" address="0x10000000" tags="slave"/>
-    <node id="nxfifo" module="file://nxfifo.xml" address="0x20000000" tags="slave"/>
-</node>

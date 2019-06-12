@@ -10,7 +10,7 @@ import sca_defs
 class ScaI2c(sca.Sca):
 
     def __init__(self, chn):
-        sca.Sca.__init__()
+        sca.Sca.__init__(self)
         self.__chn = chn
         self._log = logging.getLogger(__name__)
 

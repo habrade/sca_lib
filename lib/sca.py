@@ -16,7 +16,7 @@ class Sca(object):
     SCA basic methods
     """
 
-    def __init__(self, sca_addr=0x00, connectionFilePath="etc/ipbus_lab202_gdpb_gbtx.xml", deviceId="C0S00_gdpb202",
+    def __init__(self, sca_addr=0x00, connectionFilePath="../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml", deviceId="C0S00_gdpb066",
                  debug=0):
         self.__SCA_ADDR = sca_addr
         self.__trans_id = 0x01

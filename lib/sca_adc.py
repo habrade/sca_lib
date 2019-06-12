@@ -9,7 +9,7 @@ import sca_defs
 class ScaAdc(sca.Sca):
 
     def __init__(self):
-        sca.Sca.__init__()
+        sca.Sca.__init__(self)
 
     def enable_adc(self):
         self._send_command(sca_defs.SCA_CH_CTRL, sca_defs.SCA_CTRL_W_CRD, sca_defs.SCA_CTRL_CRD_ENADC)

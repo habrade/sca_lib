@@ -14,7 +14,7 @@ class BME280(sca_i2c.ScaI2c):
                  h_mode=bme280_defs.BME280_OSAMPLE_1,
                  standby=bme280_defs.BME280_STANDBY_250, set_filter=bme280_defs.BME280_FILTER_off,
                  **kwargs):
-        sca_i2c.ScaI2c.__init__(chn=0)
+        sca_i2c.ScaI2c.__init__(self, chn=0)
         self._log = logging.getLogger('__name__')
         self.BME280Data = []
         # Check that t_mode is valid.
@@ -176,8 +176,8 @@ class BME280(sca_i2c.ScaI2c):
         return self.m_7b_w(bme280_defs.BME280_I2CADDR)
 
     def _read_block(self, register, nr_bytes):
-        self.set_trans_byte_length(nr_bytes)
         self._write_raw8(register)
+        self.set_trans_byte_length(nr_bytes)
         if self.m_7b_r(bme280_defs.BME280_I2CADDR):
             return self.get_data_reg(nr_bytes)
         else:
