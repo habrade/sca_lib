@@ -7,8 +7,9 @@ import sca_defs
 
 sys.path.append('./')
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 
 class Sca(object):
@@ -17,13 +18,13 @@ class Sca(object):
     """
 
     def __init__(self, sca_addr=0x00, connectionFilePath="../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml", deviceId="C0S00_gdpb066",
-                 debug=0):
+                 debug=1):
         self.__SCA_ADDR = sca_addr
         self.__trans_id = 0x01
         self.__debug = debug
 
         self.__connectionFilePath = connectionFilePath
-        self.__deviceId = "C0S00_gdpb202"
+        self.__deviceId = deviceId
         # Creating the HwInterface
         self.__connectionMgr = uhal.ConnectionManager("file://" + self.__connectionFilePath)
         self.__hw = self.__connectionMgr.getDevice(deviceId)

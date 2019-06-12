@@ -11,12 +11,12 @@ if __name__ == '__main__':
     sca_dev = sca_adc.ScaAdc()
 
     # Reset Chip
-    sca_dev.SCA._send_reset()
+    sca_dev._send_reset()
     # Connect SCA chip
-    sca_dev.SCA._send_connect()
+    sca_dev._send_connect()
 
     # Read Chip ID
-    sca_dev.SCA._read_sca_id()
+    sca_id = sca_dev._read_sca_id()
 
     while True:
         for i in range(32):
