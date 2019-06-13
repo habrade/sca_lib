@@ -1,14 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import logging
 import pvaccess
 import time
 import sys  # For sys.argv and sys.exit
 
-sys.path.append('./lib')
-import sca_defs
-
-import bme280
-import bme280_defs
+from lib import sca_defs
+from lib import bme280
+from lib import bme280_defs
 
 log = logging.getLogger(__name__)
 
@@ -16,14 +14,14 @@ if __name__ == '__main__':
     sensor = bme280.BME280(t_mode=bme280_defs.BME280_OSAMPLE_8, p_mode=bme280_defs.BME280_OSAMPLE_8,
                            h_mode=bme280_defs.BME280_OSAMPLE_8)
     # Reset SCA
-    sensor.SCA._send_reset()
+    sensor.SCA.send_reset()
     # Connect SCA chip
-    sensor.SCA._send_connect()
+    sensor.SCA.send_connect()
 
-    log.info("SCA ID = %x", sensor.SCA._read_sca_id())
+    log.info("SCA ID = %x", sensor.SCA.read_sca_id())
 
     # Enable I2C ch. 0
-    sensor.SCA._enable_chn(sca_defs.SCA_CH_I2C0)
+    sensor.SCA.enable_chn(sca_defs.SCA_CH_I2C0)
     sensor.I2C.set_frq(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_SPEED_100)
     sensor.I2c.set_mode(sca_defs.SCA_CH_I2C0, sca_defs.SCA_I2C_MODE_OPEN_DRAIN)
 

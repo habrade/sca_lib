@@ -1,29 +1,35 @@
-#!/usr/bin/python
-
+#!/usr/bin/env python
 import sys
 import time
 import pvaccess
 import logging
-sys.path.append('./lib')
-import sca_adc
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+from lib import sca_adc
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
 
     sca_dev = sca_adc.ScaAdc()
 
     # Reset Chip
-    sca_dev._send_reset()
+    sca_dev.send_reset()
     # Connect SCA chip
-    sca_dev._send_connect()
+    sca_dev.send_connect()
 
     # Read Chip ID
-    sca_id = sca_dev._read_sca_id()
+    # while True:
+    #     sca_id = sca_dev.read_sca_id()
+    #     if sca_id == 0:
+    #         continue
+    #     else:
+    #         break
+    sca_id = sca_dev.read_sca_id()
     log.info("SCA ID = %x" % sca_id)
-    
+
     PREFIX = "labtest:"
 
     # adc_value = []
@@ -36,6 +42,4 @@ if __name__ == '__main__':
             log.debug("ADC Ch %d = %x" % (i, adc_value))
             ch_name = PREFIX + "SCA:ADC:CH:" + str(i)
             ca_ch = pvaccess.Channel(ch_name)
-            ca_ch.put(int(adc_value))
-        #time.sleep(1)
-
+            ca_ch.putUInt(int(adc_value))
