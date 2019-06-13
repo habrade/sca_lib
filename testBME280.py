@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import logging
+import pvaccess
 import time
 import sys  # For sys.argv and sys.exit
 

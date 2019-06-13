@@ -1,0 +1,80 @@
+record(ai, "$(P):SCA:ID") { 
+}
+
+record(ai, "$(P):SCA:ADC:CH:0") { 
+}
+record(ai, "$(P):SCA:ADC:CH:1") { 
+}
+record(ai, "$(P):SCA:ADC:CH:2") { 
+}
+record(ai, "$(P):SCA:ADC:CH:3") { 
+}
+record(ai, "$(P):SCA:ADC:CH:4") { 
+}
+record(ai, "$(P):SCA:ADC:CH:5") { 
+}
+record(ai, "$(P):SCA:ADC:CH:6") { 
+}
+record(ai, "$(P):SCA:ADC:CH:7") { 
+}
+record(ai, "$(P):SCA:ADC:CH:8") { 
+}
+record(ai, "$(P):SCA:ADC:CH:9") { 
+}
+record(ai, "$(P):SCA:ADC:CH:10") { 
+}
+record(ai, "$(P):SCA:ADC:CH:11") { 
+}
+record(ai, "$(P):SCA:ADC:CH:12") { 
+}
+record(ai, "$(P):SCA:ADC:CH:13") { 
+}
+record(ai, "$(P):SCA:ADC:CH:14") { 
+}
+record(ai, "$(P):SCA:ADC:CH:15") { 
+}
+record(ai, "$(P):SCA:ADC:CH:16") { 
+}
+record(ai, "$(P):SCA:ADC:CH:17") { 
+}
+record(ai, "$(P):SCA:ADC:CH:18") { 
+}
+record(ai, "$(P):SCA:ADC:CH:19") { 
+}
+record(ai, "$(P):SCA:ADC:CH:20") { 
+}
+record(ai, "$(P):SCA:ADC:CH:21") { 
+}
+record(ai, "$(P):SCA:ADC:CH:22") { 
+}
+record(ai, "$(P):SCA:ADC:CH:23") { 
+}
+record(ai, "$(P):SCA:ADC:CH:24") { 
+}
+record(ai, "$(P):SCA:ADC:CH:25") { 
+}
+record(ai, "$(P):SCA:ADC:CH:26") { 
+}
+record(ai, "$(P):SCA:ADC:CH:27") { 
+}
+record(ai, "$(P):SCA:ADC:CH:28") { 
+}
+record(ai, "$(P):SCA:ADC:CH:29") { 
+}
+record(ai, "$(P):SCA:ADC:CH:30") { 
+}
+record(ai, "$(P):SCA:ADC:CH:31") { 
+}
+
+record(ao, "$(P):SCA:GPIO:VALUE") { 
+}
+record(ao, "$(P):SCA:GPIO:DIRECTION:SET") { 
+}
+record(ai, "$(P):SCA:GPIO:DIRECTION:GET") { 
+}
+record(ao, "$(P):SCA:GPIO:PINOUT:SET") { 
+}
+record(ai, "$(P):SCA:GPIO:PINOUT:GET") { 
+}
+record(ai, "$(P):SCA:GPIO:PININ:GET") { 
+}
