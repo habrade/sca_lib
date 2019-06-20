@@ -3,7 +3,7 @@ import sys
 
 import uhal
 
-import sca_defs
+# import sca_defs
 from sca_defs import *
 
 logging.basicConfig(level=logging.INFO,
@@ -46,7 +46,7 @@ class Sca(object):
         node = self.__hw.getNode("GBT-SCA.txCmd")
         node.write(command)
         node = self.__hw.getNode("GBT-SCA.txData")
-        node.write(data)
+        node.write(data & 0xffff)
         # start_transaction
         node = self.__hw.getNode("GBT-SCA.sendCmd")
         node.write(1)

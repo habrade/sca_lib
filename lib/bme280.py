@@ -1,6 +1,7 @@
 import logging
 import sys
 import time
+import struct
 
 import sca_i2c
 import bme280_defs
@@ -111,8 +112,8 @@ class BME280(sca_i2c.ScaI2c):
     def _write8(self, register, value):
         """Write an 8-bit value to the specified register."""
         self._log.debug("Write 0x%02X to register 0x%02X", value, register)
-        value = value & 0xFF
-        return self._write_block(register << 8 | value)
+        data = [register, value & 0xFF]
+        return self._write_block(bytes(data))
 
     def _write16(self, register, value):
         """Write a 16-bit value to the specified register."""
@@ -138,7 +139,8 @@ class BME280(sca_i2c.ScaI2c):
         """Read an unsigned 16-bit value from the specified register, with the
         specified endianness (default little endian, or least significant byte
         first)."""
-        result = self._read_block(register, 2) & 0xFFFF
+        resultBytes = self._read_block(register, 2)
+        result = struct.unpack('>H', resultBytes)[0]
         self._log.debug(
             "Read 0x%04X from register pair 0x%02X, 0x%02X", result, register, register + 1)
         # Swap bytes if using big endian because read_word_data assumes little

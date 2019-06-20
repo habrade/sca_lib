@@ -78,3 +78,10 @@ record(ai, "$(P):SCA:GPIO:PINOUT:GET") {
 }
 record(ai, "$(P):SCA:GPIO:PININ:GET") { 
 }
+
+record(ai, "$(P):BME280:Temperature") { 
+}
+record(ai, "$(P):BME280:Humidity") { 
+}
+record(ai, "$(P):BME280:Pressure") { 
+}

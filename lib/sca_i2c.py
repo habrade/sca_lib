@@ -1,9 +1,14 @@
 import logging
 import sys
+import struct
 
 import sca
-import sca_defs
 from sca_defs import *
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 
 class ScaI2c(sca.Sca):
@@ -169,26 +174,43 @@ class ScaI2c(sca.Sca):
 
     def set_data_reg(self, data):
         if (len(data) > 16) or (len(data) < 1):
-            raise Exception("Too less data")
+            raise Exception("Data lenth should between 1 and 16")
         else:
+            data_temp = bytearray(16)
+            data_temp[0:len(data)] = data
+            # log.debug("data = %x" % data)
+            print data_temp
+            print len(data_temp)
             if len(data) > 12:
-                self.send_command(self.__chn, SCA_I2C_W_DATA3, data[12:16])
+                self.send_command(self.__chn, SCA_I2C_W_DATA3, struct.unpack('>I', data_temp[12:16])[0])
             if len(data) > 8:
-                self.send_command(self.__chn, SCA_I2C_W_DATA2, data[8:12])
+                self.send_command(self.__chn, SCA_I2C_W_DATA2, struct.unpack('>I', data_temp[8:12])[0])
             if len(data) > 4:
-                self.send_command(self.__chn, SCA_I2C_W_DATA1, data[4:8])
-            self.send_command(self.__chn, SCA_I2C_W_DATA0, data[0:4])
+                self.send_command(self.__chn, SCA_I2C_W_DATA1, struct.unpack('>I', data_temp[4:8])[0])
+            self.send_command(self.__chn, SCA_I2C_W_DATA0, struct.unpack('>I', data_temp[0:4])[0])
 
     def get_data_reg(self, nr_bytes):
-        data = []
+        data = bytearray(16)
         if (nr_bytes > 16) or (nr_bytes < 1):
             self._log.error("Bytes of data should be from 1 to 16")
         else:
-            data[0:4] = self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
+            self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
+            data0 = self.get_reg_value("rxData")
+            data[0:4] = struct.pack('>I', data0)
+
             if nr_bytes > 4:
-                data[4:8] = self.send_command(self.__chn, SCA_I2C_R_DATA1, 0)
+                self.send_command(self.__chn, SCA_I2C_R_DATA1, 0)
+                data1 = self.get_reg_value("rxData")
+                data[4:8] = struct.pack('>I', data1)
+
             if nr_bytes > 8:
-                data[8:12] = self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
+                self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
+                data2 = self.get_reg_value("rxData")
+                data[8:12] = struct.pack('>I', data2)
+
             if nr_bytes > 12:
-                data[12:16] = self.send_command(self.__chn, SCA_I2C_R_DATA3, 0)
-            return data
+                self.send_command(self.__chn, SCA_I2C_R_DATA3, 0)
+                data3 = self.get_reg_value("rxData")
+                data[12:16] = struct.pack('>I', data3)
+
+            return data[0:nr_bytes]
