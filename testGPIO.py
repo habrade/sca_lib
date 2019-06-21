@@ -65,3 +65,5 @@ if __name__ == '__main__':
         pinin_get = sca_dev.read_pin_in()
         log.debug("GPIO PININ Get =  %x" % pinin_get)
         ca_ch.put(int(pinin_get))
+
+        time.sleep(0.1)

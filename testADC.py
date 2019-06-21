@@ -36,10 +36,15 @@ if __name__ == '__main__':
     while True:
         sca_id_ch = pvaccess.Channel(PREFIX + "SCA:ID")
         sca_id_ch.put(int(sca_id))
+
         for i in range(32):
             sca_dev.w_sel(i)
             adc_value = sca_dev.start_conv()
+
             log.debug("ADC Ch %d = %x" % (i, adc_value))
+
             ch_name = PREFIX + "SCA:ADC:CH:" + str(i)
             ca_ch = pvaccess.Channel(ch_name)
             ca_ch.putUInt(int(adc_value))
+
+        time.sleep(0.1)

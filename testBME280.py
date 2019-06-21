@@ -2,7 +2,6 @@
 import logging
 import pvaccess
 import time
-import sys  # For sys.argv and sys.exit
 
 from lib.sca_defs import *
 from lib.bme280_defs import *
@@ -11,7 +10,7 @@ from lib import bme280
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
     sensor = bme280.BME280(t_mode=BME280_OSAMPLE_8,
@@ -32,6 +31,9 @@ if __name__ == '__main__':
     sensor.rst_dev()
 
     PREFIX = "labtest:"
+    degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
+    hectopascals_ch = pvaccess.Channel(PREFIX + "BME280:Pressure")
+    humidity_ch = pvaccess.Channel(PREFIX + "BME280:Humidity")
 
     # check BME280 ID
     if sensor.read_id() != 0x60:
@@ -39,20 +41,18 @@ if __name__ == '__main__':
 
     # read Temp, Pressure, Humidity
     while True:
-        degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
-        hectopascals_ch = pvaccess.Channel(PREFIX + "BME280:Pressure")
-        humidity_ch = pvaccess.Channel(PREFIX + "BME280:Humidity")
-
         degrees = sensor.read_temperature()
         pascals = sensor.read_pressure()
         hectopascals = pascals / 100
         humidity = sensor.read_humidity()
 
+        # Data put to epics channel
         degrees_ch.putDouble(degrees)
         hectopascals_ch.putDouble(hectopascals)
         humidity_ch.putDouble(humidity)
 
-        print 'Temp      = {0:0.3f} deg C'.format(degrees)
-        print 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
-        print 'Humidity  = {0:0.2f} %'.format(humidity)
+        log.debug("Temp = %f deg C" % degrees)
+        log.debug("Pressure = %f hPa" % hectopascals)
+        log.debug("Humidity = %f %%" % humidity)
+
         time.sleep(0.04)
