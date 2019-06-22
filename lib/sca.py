@@ -3,7 +3,6 @@ import sys
 
 import uhal
 
-# import sca_defs
 from sca_defs import *
 
 logging.basicConfig(level=logging.INFO,
