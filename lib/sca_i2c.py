@@ -13,8 +13,8 @@ log.setLevel(logging.INFO)
 
 class ScaI2c(sca.Sca):
 
-    def __init__(self, chn):
-        sca.Sca.__init__(self)
+    def __init__(self, chn, version):
+        sca.Sca.__init__(self, version=version)
         self.__chn = chn
         self._log = logging.getLogger(__name__)
 

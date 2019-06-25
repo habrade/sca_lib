@@ -8,7 +8,7 @@ from sca_defs import *
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 
 class Sca(object):
@@ -69,21 +69,8 @@ class Sca(object):
 
         rxErr = self.get_reg_value("rxErr")
         if rxErr != 0x00:
-            log.error("    txTransID = %x\t" % self.get_reg_value("txTransID"))
-            log.error("    rxTransID = %x\n" % self.get_reg_value("rxTransID"))
-            log.error("    txChn = %x\t" % self.get_reg_value("txChn"))
-            log.error("    rxChn = %x\n" % self.get_reg_value("rxChn"))
-            log.error("    txCmd = %x\t" % self.get_reg_value("txCmd"))
-            log.error("    rxAddr = %x\n" % self.get_reg_value("rxAddr"))
-            log.error("    txData = %x\t" % self.get_reg_value("txData"))
-            log.error("    rxData = %x\n" % self.get_reg_value("rxData"))
-            log.error(" \t")
-            log.error("    rxCtrl = %x\n" % self.get_reg_value("rxCtrl"))
-            log.error(" \t")
-            log.error("    rxLen = %x\n" % self.get_reg_value("rxLen"))
-            log.error(" \t")
-            log.error("    rxErr = %x\n" % self.get_reg_value("rxErr"))
-            raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
+            # raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
+            log.error("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
 
     def send_reset(self):
         node = self.__hw.getNode("GBT-SCA.rst")
@@ -121,10 +108,6 @@ class Sca(object):
             return err_val
 
     def read_sca_id(self):
-        """Enable ADC channel, must do this before read chip ID"""
-        # self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
-        self.enable_chn(SCA_CH_ADC, True)
-
         if self._version == 1:
             self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V1, SCA_CTRL_DATA_R_ID)
         else:

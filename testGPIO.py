@@ -29,7 +29,7 @@ if __name__ == '__main__':
     sca_dev.enable_chn(sca_defs.SCA_CH_GPIO, True)
 
     PREFIX = "labtest:"
-    ch_name_direction_set = PREFIX + "SCA:GPIO:DIRECTION:SET"
+    ca_name_direction_set = PREFIX + "SCA:GPIO:DIRECTION:SET"
     ca_name_direction_get = PREFIX + "SCA:GPIO:DIRECTION:GET"
     ca_name_pinout_get = PREFIX + "SCA:GPIO:PINOUT:GET"
     ca_name_pinout_set = PREFIX + "SCA:GPIO:PINOUT:SET"
@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     while True:
         # GPIO Direction Set
-        ca_ch = pvaccess.Channel(ch_name_direction_set)
+        ca_ch = pvaccess.Channel(ca_name_direction_set)
         direction_set = int(ca_ch.get().getDouble())
         log.debug("GPIO Direction Set to %x" % direction_set)
         sca_dev.set_direction(direction_set)
