@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
-    sca_dev = sca_gpio.ScaGpio()
+    sca_dev = sca_gpio.ScaGpio(version=2)
 
     # Reset Chip
     sca_dev.send_reset()
@@ -66,4 +66,4 @@ if __name__ == '__main__':
         log.debug("GPIO PININ Get =  %x" % pinin_get)
         ca_ch.put(int(pinin_get))
 
-        time.sleep(0.1)
+        time.sleep(1)

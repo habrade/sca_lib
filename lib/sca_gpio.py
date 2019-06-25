@@ -11,8 +11,8 @@ log.setLevel(logging.INFO)
 
 class ScaGpio(sca.Sca):
 
-    def __init__(self):
-        sca.Sca.__init__(self)
+    def __init__(self, version):
+        sca.Sca.__init__(self, version=version)
 
     def set_direction(self, directions):
         """GPIO Direction Set, 1->output mode, 0->input mode"""

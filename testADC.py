@@ -13,20 +13,13 @@ log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
 
-    sca_dev = sca_adc.ScaAdc()
+    sca_dev = sca_adc.ScaAdc(version=2)
 
     # Reset Chip
     sca_dev.send_reset()
     # Connect SCA chip
     sca_dev.send_connect()
 
-    # Read Chip ID
-    # while True:
-    #     sca_id = sca_dev.read_sca_id()
-    #     if sca_id == 0:
-    #         continue
-    #     else:
-    #         break
     sca_id = sca_dev.read_sca_id()
     log.info("SCA ID = %x" % sca_id)
 
@@ -39,6 +32,7 @@ if __name__ == '__main__':
 
         for i in range(32):
             sca_dev.w_sel(i)
+            sca_dev.r_data()
             adc_value = sca_dev.start_conv()
 
             log.debug("ADC Ch %d = %x" % (i, adc_value))

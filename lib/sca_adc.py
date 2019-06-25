@@ -7,32 +7,53 @@ from sca_defs import *
 
 class ScaAdc(sca.Sca):
 
-    def __init__(self):
-        sca.Sca.__init__(self, version=1)
+    def __init__(self, version):
+        sca.Sca.__init__(self, version=version)
 
     def enable_adc(self):
         self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
 
     def start_conv(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_GO, 1)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_GO, 1)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_GO, 1)
+
         return self.get_reg_value("rxData")
 
     def w_sel(self, sel):
-        self.send_command(SCA_CH_ADC, SCA_ADC_W_MUX, sel)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_W_MUX, sel)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_W_INSEL, sel)
 
     def r_sel(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_R_MUX, 0)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_R_MUX, 0)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_MUX, 0)
+
         return self.get_reg_value("rxData")
 
     def w_curr(self, curr):
-        self.send_command(SCA_CH_ADC, SCA_ADC_W_CURR, curr)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_W_CURR, curr)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_W_CUREN, curr)
 
     def r_curr(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_R_CURR, 0)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_R_CURR, 0)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_CUREN, 0)
+
         return self.get_reg_value("rxData")
 
     def w_gain(self, gain):
-        self.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_W_GAIN, gain)
 
     def r_gain(self):
         self.send_command(SCA_CH_ADC, SCA_ADC_R_GAIN, 0)
@@ -43,7 +64,11 @@ class ScaAdc(sca.Sca):
         return self.get_reg_value("rxData")
 
     def r_data(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_R_DATA, 0)
+        if self._version == 2:
+            self.send_command(SCA_CH_ADC, SCA_ADC_R_DATA, 0)
+        elif self._version == 1:
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_DATA, 0)
+
         return self.get_reg_value("rxData")
 
     def r_ofs(self):

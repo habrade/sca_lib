@@ -8,7 +8,7 @@ from sca_defs import *
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class Sca(object):
@@ -24,7 +24,7 @@ class Sca(object):
 
         self.__connectionFilePath = connectionFilePath
         self.__deviceId = deviceId
-        self.__version = version
+        self._version = version
         # Creating the HwInterface
         self.__connectionMgr = uhal.ConnectionManager(
             "file://" + self.__connectionFilePath)
@@ -45,7 +45,7 @@ class Sca(object):
         node = self.__hw.getNode("GBT-SCA.txCmd")
         node.write(command)
         node = self.__hw.getNode("GBT-SCA.txData")
-        node.write(data & 0xffff)
+        node.write(data)
         # start_transaction
         node = self.__hw.getNode("GBT-SCA.sendCmd")
         node.write(1)
@@ -67,9 +67,23 @@ class Sca(object):
         log.debug(" \t")
         log.debug("    rxErr = %x\n" % self.get_reg_value("rxErr"))
 
-        # while True:
-        #    if self.checkErr(self.__hw) == 0x00:
-        #       break
+        rxErr = self.get_reg_value("rxErr")
+        if rxErr != 0x00:
+            log.error("    txTransID = %x\t" % self.get_reg_value("txTransID"))
+            log.error("    rxTransID = %x\n" % self.get_reg_value("rxTransID"))
+            log.error("    txChn = %x\t" % self.get_reg_value("txChn"))
+            log.error("    rxChn = %x\n" % self.get_reg_value("rxChn"))
+            log.error("    txCmd = %x\t" % self.get_reg_value("txCmd"))
+            log.error("    rxAddr = %x\n" % self.get_reg_value("rxAddr"))
+            log.error("    txData = %x\t" % self.get_reg_value("txData"))
+            log.error("    rxData = %x\n" % self.get_reg_value("rxData"))
+            log.error(" \t")
+            log.error("    rxCtrl = %x\n" % self.get_reg_value("rxCtrl"))
+            log.error(" \t")
+            log.error("    rxLen = %x\n" % self.get_reg_value("rxLen"))
+            log.error(" \t")
+            log.error("    rxErr = %x\n" % self.get_reg_value("rxErr"))
+            raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
 
     def send_reset(self):
         node = self.__hw.getNode("GBT-SCA.rst")
@@ -108,16 +122,17 @@ class Sca(object):
 
     def read_sca_id(self):
         """Enable ADC channel, must do this before read chip ID"""
-        self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
-        log.info("SCA Version = %d" % self.__version)
+        # self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
+        self.enable_chn(SCA_CH_ADC, True)
 
-        if self.__version == 1:
+        if self._version == 1:
             self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V1, SCA_CTRL_DATA_R_ID)
         else:
             self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V2, SCA_CTRL_DATA_R_ID)
 
+        log.info("SCA Version = %d" % self._version)
         sca_id = self.get_reg_value("rxData")
-        log.info("SCA ID = %x" % sca_id)
+        log.info("SCA ID = 0x%06x" % sca_id)
         return sca_id
 
     @staticmethod
@@ -145,22 +160,28 @@ class Sca(object):
             read_cmd = self.get_node_control_cmd(chn, False)
             self.send_command(SCA_CH_CTRL, read_cmd, 0)
             mask = self.get_reg_value("rxData") >> 24
+            log.debug("Channel Mask = %02x" % mask)
             bit = chn & 0x07
             return mask & (1 << bit)
         else:
             raise Exception("Channel out of range")
 
     def enable_chn(self, chn, enabled):
-        read_cmd = self.get_node_control_cmd(chn, False)
-        self.send_command(SCA_CH_CTRL, read_cmd, 0)
-        mask = self.get_reg_value("rxData") >> 24
-        bit = chn & 0x07
-        if enabled:
-            mask |= 1 << bit
+        if (chn >= 1) and (chn <= 31):
+            read_cmd = self.get_node_control_cmd(chn, False)
+            self.send_command(SCA_CH_CTRL, read_cmd, 0)
+            mask = self.get_reg_value("rxData") >> 24
+            log.debug("Channel Mask = %02x" % mask)
+            bit = chn & 0x07
+            if enabled:
+                mask |= 1 << bit
+            else:
+                mask &= ~(1 << bit)
+            log.debug("Channel new Mask = %02x" % mask)
+            write_cmd = self.get_node_control_cmd(chn, True)
+            self.send_command(SCA_CH_CTRL, write_cmd, mask << 24)
         else:
-            mask &= ~(1 << bit)
-        write_cmd = self.get_node_control_cmd(chn, True)
-        self.send_command(SCA_CH_CTRL, write_cmd, mask)
+            raise Exception("Channel out of range")
 
     def enable_all_channels(self):
         self.enable_chn(SCA_CH_SPI, True)

@@ -11,9 +11,16 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
-sca_dev = sca.Sca()
 
-# Read Chip ID
-while True:
-    sca_id = sca_dev.read_sca_id()
-    time.sleep(1)
+if __name__ == '__main__':
+    sca_dev = sca.Sca(version=2)
+
+    # Reset Chip
+    sca_dev.send_reset()
+    # Connect SCA chip
+    sca_dev.send_connect()
+
+    # Read Chip ID
+    while True:
+        sca_id = sca_dev.read_sca_id()
+        time.sleep(1)
