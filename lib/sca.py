@@ -17,14 +17,14 @@ class Sca(object):
     """
 
     def __init__(self, sca_addr=0x00, connectionFilePath="../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml",
-                 deviceId="C0S00_gdpb066", version=2
+                 deviceId="C0S00_gdpb066" 
                  ):
         self.__SCA_ADDR = sca_addr
         self.__trans_id = 0x01
 
         self.__connectionFilePath = connectionFilePath
         self.__deviceId = deviceId
-        self._version = version
+        self._version = SCA_VERSION
         # Creating the HwInterface
         self.__connectionMgr = uhal.ConnectionManager(
             "file://" + self.__connectionFilePath)
@@ -108,7 +108,7 @@ class Sca(object):
             return err_val
 
     def read_sca_id(self):
-        if self._version == 1:
+        if self._version == 0x01:
             self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V1, SCA_CTRL_DATA_R_ID)
         else:
             self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V2, SCA_CTRL_DATA_R_ID)

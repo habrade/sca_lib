@@ -11,9 +11,8 @@ from bme280_defs import *
 class BME280(sca_i2c.ScaI2c):
     def __init__(self, t_mode=BME280_OSAMPLE_1, p_mode=BME280_OSAMPLE_1,
                  h_mode=BME280_OSAMPLE_1,
-                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off,
-                 version=2, **kwargs):
-        sca_i2c.ScaI2c.__init__(self, chn=0, version=version)
+                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
+        sca_i2c.ScaI2c.__init__(self, chn=0)
         self._log = logging.getLogger('__name__')
         self.BME280Data = []
         # Check that t_mode is valid.

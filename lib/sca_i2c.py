@@ -13,8 +13,8 @@ log.setLevel(logging.INFO)
 
 class ScaI2c(sca.Sca):
 
-    def __init__(self, chn, version):
-        sca.Sca.__init__(self, version=version)
+    def __init__(self, chn):
+        sca.Sca.__init__(self)
         self.__chn = chn
         self._log = logging.getLogger(__name__)
 
@@ -79,6 +79,7 @@ class ScaI2c(sca.Sca):
 
     def s_7b_w(self, addr, data):
         temp = addr << 24 + data << 16
+        # print("temp data is %x" % temp)
         self.send_command(self.__chn, SCA_I2C_S_7B_W, temp)
         status = self.get_reg_value("rxData") >> 24
         return self._parse_status(status)
