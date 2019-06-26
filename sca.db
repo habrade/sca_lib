@@ -1,87 +1,191 @@
-record(ai, "$(P):SCA:ID") { 
+record(ai, "$(P):ID") { 
 }
 
-record(ai, "$(P):SCA:ADC:CH:0") { 
+record(ao, "$(P):ADC:VREF") {
+    field(EGU, "V")
+    field(PREC, "2")
 }
-record(ai, "$(P):SCA:ADC:CH:1") { 
+record(ai, "$(P):ADC:CH:0") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:2") { 
+record(ai, "$(P):ADC:CH:1") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:3") { 
+record(ai, "$(P):ADC:CH:2") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:4") { 
+record(ai, "$(P):ADC:CH:3") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:5") { 
+record(ai, "$(P):ADC:CH:4") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:6") { 
+record(ai, "$(P):ADC:CH:5") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:7") { 
+record(ai, "$(P):ADC:CH:6") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:8") { 
+record(ai, "$(P):ADC:CH:7") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:9") { 
+record(ai, "$(P):ADC:CH:8") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:10") { 
+record(ai, "$(P):ADC:CH:9") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:11") { 
+record(ai, "$(P):ADC:CH:10") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:12") { 
+record(ai, "$(P):ADC:CH:11") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:13") { 
+record(ai, "$(P):ADC:CH:12") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:14") { 
+record(ai, "$(P):ADC:CH:13") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:15") { 
+record(ai, "$(P):ADC:CH:14") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:16") { 
+record(ai, "$(P):ADC:CH:15") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:17") { 
+record(ai, "$(P):ADC:CH:16") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:18") { 
+record(ai, "$(P):ADC:CH:17") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:19") { 
+record(ai, "$(P):ADC:CH:18") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:20") { 
+record(ai, "$(P):ADC:CH:19") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:21") { 
+record(ai, "$(P):ADC:CH:20") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:22") { 
+record(ai, "$(P):ADC:CH:21") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:23") { 
+record(ai, "$(P):ADC:CH:22") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:24") { 
+record(ai, "$(P):ADC:CH:23") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:25") { 
+record(ai, "$(P):ADC:CH:24") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:26") { 
+record(ai, "$(P):ADC:CH:25") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:27") { 
+record(ai, "$(P):ADC:CH:26") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:28") { 
+record(ai, "$(P):ADC:CH:27") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:29") { 
+record(ai, "$(P):ADC:CH:28") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:30") { 
+record(ai, "$(P):ADC:CH:29") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
 }
-record(ai, "$(P):SCA:ADC:CH:31") { 
+record(ai, "$(P):ADC:CH:30") { 
+    field(EGU, "V")
+    field(PREC, "2")
+    field(HIHI, "1.0")
+}
+record(ai, "$(P):ADC:CH:31") { 
+    field(EGU, "Celcius")
+    field(PREC, "2")
+    field(HIHI, "80")
+    field(LOLO, "-30")
 }
 
-record(ao, "$(P):SCA:GPIO:VALUE") { 
+record(ao, "$(P):GPIO:VALUE") { 
 }
-record(ao, "$(P):SCA:GPIO:DIRECTION:SET") { 
+record(ao, "$(P):GPIO:DIRECTION:SET") { 
 }
-record(ai, "$(P):SCA:GPIO:DIRECTION:GET") { 
+record(ai, "$(P):GPIO:DIRECTION:GET") { 
 }
-record(ao, "$(P):SCA:GPIO:PINOUT:SET") { 
+record(ao, "$(P):GPIO:PINOUT:SET") { 
 }
-record(ai, "$(P):SCA:GPIO:PINOUT:GET") { 
+record(ai, "$(P):GPIO:PINOUT:GET") { 
 }
-record(ai, "$(P):SCA:GPIO:PININ:GET") { 
+record(ai, "$(P):GPIO:PININ:GET") { 
 }
 
 record(ai, "$(P):BME280:Temperature") { 
+    field(EGU, "Celcius")
 }
 record(ai, "$(P):BME280:Humidity") { 
+    field(EGU, "%")
 }
 record(ai, "$(P):BME280:Pressure") { 
+    field(EGU, "hPa")
 }
