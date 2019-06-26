@@ -55,4 +55,3 @@ if __name__ == '__main__':
         log.debug("Pressure = %f hPa" % hectopascals)
         log.debug("Humidity = %f %%" % humidity)
 
-        time.sleep(0.04)

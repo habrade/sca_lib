@@ -1,10 +1,6 @@
-record(ai, "$(P):ID") { 
+record(longin, "$(P):ID") { 
 }
 
-record(ao, "$(P):ADC:VREF") {
-    field(EGU, "V")
-    field(PREC, "2")
-}
 record(ai, "$(P):ADC:CH:0") { 
     field(EGU, "V")
     field(PREC, "2")
@@ -262,17 +258,17 @@ record(ai, "$(P):ADC:CH:31") {
     field(LLSV, "MAJOR")
 }
 
-record(ao, "$(P):GPIO:VALUE") { 
+record(longin, "$(P):GPIO:VALUE") { 
 }
-record(ao, "$(P):GPIO:DIRECTION:SET") { 
+record(longout, "$(P):GPIO:DIRECTION:SET") { 
 }
-record(ai, "$(P):GPIO:DIRECTION:GET") { 
+record(longin, "$(P):GPIO:DIRECTION:GET") { 
 }
-record(ao, "$(P):GPIO:PINOUT:SET") { 
+record(longout, "$(P):GPIO:PINOUT:SET") { 
 }
-record(ai, "$(P):GPIO:PINOUT:GET") { 
+record(longin, "$(P):GPIO:PINOUT:GET") { 
 }
-record(ai, "$(P):GPIO:PININ:GET") { 
+record(longin, "$(P):GPIO:PININ:GET") { 
 }
 
 record(ai, "$(P):BME280:Temperature") { 

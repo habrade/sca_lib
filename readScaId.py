@@ -13,14 +13,14 @@ log.setLevel(logging.DEBUG)
 
 
 if __name__ == '__main__':
-    sca_dev = sca.Sca(version=2)
+    sca_dev = sca.Sca()
 
     # Reset Chip
     sca_dev.send_reset()
     # Connect SCA chip
     sca_dev.send_connect()
 
+    sca_dev.enable_chn(SCA_CH_ADC, True)
     # Read Chip ID
     while True:
         sca_id = sca_dev.read_sca_id()
-        time.sleep(1)

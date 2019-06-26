@@ -6,18 +6,14 @@ import uhal
 from sca_defs import *
 
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                    format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 
 class Sca(object):
-    """
-    SCA basic methods
-    """
-
     def __init__(self, sca_addr=0x00, connectionFilePath="../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml",
-                 deviceId="C0S00_gdpb066" 
+                 deviceId="C0S00_gdpb066"
                  ):
         self.__SCA_ADDR = sca_addr
         self.__trans_id = 0x01
@@ -52,25 +48,22 @@ class Sca(object):
         node.write(0)
         self.__hw.dispatch()
 
-        log.debug("    txTransID = %x\t" % self.get_reg_value("txTransID"))
-        log.debug("    rxTransID = %x\n" % self.get_reg_value("rxTransID"))
-        log.debug("    txChn = %x\t" % self.get_reg_value("txChn"))
-        log.debug("    rxChn = %x\n" % self.get_reg_value("rxChn"))
-        log.debug("    txCmd = %x\t" % self.get_reg_value("txCmd"))
-        log.debug("    rxAddr = %x\n" % self.get_reg_value("rxAddr"))
-        log.debug("    txData = %x\t" % self.get_reg_value("txData"))
-        log.debug("    rxData = %x\n" % self.get_reg_value("rxData"))
-        log.debug(" \t")
-        log.debug("    rxCtrl = %x\n" % self.get_reg_value("rxCtrl"))
-        log.debug(" \t")
-        log.debug("    rxLen = %x\n" % self.get_reg_value("rxLen"))
-        log.debug(" \t")
-        log.debug("    rxErr = %x\n" % self.get_reg_value("rxErr"))
+        log.debug("    txTransID = %#x\t" % self.get_reg_value("txTransID"))
+        log.debug("    rxTransID = %#x\t" % self.get_reg_value("rxTransID"))
+        log.debug("    txChn = %#x\t" % self.get_reg_value("txChn"))
+        log.debug("    rxChn = %#x\t" % self.get_reg_value("rxChn"))
+        log.debug("    txCmd = %#x\t" % self.get_reg_value("txCmd"))
+        log.debug("    rxAddr = %#x\t" % self.get_reg_value("rxAddr"))
+        log.debug("    txData = %#x\t" % self.get_reg_value("txData"))
+        log.debug("    rxData = %#x\t" % self.get_reg_value("rxData"))
+        log.debug("    rxCtrl = %#x\t" % self.get_reg_value("rxCtrl"))
+        log.debug("    rxLen = %#x\t" % self.get_reg_value("rxLen"))
+        log.debug("    rxErr = %#x\t" % self.get_reg_value("rxErr"))
 
         rxErr = self.get_reg_value("rxErr")
         if rxErr != 0x00:
             # raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
-            log.error("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
+            log.error("ERROR! SCA rxErr Code: %#02x" % rxErr)
 
     def send_reset(self):
         node = self.__hw.getNode("GBT-SCA.rst")
@@ -113,9 +106,9 @@ class Sca(object):
         else:
             self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V2, SCA_CTRL_DATA_R_ID)
 
-        log.info("SCA Version = %d" % self._version)
         sca_id = self.get_reg_value("rxData")
-        log.info("SCA ID = 0x%06x" % sca_id)
+        log.info("SCA Version = %#02x \t SCA ID = %#06x" %
+                 (self._version, sca_id))
         return sca_id
 
     @staticmethod
@@ -143,7 +136,7 @@ class Sca(object):
             read_cmd = self.get_node_control_cmd(chn, False)
             self.send_command(SCA_CH_CTRL, read_cmd, 0)
             mask = self.get_reg_value("rxData") >> 24
-            log.debug("Channel Mask = %02x" % mask)
+            log.debug("Channel Mask = %#02x" % mask)
             bit = chn & 0x07
             return mask & (1 << bit)
         else:
@@ -154,13 +147,13 @@ class Sca(object):
             read_cmd = self.get_node_control_cmd(chn, False)
             self.send_command(SCA_CH_CTRL, read_cmd, 0)
             mask = self.get_reg_value("rxData") >> 24
-            log.debug("Channel Mask = %02x" % mask)
+            log.debug("Channel Mask = %#02x" % mask)
             bit = chn & 0x07
             if enabled:
                 mask |= 1 << bit
             else:
                 mask &= ~(1 << bit)
-            log.debug("Channel new Mask = %02x" % mask)
+            log.debug("Channel new Mask = %#02x" % mask)
             write_cmd = self.get_node_control_cmd(chn, True)
             self.send_command(SCA_CH_CTRL, write_cmd, mask << 24)
         else:

@@ -5,8 +5,10 @@ import sca
 import sca_defs
 from sca_defs import *
 
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class ScaGpio(sca.Sca):
@@ -50,11 +52,11 @@ class ScaGpio(sca.Sca):
             self.write_pin_out(pins)
 
     def test_gpio(self, pins):
-        log.info("set GPIO value: %x" % pins)
+        log.info("set GPIO value: %#x" % pins)
         self.send_command(SCA_CH_GPIO, SCA_GPIO_W_DATAOUT, pins)
         log.info("Get GPIO value")
         self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DATAOUT, 0)
-        log.info("GPIO = %x" % self.get_reg_value("rxData"))
+        log.info("GPIO = %#x" % self.get_reg_value("rxData"))
         if self.get_reg_value("rxData") == pins:
             log.info("pass!")
         else:
