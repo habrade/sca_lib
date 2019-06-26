@@ -9,162 +9,257 @@ record(ai, "$(P):ADC:CH:0") {
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:1") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:2") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:3") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:4") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:5") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:6") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:7") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:8") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:9") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:10") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:11") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:12") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:13") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:14") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:15") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:16") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:17") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:18") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:19") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:20") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:21") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:22") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:23") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:24") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:25") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:26") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:27") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:28") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:29") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:30") { 
     field(EGU, "V")
     field(PREC, "2")
     field(HIHI, "1.0")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:31") { 
-    field(EGU, "Celcius")
-    field(PREC, "2")
+    field(EGU, "°C")
+    field(PREC, "1")
     field(HIHI, "80")
+    field(HHSV, "MAJOR")
     field(LOLO, "-30")
+    field(LLSV, "MAJOR")
 }
 
 record(ao, "$(P):GPIO:VALUE") { 
@@ -181,11 +276,26 @@ record(ai, "$(P):GPIO:PININ:GET") {
 }
 
 record(ai, "$(P):BME280:Temperature") { 
-    field(EGU, "Celcius")
+    field(EGU, "°C")
+    field(PREC, "1")
+    field(HIHI, "85")
+    field(HHSV, "MAJOR")
+    field(LOLO, "-40")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):BME280:Humidity") { 
     field(EGU, "%")
+    field(PREC, "1")
+    field(HIHI, "100")
+    field(HHSV, "MAJOR")
+    field(LOLO, "0")
+    field(LLSV, "MAJOR")
 }
 record(ai, "$(P):BME280:Pressure") { 
     field(EGU, "hPa")
+    field(PREC, "1")
+    field(HIHI, "1100")
+    field(HHSV, "MAJOR")
+    field(LOLO, "300")
+    field(LLSV, "MAJOR")
 }
