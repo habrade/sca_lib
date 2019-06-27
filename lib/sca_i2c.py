@@ -16,7 +16,6 @@ class ScaI2c(sca.Sca):
     def __init__(self, chn):
         sca.Sca.__init__(self)
         self.__chn = chn
-        self._log = logging.getLogger(__name__)
 
     def _parse_status(self, status):
         """Return 0 on success or positive value on error"""
@@ -24,11 +23,11 @@ class ScaI2c(sca.Sca):
             # log.debug("SCA I2C transaction status SUCCESS")
             pass
         elif status & (0x1 << 3):
-            self._log.warn("SCA I2C transaction LEVERR - SDA pulled to GND")
+            log.warn("SCA I2C transaction LEVERR - SDA pulled to GND")
         elif status & (0x1 << 5):
-            self._log.warn("SCA I2C transaction INVOM - invalid command")
+            log.warn("SCA I2C transaction INVOM - invalid command")
         elif status & (0x1 << 6):
-            self._log.warn("SCA I2C transaction NOACK - no acknowledge from slave")
+            log.warn("SCA I2C transaction NOACK - no acknowledge from slave")
         return status & 0x68
 
     def w_ctrl_reg(self, val):
@@ -78,8 +77,7 @@ class ScaI2c(sca.Sca):
         return self.get_reg_value("rxData")
 
     def s_7b_w(self, addr, data):
-        temp = addr << 24 + data << 16
-        # print("temp data is %x" % temp)
+        temp = (addr << 24) + (data << 16)
         self.send_command(self.__chn, SCA_I2C_S_7B_W, temp)
         status = self.get_reg_value("rxData") >> 24
         return self._parse_status(status)
@@ -93,7 +91,7 @@ class ScaI2c(sca.Sca):
         if self._parse_status(status) == 0:
             return data
         else:
-            self._log.error("Error happened at this I2C read transaction, check status")
+            log.error("Error happened at this I2C read transaction, check status")
 
     def s_10b_w(self, addr, data):
         temp = addr << 16 + data << 8
@@ -102,7 +100,7 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return True
         else:
-            self._log.error("Error happened at this I2C write transaction, check status")
+            log.error("Error happened at this I2C write transaction, check status")
         return status
 
     def s_10b_r(self, addr):
@@ -114,7 +112,7 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return data
         else:
-            self._log.error("Error happened at this I2C read transaction, check status")
+            log.error("Error happened at this I2C read transaction, check status")
         return self.get_reg_value("rxData") >> 16
 
     def m_7b_w(self, addr):
@@ -123,7 +121,7 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return True
         else:
-            self._log.error("Error happened at this I2C write transaction, check status")
+            log.error("Error happened at this I2C write transaction, check status")
 
     def m_7b_r(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_7B_R, addr << 24)
@@ -131,7 +129,7 @@ class ScaI2c(sca.Sca):
         if self._parse_status(status) == 0:
             return True
         else:
-            self._log.error("Error happened at this I2C read transaction, check status")
+            log.error("Error happened at this I2C read transaction, check status")
 
     def m_10b_w(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_10B_W, addr << 24)
@@ -139,7 +137,7 @@ class ScaI2c(sca.Sca):
         if status == 0x04:
             return True
         else:
-            self._log.error("Error happened at this I2C read transaction, check status")
+            log.error("Error happened at this I2C read transaction, check status")
 
     def m_10b_r(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_10B_R, addr << 24)
@@ -193,7 +191,7 @@ class ScaI2c(sca.Sca):
     def get_data_reg(self, nr_bytes):
         data = bytearray(16)
         if (nr_bytes > 16) or (nr_bytes < 1):
-            self._log.error("Bytes of data should be from 1 to 16")
+            log.error("Bytes of data should be from 1 to 16")
         else:
             self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
             data0 = self.get_reg_value("rxData")

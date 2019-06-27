@@ -4,8 +4,8 @@ import time
 import struct
 
 import sca_i2c
-import bme280_defs
-from bme280_defs import *
+from lib.sca_defs import *
+from lib.bme280_defs import *
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
@@ -17,7 +17,7 @@ class BME280(sca_i2c.ScaI2c):
     def __init__(self, t_mode=BME280_OSAMPLE_1, p_mode=BME280_OSAMPLE_1,
                  h_mode=BME280_OSAMPLE_1,
                  standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
-        sca_i2c.ScaI2c.__init__(self, chn=0)
+        sca_i2c.ScaI2c.__init__(self, chn=SCA_CH_I2C0)
         self.BME280Data = []
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,
@@ -109,19 +109,19 @@ class BME280(sca_i2c.ScaI2c):
 
     def _write_raw8(self, value):
         """Write an 8-bit value on the bus (without register)."""
-        self._log.debug("Write 0x%02 on the bus (without register)", value)
+        log.debug("Write %#02x on the bus (without register)" % value)
         return self.s_7b_w(BME280_I2CADDR, value)
 
     def _write8(self, register, value):
         """Write an 8-bit value to the specified register."""
-        self._log.debug("Write 0x%02X to register %#02X", value, register)
+        log.debug("Write %#02x to register %#02x" % (value, register))
         data = [register, value & 0xFF]
         return self._write_block(bytes(data))
 
     def _write16(self, register, value):
         """Write a 16-bit value to the specified register."""
-        self._log.debug(
-            "Write 0x%04X to register pair %#02X, %#02X", value, register, register + 1)
+        log.debug(
+            "Write %#04x to register pair %#02x, %#02x" % (value, register, register + 1))
         value = value & 0xFFFF
         self._write_block((register << 24) | ((value & 0xff) << 16) | (
             register + 1) << 8 | (value >> 8 & 0xff))
@@ -144,8 +144,7 @@ class BME280(sca_i2c.ScaI2c):
         first)."""
         resultBytes = self._read_block(register, 2)
         result = struct.unpack('>H', resultBytes)[0]
-        self._log.debug(
-            "Read 0x%04X from register pair %#02x, %#02x", result, register, register + 1)
+        log.debug("Read 0x%04X from register pair %#02x, %#02x", result, register, register + 1)
         # Swap bytes if using big endian because read_word_data assumes little
         # endian on ARM (little endian) systems.
         if not little_endian:
@@ -190,7 +189,7 @@ class BME280(sca_i2c.ScaI2c):
         if self.m_7b_r(BME280_I2CADDR):
             return self.get_data_reg(nr_bytes)
         else:
-            self._log.error("Error during read")
+            log.error("Error during read")
 
     def rst_dev(self):
         self._write8(BME280_REGISTER_SOFTRESET, 0xB6)

@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # reset bme280
     sensor.rst_dev()
 
-    PREFIX = "labtest:"
+    PREFIX = "labtest:SCA:0:"
     degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
     hectopascals_ch = pvaccess.Channel(PREFIX + "BME280:Pressure")
     humidity_ch = pvaccess.Channel(PREFIX + "BME280:Humidity")
@@ -56,4 +56,3 @@ if __name__ == '__main__':
         log.debug("Temp = %f deg C" % degrees)
         log.debug("Pressure = %f hPa" % hectopascals)
         log.debug("Humidity = %f %%" % humidity)
-
