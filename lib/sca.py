@@ -63,7 +63,7 @@ class Sca(object):
         rxErr = self.get_reg_value("rxErr")
         if rxErr != 0x00:
             # raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
-            log.error("ERROR! SCA rxErr Code: %#02x" % rxErr)
+            log.error("SCA rxErr Code: %#02x" % rxErr)
 
     def send_reset(self):
         node = self.__hw.getNode("GBT-SCA.rst")
