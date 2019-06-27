@@ -2,6 +2,7 @@
 import sys
 import time
 import logging
+import subprocess
 
 import pvaccess
 
@@ -14,6 +15,11 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
+
+    # run softIocPVA
+    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE,
+                     stderr=subprocess.STDOUT)
+
     sca_dev = sca_gpio.ScaGpio()
 
     # Reset Chip
@@ -24,12 +30,12 @@ if __name__ == '__main__':
     # Enable GPIO
     sca_dev.enable_chn(sca_defs.SCA_CH_GPIO, True)
 
-    PREFIX = "labtest:"
-    ca_name_direction_set = PREFIX + "SCA:GPIO:DIRECTION:SET"
-    ca_name_direction_get = PREFIX + "SCA:GPIO:DIRECTION:GET"
-    ca_name_pinout_get = PREFIX + "SCA:GPIO:PINOUT:GET"
-    ca_name_pinout_set = PREFIX + "SCA:GPIO:PINOUT:SET"
-    ca_name_pinin_get = PREFIX + "SCA:GPIO:PININ:GET"
+    PREFIX = "labtest:SCA:0:"
+    ca_name_direction_set = PREFIX + "GPIO:DIRECTION:SET"
+    ca_name_direction_get = PREFIX + "GPIO:DIRECTION:GET"
+    ca_name_pinout_get = PREFIX + "GPIO:PINOUT:GET"
+    ca_name_pinout_set = PREFIX + "GPIO:PINOUT:SET"
+    ca_name_pinin_get = PREFIX + "GPIO:PININ:GET"
 
     while True:
         # GPIO Direction Set

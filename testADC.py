@@ -2,16 +2,22 @@
 import sys
 import time
 import pvaccess
+import subprocess
 
 from lib.sca_defs import *
 from lib import sca_adc
 
 # ioc channels' prefix
-PREFIX = "labtest:SCA:"
+PREFIX = "labtest:SCA:0:"
 # ADC channels' name
 ca_adc_vref = pvaccess.Channel(PREFIX + "ADC:VREF")
 
 if __name__ == '__main__':
+
+    # run softIocPVA
+    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    SCA_ADC_VREF = 1.5
 
     sca_dev = sca_adc.ScaAdc()
 
@@ -24,14 +30,12 @@ if __name__ == '__main__':
     sca_dev.enable_chn(SCA_CH_ADC, True)
 
     while True:
-        vref = ca_adc_vref.get().getDouble()
-        print("vref: %f" % vref)
         # read adc channels for 0 31
         for i in range(31):
             sca_dev.w_sel(i)
             sca_dev.start_conv()
             adc_value = sca_dev.r_data()
-            volt_value = float(adc_value*vref)/(2**12)
+            volt_value = float(adc_value*SCA_ADC_VREF)/(2**12)
             print("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
             ch_name = PREFIX + "ADC:CH:" + str(i)
             ca_ch = pvaccess.Channel(ch_name)

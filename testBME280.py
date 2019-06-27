@@ -2,6 +2,7 @@
 import logging
 import pvaccess
 import time
+import subprocess
 
 from lib.sca_defs import *
 from lib.bme280_defs import *
@@ -13,14 +14,15 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
+    # run softIocPVA
+    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
     sensor = bme280.BME280(t_mode=BME280_OSAMPLE_8,
                            p_mode=BME280_OSAMPLE_8, h_mode=BME280_OSAMPLE_8)
     # Reset SCA
     sensor.send_reset()
     # Connect SCA chip
     sensor.send_connect()
-
-    log.info("SCA ID = %x", sensor.read_sca_id())
 
     # Enable I2C ch. 0
     sensor.enable_chn(SCA_CH_I2C0, True)
