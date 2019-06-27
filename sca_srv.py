@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import logging
 import threading
+import subprocess
 
 import pvaccess
 
@@ -20,10 +21,13 @@ log.setLevel(logging.DEBUG)
 class ScaSrv():
     def __init__(self, scaNum):
 
+        # run softIocPVA
+        subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
         self.__SCA_ADC_VREF = 1.5
 
         # ioc channels' prefix
-        self.__PREFIX = "labtest:SCA:" + scaNum + ":"
+        self.__PREFIX = "labtest:SCA:%d:" % scaNum
         # SCA ID channel's name
         self.ca_sca_id = pvaccess.Channel(self.__PREFIX + "ID")
         # GPIO channels' name
