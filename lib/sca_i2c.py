@@ -94,7 +94,7 @@ class ScaI2c(sca.Sca):
             log.error("Error happened at this I2C read transaction, check status")
 
     def s_10b_w(self, addr, data):
-        temp = addr << 16 + data << 8
+        temp = (addr << 16) + (data << 8)
         self.send_command(self.__chn, SCA_I2C_S_10B_W, temp)
         status = self.get_reg_value("rxData") >> 24
         if status == 0x04:
