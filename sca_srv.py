@@ -50,15 +50,21 @@ class ScaSrv():
         # Connect SCA chip
         sca_dev.send_connect()
 
+        # read SCA ID
+        sca_dev.enable_chn(SCA_CH_ADC, True)
+        sca_id = sca_dev.read_sca_id()
+        # put to epics channel
+        self.ca_sca_id.putInt(int(sca_id))
+
         threads = []
-        for index in range(3):
+        for index in range(2):
+            # if index == 0:
+            #     thread_function = self.readID_thread_func
             if index == 0:
-                thread_function = self.readID_thread_func
-            elif index == 1:
                 thread_function = self.GPIO_thread_func
-            elif index == 2:
+            elif index == 1:
                 thread_function = self.ADC_thread_func
-            elif index == 3:
+            elif index == 2:
                 thread_function = self.BME280_thread_func
 
             t = threading.Thread(target=thread_function, args=())
@@ -70,14 +76,14 @@ class ScaSrv():
         for thread in threads:
             thread.join()
 
-    def readID_thread_func(self):
-        sca_dev = sca.Sca()
-        sca_dev.enable_chn(SCA_CH_ADC, True)
-        while True:
-            # read SCA ID
-            sca_id = sca_dev.read_sca_id()
-            # put to epics channel
-            self.ca_sca_id.putInt(int(sca_id))
+    # def readID_thread_func(self):
+    #     sca_dev = sca.Sca()
+    #     sca_dev.enable_chn(SCA_CH_ADC, True)
+    #     while True:
+    #         # read SCA ID
+    #         sca_id = sca_dev.read_sca_id()
+    #         # put to epics channel
+    #         self.ca_sca_id.putInt(int(sca_id))
 
     def GPIO_thread_func(self):
         sca_dev = sca_gpio.ScaGpio()
