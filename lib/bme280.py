@@ -95,17 +95,15 @@ class BME280(sca_i2c.ScaI2c):
         self.dig_H5 = h5 | (
             self._read_u8(BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
 
-        '''
-        print '0xE4 = {0:2x}'.format (self._read_u8 (BME280_REGISTER_DIG_H4))
-        print '0xE5 = {0:2x}'.format (self._read_u8 (BME280_REGISTER_DIG_H5))
-        print '0xE6 = {0:2x}'.format (self._read_u8 (BME280_REGISTER_DIG_H6))
-        print 'dig_H1 = {0:d}'.format (self.dig_H1)
-        print 'dig_H2 = {0:d}'.format (self.dig_H2)
-        print 'dig_H3 = {0:d}'.format (self.dig_H3)
-        print 'dig_H4 = {0:d}'.format (self.dig_H4)
-        print 'dig_H5 = {0:d}'.format (self.dig_H5)
-        print 'dig_H6 = {0:d}'.format (self.dig_H6)
-        '''
+        log.debug("0xE4 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H4))
+        log.debug("0xE5 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H5))
+        log.debug("0xE6 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H6))
+        log.debug("dig_H1 = %d" % self.dig_H1)
+        log.debug("dig_H2 = %d" % self.dig_H2)
+        log.debug("dig_H3 = %d" % self.dig_H3)
+        log.debug("dig_H4 = %d" % self.dig_H4)
+        log.debug("dig_H5 = %d" % self.dig_H5)
+        log.debug("dig_H6 = %d" % self.dig_H6)
 
     def _write_raw8(self, value):
         """Write an 8-bit value on the bus (without register)."""
