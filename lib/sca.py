@@ -84,7 +84,7 @@ class Sca(object):
         node = self.__hw.getNode(node_name)
         reg_val = node.read()
         self.__hw.dispatch()
-        return reg_val
+        return reg_val.value()
 
     def check_error(self):
         node_name = "GBT-SCA.rx_flag"

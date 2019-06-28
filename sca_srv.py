@@ -54,7 +54,7 @@ class ScaSrv():
         sca_dev.enable_chn(SCA_CH_ADC, True)
         sca_id = sca_dev.read_sca_id()
         # put to epics channel
-        self.ca_sca_id.putInt(int(sca_id))
+        self.ca_sca_id.putInt(sca_id)
 
         threads = []
         for index in range(2):
@@ -90,25 +90,25 @@ class ScaSrv():
         sca_dev.enable_chn(SCA_CH_GPIO, True)
         while True:
             # GPIO Direction Set
-            direction_set = int(self.ca_gpio_direction_set.get().getInt())
+            direction_set = self.ca_gpio_direction_set.get().getInt()
             log.debug("GPIO Direction Set to %#x" % direction_set)
             sca_dev.set_direction(direction_set)
             # GPIO Direction READ
             direction_get = sca_dev.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
-            self.ca_gpio_direction_get.putInt(int(direction_get))
+            self.ca_gpio_direction_get.putInt(direction_get)
             # GPIO PinOut Set
-            pinout_set = int(self.ca_gpio_pinout_set.get().getInt())
+            pinout_set = self.ca_gpio_pinout_set.get().getInt()
             log.debug("GPIO PINOUT Set to %#x" % pinout_set)
             sca_dev.write_pin_out(pinout_set)
             # GPIO PinOut READ
             pinout_get = sca_dev.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
-            self.ca_gpio_pinout_get.putInt(int(pinout_get))
+            self.ca_gpio_pinout_get.putInt(pinout_get)
             # GPIO PinIn READ
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
-            self.ca_gpio_pinin_get.putInt(int(pinin_get))
+            self.ca_gpio_pinin_get.putInt(pinin_get)
 
     def ADC_thread_func(self):
         sca_dev = sca_adc.ScaAdc()

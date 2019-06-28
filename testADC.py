@@ -9,8 +9,6 @@ from lib import sca_adc
 
 # ioc channels' prefix
 PREFIX = "labtest:SCA:0:"
-# ADC channels' name
-ca_adc_vref = pvaccess.Channel(PREFIX + "ADC:VREF")
 
 if __name__ == '__main__':
 
@@ -36,7 +34,7 @@ if __name__ == '__main__':
             sca_dev.start_conv()
             adc_value = sca_dev.r_data()
             volt_value = float(adc_value*SCA_ADC_VREF)/(2**12)
-            print("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
+            print("ADC Ch %d =  %#x \t Volt = %f" % (i, adc_value, volt_value))
             ch_name = PREFIX + "ADC:CH:" + str(i)
             ca_ch = pvaccess.Channel(ch_name)
             ca_ch.putDouble(volt_value)
@@ -45,8 +43,8 @@ if __name__ == '__main__':
         sca_dev.w_sel(31)
         sca_dev.start_conv()
         adc_value = sca_dev.r_data()
-        internal_temp = float(-adc_value)/5
-        # print("ADC Ch %d = %#x Temp = %f" % (31, adc_value, internal_temp))
+        internal_temp = float(720-adc_value)/5
+        print("ADC Ch %d = %#x \t Temp = %f" % (31, adc_value, internal_temp))
         ch_name = PREFIX + "ADC:CH:" + str(31)
         ca_ch = pvaccess.Channel(ch_name)
         # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
