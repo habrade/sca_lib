@@ -1,5 +1,4 @@
 import logging
-import sys
 import time
 import struct
 
@@ -140,8 +139,8 @@ class BME280(sca_i2c.ScaI2c):
         """Read an unsigned 16-bit value from the specified register, with the
         specified endianness (default little endian, or least significant byte
         first)."""
-        resultBytes = self._read_block(register, 2)
-        result = struct.unpack('>H', resultBytes)[0]
+        result_bytes = self._read_block(register, 2)
+        result = struct.unpack('>H', result_bytes)[0]
         log.debug("Read 0x%04X from register pair %#02x, %#02x", result, register, register + 1)
         # Swap bytes if using big endian because read_word_data assumes little
         # endian on ARM (little endian) systems.

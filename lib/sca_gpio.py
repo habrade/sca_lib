@@ -1,8 +1,6 @@
 import logging
-import sys
 
 import sca
-import sca_defs
 from sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG,
