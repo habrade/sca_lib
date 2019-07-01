@@ -7,4 +7,4 @@ class ScaModule(object):
     def __init__(self, hw):
         self.sca_adc = ScaAdc(hw)
         self.sca_gpio = ScaGpio(hw)
-        self.bme280 = BME280(hw)
+        # self.bme280 = BME280(hw)
