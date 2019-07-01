@@ -6,19 +6,27 @@ import subprocess
 
 from lib.sca_defs import *
 from lib.bme280_defs import *
-from lib import bme280
+from lib.gdpb import Gdpb
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+
+class TestBme280(Gdpb):
+    def __init__(self):
+        Gdpb.__init__(self)
+        self.bme280_dev = self.sca_modules[0].bme280
+
+
 if __name__ == '__main__':
     # run softIocPVA
     subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-    sensor = bme280.BME280(t_mode=BME280_OSAMPLE_8,
-                           p_mode=BME280_OSAMPLE_8, h_mode=BME280_OSAMPLE_8)
+    test_bme280 = TestBme280()
+    sensor = test_bme280.bme280_dev
+    
     # Reset SCA
     sensor.send_reset()
     # Connect SCA chip

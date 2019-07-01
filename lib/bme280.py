@@ -12,9 +12,9 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 
-class BME280(ScaI2c):
-    def __init__(self, hw, t_mode=BME280_OSAMPLE_1, p_mode=BME280_OSAMPLE_1,
-                 h_mode=BME280_OSAMPLE_1,
+class Bme280(ScaI2c):
+    def __init__(self, hw, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
+                 h_mode=BME280_OSAMPLE_8,
                  standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
         ScaI2c.__init__(self, hw=hw, chn=SCA_CH_I2C0)
         self.BME280Data = []

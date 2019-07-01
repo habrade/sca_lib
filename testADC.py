@@ -5,7 +5,13 @@ import pvaccess
 import subprocess
 
 from lib.sca_defs import *
-from lib import sca_adc
+from lib.gdpb import Gdpb
+
+
+class TestADC(Gdpb):
+    def __init__(self):
+        Gdpb.__init__(self)
+        self.adc_dev = self.sca_modules[0].adc
 
 # ioc channels' prefix
 PREFIX = "labtest:SCA:0:"
@@ -17,7 +23,8 @@ if __name__ == '__main__':
 
     SCA_ADC_VREF = 1.5
 
-    sca_dev = sca_adc.ScaAdc()
+    test_adc = TestADC()
+    sca_dev = test_adc.sca_modules[0].adc
 
     # Reset Chip
     sca_dev.send_reset()
