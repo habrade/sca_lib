@@ -1,7 +1,7 @@
 import logging
 import struct
 
-import sca
+from sca import Sca
 from sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG,
@@ -10,16 +10,17 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 
-class ScaI2c(sca.Sca):
+class ScaI2c(Sca):
 
-    def __init__(self, chn):
-        sca.Sca.__init__(self)
+    def __init__(self, hw, chn):
+        Sca.__init__(self, hw)
         self.__chn = chn
 
-    def _parse_status(self, status):
+    @staticmethod
+    def _parse_status(status):
         """Return 0 on success or positive value on error"""
         if status & (0x1 << 2):
-            # log.debug("SCA I2C transaction status SUCCESS")
+            log.debug("SCA I2C transaction status SUCCESS")
             pass
         elif status & (0x1 << 3):
             log.warn("SCA I2C transaction LEVERR - SDA pulled to GND")

@@ -2,7 +2,7 @@
 <display version="2.0.0">
   <name>Display</name>
   <macros>
-    <P>labtest:SCA</P>
+    <P>labtest:SCA:0</P>
   </macros>
   <width>900</width>
   <widget type="label" version="2.0.0">
@@ -855,19 +855,5 @@
     <pv_name>$(P):BME280:Humidity</pv_name>
     <x>620</x>
     <y>540</y>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_10</name>
-    <text>Ref Volt</text>
-    <x>100</x>
-    <y>50</y>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Entry_2</name>
-    <pv_name>$(P):ADC:VREF</pv_name>
-    <x>160</x>
-    <y>50</y>
-    <precision>-2</precision>
   </widget>
 </display>

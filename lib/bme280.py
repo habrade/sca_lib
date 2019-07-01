@@ -1,10 +1,10 @@
 import logging
-import time
 import struct
+import time
 
-import sca_i2c
-from lib.sca_defs import *
-from lib.bme280_defs import *
+from bme280_defs import *
+from sca_defs import *
+from sca_i2c import ScaI2c
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
@@ -12,11 +12,11 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 
-class BME280(sca_i2c.ScaI2c):
-    def __init__(self, t_mode=BME280_OSAMPLE_1, p_mode=BME280_OSAMPLE_1,
+class BME280(ScaI2c):
+    def __init__(self, hw, t_mode=BME280_OSAMPLE_1, p_mode=BME280_OSAMPLE_1,
                  h_mode=BME280_OSAMPLE_1,
                  standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
-        sca_i2c.ScaI2c.__init__(self, chn=SCA_CH_I2C0)
+        ScaI2c.__init__(self, hw=hw, chn=SCA_CH_I2C0)
         self.BME280Data = []
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,
@@ -92,7 +92,7 @@ class BME280(sca_i2c.ScaI2c):
         h5 = self._read_s8(BME280_REGISTER_DIG_H6)
         h5 = (h5 << 4)
         self.dig_H5 = h5 | (
-            self._read_u8(BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
+                self._read_u8(BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
 
         log.debug("0xE4 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H4))
         log.debug("0xE5 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H5))
@@ -121,7 +121,7 @@ class BME280(sca_i2c.ScaI2c):
             "Write %#04x to register pair %#02x, %#02x" % (value, register, register + 1))
         value = value & 0xFFFF
         self._write_block((register << 24) | ((value & 0xff) << 16) | (
-            register + 1) << 8 | (value >> 8 & 0xff))
+                register + 1) << 8 | (value >> 8 & 0xff))
 
     def _read_u8(self, register):
         """To be able to read registers, first the register must be sent in write mode"""
@@ -226,7 +226,7 @@ class BME280(sca_i2c.ScaI2c):
         # float in Python is double precision
         UT = float(self.read_raw_temp())
         var1 = (UT / 16384.0 - float(self.dig_T1) / 1024.0) * \
-            float(self.dig_T2)
+               float(self.dig_T2)
         var2 = ((UT / 131072.0 - float(self.dig_T1) / 8192.0) * (
                 UT / 131072.0 - float(self.dig_T1) / 8192.0)) * float(self.dig_T3)
         self.t_fine = int(var1 + var2)
@@ -257,7 +257,7 @@ class BME280(sca_i2c.ScaI2c):
         # print 'Raw humidity = {0:d}'.format (adc)
         h = float(self.t_fine) - 76800.0
         h = (adc - (float(self.dig_H4) * 64.0 + float(self.dig_H5) / 16384.0 * h)) * (float(self.dig_H2) / 65536.0 * (
-            1.0 + float(self.dig_H6) / 67108864.0 * h * (1.0 + float(self.dig_H3) / 67108864.0 * h)))
+                1.0 + float(self.dig_H6) / 67108864.0 * h * (1.0 + float(self.dig_H3) / 67108864.0 * h)))
         h = h * (1.0 - float(self.dig_H1) * h / 524288.0)
         if h > 100:
             h = 100

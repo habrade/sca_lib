@@ -1,6 +1,6 @@
 import logging
 
-import sca
+from sca import Sca
 from sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG,
@@ -9,10 +9,10 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 
-class ScaGpio(sca.Sca):
+class ScaGpio(Sca):
 
-    def __init__(self):
-        sca.Sca.__init__(self)
+    def __init__(self, hw):
+        Sca.__init__(self, hw)
 
     def set_direction(self, directions):
         """GPIO Direction Set, 1->output mode, 0->input mode"""

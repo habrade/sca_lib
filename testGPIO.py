@@ -1,26 +1,30 @@
 #!/usr/bin/env python
-import sys
-import time
 import logging
 import subprocess
 
 import pvaccess
 
 from lib import sca_defs
-from lib import sca_gpio
+from lib.gdpb import Gdpb
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
+
+
+class TestGPIO(Gdpb):
+    def __init__(self):
+        Gdpb.__init__(self)
+        self.gpio_dev = self.sca_modules[0].sca_gpio
+
 
 if __name__ == '__main__':
 
     # run softIocPVA
-    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE,
-                     stderr=subprocess.STDOUT)
+    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-    sca_dev = sca_gpio.ScaGpio()
+    test_gpio = TestGPIO()
+    sca_dev = test_gpio.gpio_dev
 
     # Reset Chip
     sca_dev.send_reset()

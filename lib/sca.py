@@ -9,8 +9,9 @@ log.setLevel(logging.INFO)
 
 
 class Sca(object):
-    def __init__(self, sca_addr=0x00, hw):
-        self.__SCA_ADDR = sca_addr
+    def __init__(self, hw=None):
+        sca_addr = 0x00
+        self.__sca_addr = sca_addr
         self.__trans_id = 0x01
 
         self._version = SCA_VERSION
@@ -19,7 +20,7 @@ class Sca(object):
 
     def send_command(self, channel, command, data):
         node = self.__hw.getNode("GBT-SCA.txAddr")
-        node.write(self.__SCA_ADDR)
+        node.write(self.__sca_addr)
         node = self.__hw.getNode("GBT-SCA.txTransID")
         node.write(self.__trans_id)
 

@@ -1,6 +1,6 @@
 import logging
 
-import sca
+from sca import Sca
 from sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG,
@@ -9,10 +9,10 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 
-class ScaAdc(sca.Sca):
+class ScaAdc(Sca):
 
-    def __init__(self):
-        sca.Sca.__init__(self)
+    def __init__(self, hw):
+        Sca.__init__(self, hw)
 
     def enable_adc(self):
         self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
@@ -35,7 +35,7 @@ class ScaAdc(sca.Sca):
         if self._version == 0x02:
             self.send_command(SCA_CH_ADC, SCA_ADC_R_MUX, 0)
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_MUX, 0)
+            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_INSEL, 0)
 
         return self.get_reg_value("rxData")
 
@@ -54,10 +54,7 @@ class ScaAdc(sca.Sca):
         return self.get_reg_value("rxData")
 
     def w_gain(self, gain):
-        if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
-        elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_W_GAIN, gain)
+        self.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
 
     def r_gain(self):
         self.send_command(SCA_CH_ADC, SCA_ADC_R_GAIN, 0)
