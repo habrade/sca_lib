@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 import logging
-import pvaccess
-import time
 import subprocess
 
-from lib.sca_defs import *
-from lib.bme280_defs import *
+import pvaccess
+
 from lib.gdpb import Gdpb
+from lib.sca_defs import *
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -26,7 +25,7 @@ if __name__ == '__main__':
 
     test_bme280 = TestBme280()
     sensor = test_bme280.bme280_dev
-    
+
     # Reset SCA
     sensor.send_reset()
     # Connect SCA chip

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import logging
-import threading
 import subprocess
+import threading
 
 import pvaccess
 

@@ -1,17 +1,17 @@
 #!/usr/bin/env python
-import sys
-import time
-import pvaccess
 import subprocess
 
-from lib.sca_defs import *
+import pvaccess
+
 from lib.gdpb import Gdpb
+from lib.sca_defs import *
 
 
 class TestADC(Gdpb):
     def __init__(self):
         Gdpb.__init__(self)
         self.adc_dev = self.sca_modules[0].adc
+
 
 # ioc channels' prefix
 PREFIX = "labtest:SCA:0:"
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             sca_dev.w_sel(i)
             sca_dev.start_conv()
             adc_value = sca_dev.r_data()
-            volt_value = float(adc_value*SCA_ADC_VREF)/(2**12)
+            volt_value = float(adc_value * SCA_ADC_VREF) / (2 ** 12)
             print("ADC Ch %d =  %#x \t Volt = %f" % (i, adc_value, volt_value))
             ch_name = PREFIX + "ADC:CH:" + str(i)
             ca_ch = pvaccess.Channel(ch_name)
@@ -50,7 +50,7 @@ if __name__ == '__main__':
         sca_dev.w_sel(31)
         sca_dev.start_conv()
         adc_value = sca_dev.r_data()
-        internal_temp = float(720-adc_value)/5
+        internal_temp = float(720 - adc_value) / 5
         print("ADC Ch %d = %#x \t Temp = %f" % (31, adc_value, internal_temp))
         ch_name = PREFIX + "ADC:CH:" + str(31)
         ca_ch = pvaccess.Channel(ch_name)
