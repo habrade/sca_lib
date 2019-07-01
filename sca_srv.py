@@ -24,11 +24,16 @@ class ScaSrv():
         self.__SCA_ADC_VREF = 1.5
 
         self.ca_sca_id = []
-        self.ca_gpio_direction_set = []
-        self.ca_gpio_direction_get = []
-        self.ca_gpio_pinout_set = []
-        self.ca_gpio_pinout_get = []
-        self.ca_gpio_pinin_get = []
+        self.ca_gpio_direction_set_1_half = []
+        self.ca_gpio_direction_get_1_half = []
+        self.ca_gpio_pinout_set_1_half = []
+        self.ca_gpio_pinout_get_1_half = []
+        self.ca_gpio_pinin_get_1_half = []
+        self.ca_gpio_direction_set_2_half = []
+        self.ca_gpio_direction_get_2_half = []
+        self.ca_gpio_pinout_set_2_half = []
+        self.ca_gpio_pinout_get_2_half = []
+        self.ca_gpio_pinin_get_2_half = []
         self.ca_bme280_degrees = []
         self.ca_bme280_hectopascals = []
         self.ca_bme280_humidity = []
@@ -39,11 +44,16 @@ class ScaSrv():
             # SCA ID channel's name
             self.ca_sca_id.append(pvaccess.Channel(self.__PREFIX + "ID"))
             # GPIO channels' name
-            self.ca_gpio_direction_set.append(pvaccess.Channel(self.__PREFIX + "GPIO:DIRECTION:SET"))
-            self.ca_gpio_direction_get.append(pvaccess.Channel(self.__PREFIX + "GPIO:DIRECTION:GET"))
-            self.ca_gpio_pinout_set.append(pvaccess.Channel(self.__PREFIX + "GPIO:PINOUT:SET"))
-            self.ca_gpio_pinout_get.append(pvaccess.Channel(self.__PREFIX + "GPIO:PINOUT:GET"))
-            self.ca_gpio_pinin_get.append(pvaccess.Channel(self.__PREFIX + "GPIO:PININ:GET"))
+            self.ca_gpio_direction_set_1_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_31_16:DIRECTION:SET"))
+            self.ca_gpio_direction_get_1_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_31_16:DIRECTION:GET"))
+            self.ca_gpio_pinout_set_1_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_31_16:PINOUT:SET"))
+            self.ca_gpio_pinout_get_1_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_31_16:PINOUT:GET"))
+            self.ca_gpio_pinin_get_1_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_31_16:PININ:GET"))
+            self.ca_gpio_direction_set_2_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_15_0:DIRECTION:SET"))
+            self.ca_gpio_direction_get_2_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_15_0:DIRECTION:GET"))
+            self.ca_gpio_pinout_set_2_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_15_0:PINOUT:SET"))
+            self.ca_gpio_pinout_get_2_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_15_0:PINOUT:GET"))
+            self.ca_gpio_pinin_get_2_half.append(pvaccess.Channel(self.__PREFIX + "GPIO:CH_15_0:PININ:GET"))
             # BME280 channels' name
             self.ca_bme280_degrees.append(pvaccess.Channel(self.__PREFIX + "BME280:Temperature"))
             self.ca_bme280_hectopascals.append(pvaccess.Channel(self.__PREFIX + "BME280:Pressure"))
@@ -88,25 +98,36 @@ class ScaSrv():
         sca_dev.enable_chn(SCA_CH_GPIO, True)
         while True:
             # GPIO Direction Set
-            direction_set = self.ca_gpio_direction_set[sca_index].get().getInt()
+            direction_set_1 = self.ca_gpio_direction_set_1_half[sca_index].get().getInt()
+            direction_set_2 = self.ca_gpio_direction_set_2_half[sca_index].get().getInt()
+            direction_set = (direction_set_1 << 16) + direction_set_2
             log.debug("GPIO Direction Set to %#x" % direction_set)
             sca_dev.set_direction(direction_set)
-            # GPIO Direction READ
+
+            # GPIO Direction Get
             direction_get = sca_dev.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
-            self.ca_gpio_direction_get[sca_index].putInt(direction_get)
+            self.ca_gpio_direction_get_1_half[sca_index].putInt(direction_get >> 16)
+            self.ca_gpio_direction_get_2_half[sca_index].putInt(direction_get & 0xFF)
+
             # GPIO PinOut Set
-            pinout_set = self.ca_gpio_pinout_set[sca_index].get().getInt()
+            pinout_set_1 = self.ca_gpio_pinout_set_1_half[sca_index].get().getInt()
+            pinout_set_2 = self.ca_gpio_pinout_set_2_half[sca_index].get().getInt()
+            pinout_set = (pinout_set_1 << 16) + pinout_set_2
             log.debug("GPIO PINOUT Set to %#x" % pinout_set)
             sca_dev.write_pin_out(pinout_set)
-            # GPIO PinOut READ
+
+            # GPIO PinOut Get
             pinout_get = sca_dev.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
-            self.ca_gpio_pinout_get[sca_index].putInt(pinout_get)
-            # GPIO PinIn READ
+            self.ca_gpio_pinout_get_1_half[sca_index].putInt(pinout_get >> 16)
+            self.ca_gpio_pinout_get_2_half[sca_index].putInt(pinout_get & 0xFF)
+
+            # GPIO PinIn Get
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
-            self.ca_gpio_pinin_get[sca_index].putInt(pinin_get)
+            self.ca_gpio_pinin_get_1_half[sca_index].putInt(pinin_get >> 16)
+            self.ca_gpio_pinin_get_2_half[sca_index].putInt(pinin_get & 0xFF)
         del sca_dev
 
     def ADC_thread_func(self, sca_index):

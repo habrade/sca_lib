@@ -258,17 +258,36 @@ record(ai, "$(P):ADC:CH:31") {
     field(LLSV, "MAJOR")
 }
 
-record(longin, "$(P):GPIO:VALUE") { 
+
+record(mbboDirect, "$(P):GPIO:CH_31_16:DIRECTION:SET") { 
+    field(DTYP, "Raw Soft Channel")
 }
-record(longout, "$(P):GPIO:DIRECTION:SET") { 
+record(mbbiDirect, "$(P):GPIO:CH_31_16:DIRECTION:GET") { 
+    field(DTYP, "Raw Soft Channel")
 }
-record(longin, "$(P):GPIO:DIRECTION:GET") { 
+record(mbboDirect, "$(P):GPIO:CH_31_16:PINOUT:SET") { 
+    field(DTYP, "Raw Soft Channel")
 }
-record(longout, "$(P):GPIO:PINOUT:SET") { 
+record(mbbiDirect, "$(P):GPIO:CH_31_16:PINOUT:GET") { 
+    field(DTYP, "Raw Soft Channel")
 }
-record(longin, "$(P):GPIO:PINOUT:GET") { 
+record(mbbiDirect, "$(P):GPIO:CH_31_16:PININ:GET") { 
+    field(DTYP, "Raw Soft Channel")
 }
-record(longin, "$(P):GPIO:PININ:GET") { 
+record(mbboDirect, "$(P):GPIO:CH_15_0:DIRECTION:SET") { 
+    field(DTYP, "Raw Soft Channel")
+}
+record(mbbiDirect, "$(P):GPIO:CH_15_0:DIRECTION:GET") { 
+    field(DTYP, "Raw Soft Channel")
+}
+record(mbboDirect, "$(P):GPIO:CH_15_0:PINOUT:SET") { 
+    field(DTYP, "Raw Soft Channel")
+}
+record(mbbiDirect, "$(P):GPIO:CH_15_0:PINOUT:GET") { 
+    field(DTYP, "Raw Soft Channel")
+}
+record(mbbiDirect, "$(P):GPIO:CH_15_0:PININ:GET") { 
+    field(DTYP, "Raw Soft Channel")
 }
 
 record(ai, "$(P):BME280:Temperature") { 
