@@ -65,7 +65,7 @@ class ScaSrv():
             del sca_dev
 
             num_threads = 2
-            threads = [num_threads]
+            threads = []
             for index_t in range(num_threads):
                 if index_t == 0:
                     thread_function = functools.partial(self.GPIO_thread_func, index)
@@ -88,25 +88,25 @@ class ScaSrv():
         sca_dev.enable_chn(SCA_CH_GPIO, True)
         while True:
             # GPIO Direction Set
-            direction_set = self.ca_gpio_direction_set.get().getInt()
+            direction_set = self.ca_gpio_direction_set[sca_index].get().getInt()
             log.debug("GPIO Direction Set to %#x" % direction_set)
             sca_dev.set_direction(direction_set)
             # GPIO Direction READ
             direction_get = sca_dev.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
-            self.ca_gpio_direction_get.putInt(direction_get)
+            self.ca_gpio_direction_get[sca_index].putInt(direction_get)
             # GPIO PinOut Set
-            pinout_set = self.ca_gpio_pinout_set.get().getInt()
+            pinout_set = self.ca_gpio_pinout_set[sca_index].get().getInt()
             log.debug("GPIO PINOUT Set to %#x" % pinout_set)
             sca_dev.write_pin_out(pinout_set)
             # GPIO PinOut READ
             pinout_get = sca_dev.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
-            self.ca_gpio_pinout_get.putInt(pinout_get)
+            self.ca_gpio_pinout_get[sca_index].putInt(pinout_get)
             # GPIO PinIn READ
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
-            self.ca_gpio_pinin_get.putInt(pinin_get)
+            self.ca_gpio_pinin_get[sca_index].putInt(pinin_get)
         del sca_dev
 
     def ADC_thread_func(self, sca_index):
@@ -156,9 +156,9 @@ class ScaSrv():
             humidity = sensor.read_humidity()
 
             # Data put to epics channel
-            self.ca_bme280_degrees.putDouble(degrees)
-            self.ca_bme280_hectopascals.putDouble(hectopascals)
-            self.ca_bme280_humidity.putDouble(humidity)
+            self.ca_bme280_degrees[sca_index].putDouble(degrees)
+            self.ca_bme280_hectopascals[sca_index].putDouble(hectopascals)
+            self.ca_bme280_humidity[sca_index].putDouble(humidity)
 
             log.debug("Temp = %f deg C" % degrees)
             log.debug("Pressure = %f hPa" % hectopascals)
