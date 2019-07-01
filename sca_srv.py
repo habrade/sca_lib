@@ -128,7 +128,6 @@ class ScaSrv():
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
             self.ca_gpio_pinin_get_ch_31_16[sca_index].putInt(pinin_get >> 16)
             self.ca_gpio_pinin_get_ch_15_0[sca_index].putInt(pinin_get & 0xFF)
-        del sca_dev
 
     def ADC_thread_func(self, sca_index):
         sca_dev = self.gdpb.sca_modules[sca_index].adc
@@ -157,7 +156,6 @@ class ScaSrv():
             ca_ch = pvaccess.Channel(ch_name)
             # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
             ca_ch.putDouble(internal_temp)
-        del sca_dev
 
     def BME280_thread_func(self, sca_index):
         sensor = self.gdpb.sca_modules[sca_index].bme280
@@ -184,7 +182,6 @@ class ScaSrv():
             log.debug("Temp = %f deg C" % degrees)
             log.debug("Pressure = %f hPa" % hectopascals)
             log.debug("Humidity = %f %%" % humidity)
-        del sensor
 
 
 if __name__ == '__main__':
