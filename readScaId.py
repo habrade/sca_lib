@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import logging
 
-from lib import sca
 from lib.sca_defs import *
 from lib.gdpb import Gdpb
 
@@ -15,6 +14,7 @@ class TestReadId(Gdpb):
     def __init__(self):
         Gdpb.__init__(self)
         self.sca_dev = self.sca_modules[0].sca_asic
+
 
 if __name__ == '__main__':
     test_read_id = TestReadId()
