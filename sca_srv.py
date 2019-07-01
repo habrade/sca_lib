@@ -5,10 +5,7 @@ import threading
 
 import pvaccess
 
-from lib import bme280
-from lib import sca
-from lib import sca_adc
-from lib import sca_gpio
+from lib.gdpb import Gdpb
 from lib.bme280_defs import *
 from lib.sca_defs import *
 
@@ -19,15 +16,15 @@ log.setLevel(logging.DEBUG)
 
 
 class ScaSrv():
-    def __init__(self, scaNum):
-
+    def __init__(self, scaNum=1):
         # run softIocPVA
-        subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        # subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
+        self.gdpb = Gdpb(scaNum)
         self.__SCA_ADC_VREF = 1.5
 
         # ioc channels' prefix
-        self.__PREFIX = "labtest:SCA:%d:" % scaNum
+        self.__PREFIX = "labtest:SCA:%d:" % (scaNum-1)
         # SCA ID channel's name
         self.ca_sca_id = pvaccess.Channel(self.__PREFIX + "ID")
         # GPIO channels' name
@@ -44,7 +41,7 @@ class ScaSrv():
         self.ca_adc_vref = pvaccess.Channel(self.__PREFIX + "ADC:VREF")
 
         # Initial SCA chip
-        sca_dev = sca.Sca()
+        sca_dev = self.gdpb.sca_modules[0].sca_asic
         # Reset Chip
         sca_dev.send_reset()
         # Connect SCA chip
@@ -56,10 +53,10 @@ class ScaSrv():
         # put to epics channel
         self.ca_sca_id.putInt(sca_id)
 
+        del sca_dev
+
         threads = []
         for index in range(2):
-            # if index == 0:
-            #     thread_function = self.readID_thread_func
             if index == 0:
                 thread_function = self.GPIO_thread_func
             elif index == 1:
@@ -76,17 +73,8 @@ class ScaSrv():
         for thread in threads:
             thread.join()
 
-    # def readID_thread_func(self):
-    #     sca_dev = sca.Sca()
-    #     sca_dev.enable_chn(SCA_CH_ADC, True)
-    #     while True:
-    #         # read SCA ID
-    #         sca_id = sca_dev.read_sca_id()
-    #         # put to epics channel
-    #         self.ca_sca_id.putInt(int(sca_id))
-
     def GPIO_thread_func(self):
-        sca_dev = sca_gpio.ScaGpio()
+        sca_dev = self.gdpb.sca_modules[0].gpio
         sca_dev.enable_chn(SCA_CH_GPIO, True)
         while True:
             # GPIO Direction Set
@@ -109,9 +97,10 @@ class ScaSrv():
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
             self.ca_gpio_pinin_get.putInt(pinin_get)
+        del sca_dev
 
     def ADC_thread_func(self):
-        sca_dev = sca_adc.ScaAdc()
+        sca_dev = self.gdpb.sca_modules[0].adc
         sca_dev.enable_chn(SCA_CH_ADC, True)
         while True:
             # vref = ca_adc_vref.get().getDouble()
@@ -137,10 +126,10 @@ class ScaSrv():
             ca_ch = pvaccess.Channel(ch_name)
             # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
             ca_ch.putDouble(internal_temp)
+        del sca_dev
 
     def BME280_thread_func(self):
-        sensor = bme280.BME280(t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
-                               h_mode=BME280_OSAMPLE_8)
+        sensor = self.gdpb.sca_modules[0].bme280
         # Enable I2C ch. 0
         sensor.enable_chn(SCA_CH_I2C0, True)
         sensor.set_frq(SCA_I2C_SPEED_100)
@@ -164,7 +153,7 @@ class ScaSrv():
             log.debug("Temp = %f deg C" % degrees)
             log.debug("Pressure = %f hPa" % hectopascals)
             log.debug("Humidity = %f %%" % humidity)
-
+        del sensor
 
 if __name__ == '__main__':
-    scaSrv = ScaSrv(0)
+    scaSrv = ScaSrv(1)
