@@ -128,7 +128,6 @@ class ScaSrv():
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
             self.ca_gpio_pinin_get_ch_31_16[sca_index].putUShort(pinin_get >> 16)
-            log.debug("DEBUG GPIO PININ Get =  %#x" % pinin_get)
             self.ca_gpio_pinin_get_ch_15_0[sca_index].putUShort(pinin_get & 0xFFFF)
 
     def ADC_thread_func(self, sca_index):
