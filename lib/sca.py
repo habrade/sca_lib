@@ -6,7 +6,7 @@ from sca_defs import *
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 
 class Sca(object):
@@ -41,24 +41,22 @@ class Sca(object):
         node.write(0)
         self.__hw.dispatch()
 
-        # log.debug("    txTransID = %#x\t" % self.get_reg_value("txTransID"))
-        # log.debug("    rxTransID = %#x\t" % self.get_reg_value("rxTransID"))
-        # log.debug("    txChn = %#x\t" % self.get_reg_value("txChn"))
-        # log.debug("    rxChn = %#x\t" % self.get_reg_value("rxChn"))
-        # log.debug("    txCmd = %#x\t" % self.get_reg_value("txCmd"))
-        # log.debug("    rxAddr = %#x\t" % self.get_reg_value("rxAddr"))
-        # log.debug("    txData = %#x\t" % self.get_reg_value("txData"))
-        # log.debug("    rxData = %#x\t" % self.get_reg_value("rxData"))
-        # log.debug("    rxCtrl = %#x\t" % self.get_reg_value("rxCtrl"))
-        # log.debug("    rxLen = %#x\t" % self.get_reg_value("rxLen"))
-        # log.debug("    rxErr = %#x\t" % self.get_reg_value("rxErr"))
-
-        # time.sleep(0.001)
+        log.debug("    txTransID = %#x\t" % self.get_reg_value("txTransID"))
+        log.debug("    rxTransID = %#x\t" % self.get_reg_value("rxTransID"))
+        log.debug("    txChn = %#x\t" % self.get_reg_value("txChn"))
+        log.debug("    rxChn = %#x\t" % self.get_reg_value("rxChn"))
+        log.debug("    txCmd = %#x\t" % self.get_reg_value("txCmd"))
+        log.debug("    rxAddr = %#x\t" % self.get_reg_value("rxAddr"))
+        log.debug("    txData = %#x\t" % self.get_reg_value("txData"))
+        log.debug("    rxData = %#x\t" % self.get_reg_value("rxData"))
+        log.debug("    rxCtrl = %#x\t" % self.get_reg_value("rxCtrl"))
+        log.debug("    rxLen = %#x\t" % self.get_reg_value("rxLen"))
+        log.debug("    rxErr = %#x\t" % self.get_reg_value("rxErr"))
 
         rxErr = self.get_reg_value("rxErr")
         if rxErr != 0x00:
             # raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
-            log.error("SCA rxErr Code: %#02x" % rxErr)
+            log.fatal("SCA rxErr Code: %#02x" % rxErr)
 
     def send_reset(self):
         node = self.__hw.getNode("GBT-SCA.rst")
