@@ -12,7 +12,7 @@ from lib.sca_defs import *
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 
 class ScaSrv():
@@ -38,8 +38,9 @@ class ScaSrv():
         self.ca_bme280_degrees = []
         self.ca_bme280_hectopascals = []
         self.ca_bme280_humidity = []
-        self.create_pv_channels()
+        self.ca_adc_channels = []
 
+        self.create_pv_channels()
         self.read_sca_modules_ids()
         self.create_threads()
 
@@ -80,6 +81,9 @@ class ScaSrv():
             self.ca_bme280_hectopascals.append(pvaccess.Channel(self.__PREFIX + "BME280:Pressure"))
             self.ca_bme280_humidity.append(pvaccess.Channel(self.__PREFIX + "BME280:Humidity"))
 
+            for ch_index in range(32):
+                self.ca_adc_channels.append(pvaccess.Channel(self.__PREFIX + "ADC:CH:" + str(ch_index)))
+
     def create_threads(self):
         for sca_index in range(self.__scaNum):
             num_threads = 2
@@ -111,22 +115,26 @@ class ScaSrv():
             direction_set = (direction_set_1 << 16) + direction_set_2
             log.debug("GPIO Direction Set to %#x" % direction_set)
             sca_dev.set_direction(direction_set)
+            time.sleep(0.01)
             # GPIO Direction Get
             direction_get = sca_dev.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
             self.ca_gpio_direction_get_ch_31_16[sca_index].putUShort(direction_get >> 16)
             self.ca_gpio_direction_get_ch_15_0[sca_index].putUShort(direction_get & 0xFFFF)
+            time.sleep(0.01)
             # GPIO PinOut Set
             pinout_set_1 = self.ca_gpio_pinout_set_ch_31_16[sca_index].get().getInt()
             pinout_set_2 = self.ca_gpio_pinout_set_ch_15_0[sca_index].get().getInt()
             pinout_set = (pinout_set_1 << 16) + pinout_set_2
             log.debug("GPIO PINOUT Set to %#x" % pinout_set)
             sca_dev.write_pin_out(pinout_set)
+            time.sleep(0.01)
             # GPIO PinOut Get
             pinout_get = sca_dev.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
             self.ca_gpio_pinout_get_ch_31_16[sca_index].putUShort(pinout_get >> 16)
             self.ca_gpio_pinout_get_ch_15_0[sca_index].putUShort(pinout_get & 0xFFFF)
+            time.sleep(0.01)
             # GPIO PinIn Get
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
@@ -137,31 +145,22 @@ class ScaSrv():
         sca_dev = self.gdpb.sca_modules[sca_index].adc
         sca_dev.enable_chn(SCA_CH_ADC, True)
         while True:
-            # vref = ca_adc_vref.get().getDouble()
-            # read adc channels for 0 31
-            for i in range(31):
+            # read adc channels for 0 32
+            for i in range(32):
                 sca_dev.w_sel(i)
                 sca_dev.start_conv()
-                time.sleep(0.0008)
+                time.sleep(0.01)
                 adc_value = sca_dev.r_data()
-                volt_value = float(adc_value * self.__SCA_ADC_VREF) / (2 ** 12)
-                log.debug("ADC Ch %d =  %#x Volt = %f" %
-                          (i, adc_value, volt_value))
-
-                ch_name = self.__PREFIX + "ADC:CH:" + str(i)
-                ca_ch = pvaccess.Channel(ch_name)
-                ca_ch.putDouble(volt_value)
-            # read internal tenperature sensor
-            sca_dev.w_sel(31)
-            sca_dev.start_conv()
-            time.sleep(0.0008)
-            adc_value = sca_dev.r_data()
-            internal_temp = (725 - adc_value) / 2
-            log.debug("ADC Ch %d = %#x Temp = %f" % (31, adc_value, internal_temp))
-            ch_name = self.__PREFIX + "ADC:CH:" + str(31)
-            ca_ch = pvaccess.Channel(ch_name)
-            # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
-            ca_ch.putDouble(internal_temp)
+                # read internal tenperature sensor
+                if i == 31:
+                    internal_temp = (725 - adc_value) / 2
+                    log.debug("ADC Ch %d = %#x Temp = %f" % (i, adc_value, internal_temp))
+                    # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
+                    self.ca_adc_channels[i].putDouble(internal_temp)
+                else:
+                    volt_value = float(adc_value * self.__SCA_ADC_VREF) / (2 ** 12)
+                    log.debug("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
+                    self.ca_adc_channels[i].putDouble(volt_value)
 
     def BME280_thread_func(self, sca_index):
         sensor = self.gdpb.sca_modules[sca_index].bme280
