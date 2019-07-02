@@ -3,7 +3,7 @@ import uhal
 from sca_module import ScaModule
 
 
-class Gdpb(ScaModule):
+class Gdpb(object):
     def __init__(self, scaNum=1):
         # ScaModule.__init__(self)
         self.__scaNum = scaNum
