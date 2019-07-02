@@ -57,7 +57,7 @@ if __name__ == '__main__':
         direction_get = sca_dev.get_direction()
         log.debug("GPIO Direction Get =  %#x" % direction_get)
         ca_ch_1.putInt(direction_get >> 16)
-        ca_ch_2.putInt(direction_get & 0xFF)
+        ca_ch_2.putInt(direction_get & 0xFFFF)
 
         # GPIO PinOut Set
         ca_ch_1 = pvaccess.Channel(ca_name_pinout_set_1_half)
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         pinout_get = sca_dev.read_pin_out()
         log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
         ca_ch_1.putInt(pinout_get >> 16)
-        ca_ch_2.putInt(pinout_get & 0xFF)
+        ca_ch_2.putInt(pinout_get & 0xFFFF)
 
         # GPIO PinIn READ
         ca_ch_1 = pvaccess.Channel(ca_name_pinin_get_1_half)
@@ -82,4 +82,4 @@ if __name__ == '__main__':
         pinin_get = sca_dev.read_pin_in()
         log.debug("GPIO PININ Get =  %#x" % pinin_get)
         ca_ch_1.putInt(pinin_get >> 16)
-        ca_ch_2.putInt(pinin_get & 0xFF)
+        ca_ch_2.putInt(pinin_get & 0xFFFF)
