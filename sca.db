@@ -263,31 +263,31 @@ record(mbboDirect, "$(P):GPIO:CH_31_16:DIRECTION:SET") {
     field(DTYP, "Raw Soft Channel")
 }
 record(mbbiDirect, "$(P):GPIO:CH_31_16:DIRECTION:GET") { 
-    field(DTYP, "Raw Soft Channel")
+    field(DTYP, "Soft Channel")
 }
 record(mbboDirect, "$(P):GPIO:CH_31_16:PINOUT:SET") { 
     field(DTYP, "Raw Soft Channel")
 }
 record(mbbiDirect, "$(P):GPIO:CH_31_16:PINOUT:GET") { 
-    field(DTYP, "Raw Soft Channel")
+    field(DTYP, "Soft Channel")
 }
 record(mbbiDirect, "$(P):GPIO:CH_31_16:PININ:GET") { 
-    field(DTYP, "Raw Soft Channel")
+    field(DTYP, "Soft Channel")
 }
 record(mbboDirect, "$(P):GPIO:CH_15_0:DIRECTION:SET") { 
     field(DTYP, "Raw Soft Channel")
 }
 record(mbbiDirect, "$(P):GPIO:CH_15_0:DIRECTION:GET") { 
-    field(DTYP, "Raw Soft Channel")
+    field(DTYP, "Soft Channel")
 }
 record(mbboDirect, "$(P):GPIO:CH_15_0:PINOUT:SET") { 
     field(DTYP, "Raw Soft Channel")
 }
 record(mbbiDirect, "$(P):GPIO:CH_15_0:PINOUT:GET") { 
-    field(DTYP, "Raw Soft Channel")
+    field(DTYP, "Soft Channel")
 }
 record(mbbiDirect, "$(P):GPIO:CH_15_0:PININ:GET") { 
-    field(DTYP, "Raw Soft Channel")
+    field(DTYP, "Soft Channel")
 }
 
 record(ai, "$(P):BME280:Temperature") { 
