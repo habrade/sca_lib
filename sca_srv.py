@@ -38,7 +38,27 @@ class ScaSrv():
         self.ca_bme280_degrees = []
         self.ca_bme280_hectopascals = []
         self.ca_bme280_humidity = []
+        self.create_pv_channels()
 
+        self.read_sca_modules_ids()
+        self.create_threads()
+
+    def read_sca_modules_ids(self):
+        for index in range(self.__scaNum):
+            # Initial SCA chip
+            sca_dev = self.gdpb.sca_modules[index].sca_asic
+            # Reset Chip
+            sca_dev.send_reset()
+            # Connect SCA chip
+            sca_dev.send_connect()
+            # read SCA ID
+            sca_dev.enable_chn(SCA_CH_ADC, True)
+            sca_id = sca_dev.read_sca_id()
+            # put to epics channel
+            self.ca_sca_id[index].putInt(sca_id)
+            del sca_dev
+
+    def create_pv_channels(self):
         for index in range(self.__scaNum):
             # ioc channels' prefix
             self.__PREFIX = "labtest:SCA:%d:" % index
@@ -60,30 +80,17 @@ class ScaSrv():
             self.ca_bme280_hectopascals.append(pvaccess.Channel(self.__PREFIX + "BME280:Pressure"))
             self.ca_bme280_humidity.append(pvaccess.Channel(self.__PREFIX + "BME280:Humidity"))
 
-            # Initial SCA chip
-            sca_dev = self.gdpb.sca_modules[index].sca_asic
-            # Reset Chip
-            sca_dev.send_reset()
-            # Connect SCA chip
-            sca_dev.send_connect()
-
-            # read SCA ID
-            sca_dev.enable_chn(SCA_CH_ADC, True)
-            sca_id = sca_dev.read_sca_id()
-            # put to epics channel
-            self.ca_sca_id[index].putInt(sca_id)
-
-            del sca_dev
-
+    def create_threads(self):
+        for sca_index in range(self.__scaNum):
             num_threads = 2
             threads = []
             for index_t in range(num_threads):
                 if index_t == 0:
-                    thread_function = functools.partial(self.GPIO_thread_func, index)
+                    thread_function = functools.partial(self.GPIO_thread_func, sca_index)
                 elif index_t == 1:
-                    thread_function = functools.partial(self.ADC_thread_func, index)
+                    thread_function = functools.partial(self.ADC_thread_func, sca_index)
                 elif index_t == 2:
-                    thread_function = functools.partial(self.BME280_thread_func, index)
+                    thread_function = functools.partial(self.BME280_thread_func, sca_index)
 
                 t = threading.Thread(target=thread_function, args=())
                 t.daemon = True
@@ -104,26 +111,22 @@ class ScaSrv():
             direction_set = (direction_set_1 << 16) + direction_set_2
             log.debug("GPIO Direction Set to %#x" % direction_set)
             sca_dev.set_direction(direction_set)
-
             # GPIO Direction Get
             direction_get = sca_dev.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
             self.ca_gpio_direction_get_ch_31_16[sca_index].putUShort(direction_get >> 16)
             self.ca_gpio_direction_get_ch_15_0[sca_index].putUShort(direction_get & 0xFFFF)
-
             # GPIO PinOut Set
             pinout_set_1 = self.ca_gpio_pinout_set_ch_31_16[sca_index].get().getInt()
             pinout_set_2 = self.ca_gpio_pinout_set_ch_15_0[sca_index].get().getInt()
             pinout_set = (pinout_set_1 << 16) + pinout_set_2
             log.debug("GPIO PINOUT Set to %#x" % pinout_set)
             sca_dev.write_pin_out(pinout_set)
-
             # GPIO PinOut Get
             pinout_get = sca_dev.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
             self.ca_gpio_pinout_get_ch_31_16[sca_index].putUShort(pinout_get >> 16)
             self.ca_gpio_pinout_get_ch_15_0[sca_index].putUShort(pinout_get & 0xFFFF)
-
             # GPIO PinIn Get
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
@@ -176,12 +179,10 @@ class ScaSrv():
             pascals = sensor.read_pressure()
             hectopascals = pascals / 100
             humidity = sensor.read_humidity()
-
             # Data put to epics channel
             self.ca_bme280_degrees[sca_index].putDouble(degrees)
             self.ca_bme280_hectopascals[sca_index].putDouble(hectopascals)
             self.ca_bme280_humidity[sca_index].putDouble(humidity)
-
             log.debug("Temp = %f deg C" % degrees)
             log.debug("Pressure = %f hPa" % hectopascals)
             log.debug("Humidity = %f %%" % humidity)
