@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import logging
+import time
 import threading
 import functools
 
@@ -107,8 +108,8 @@ class ScaSrv():
             # GPIO Direction Get
             direction_get = sca_dev.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
-            self.ca_gpio_direction_get_ch_31_16[sca_index].putInt(direction_get >> 16)
-            self.ca_gpio_direction_get_ch_15_0[sca_index].putInt(direction_get & 0xFF)
+            self.ca_gpio_direction_get_ch_31_16[sca_index].putUShort(direction_get >> 16)
+            self.ca_gpio_direction_get_ch_15_0[sca_index].putUShort(direction_get & 0xFFFF)
 
             # GPIO PinOut Set
             pinout_set_1 = self.ca_gpio_pinout_set_ch_31_16[sca_index].get().getInt()
@@ -120,14 +121,15 @@ class ScaSrv():
             # GPIO PinOut Get
             pinout_get = sca_dev.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
-            self.ca_gpio_pinout_get_ch_31_16[sca_index].putInt(pinout_get >> 16)
-            self.ca_gpio_pinout_get_ch_15_0[sca_index].putInt(pinout_get & 0xFF)
+            self.ca_gpio_pinout_get_ch_31_16[sca_index].putUShort(pinout_get >> 16)
+            self.ca_gpio_pinout_get_ch_15_0[sca_index].putUShort(pinout_get & 0xFFFF)
 
             # GPIO PinIn Get
             pinin_get = sca_dev.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
-            self.ca_gpio_pinin_get_ch_31_16[sca_index].putInt(pinin_get >> 16)
-            self.ca_gpio_pinin_get_ch_15_0[sca_index].putInt(pinin_get & 0xFF)
+            self.ca_gpio_pinin_get_ch_31_16[sca_index].putUShort(pinin_get >> 16)
+            log.debug("DEBUG GPIO PININ Get =  %#x" % pinin_get)
+            self.ca_gpio_pinin_get_ch_15_0[sca_index].putUShort(pinin_get & 0xFFFF)
 
     def ADC_thread_func(self, sca_index):
         sca_dev = self.gdpb.sca_modules[sca_index].adc
@@ -138,6 +140,7 @@ class ScaSrv():
             for i in range(31):
                 sca_dev.w_sel(i)
                 sca_dev.start_conv()
+                time.sleep(0.0008)
                 adc_value = sca_dev.r_data()
                 volt_value = float(adc_value * self.__SCA_ADC_VREF) / (2 ** 12)
                 log.debug("ADC Ch %d =  %#x Volt = %f" %
@@ -149,6 +152,7 @@ class ScaSrv():
             # read internal tenperature sensor
             sca_dev.w_sel(31)
             sca_dev.start_conv()
+            time.sleep(0.0008)
             adc_value = sca_dev.r_data()
             internal_temp = (725 - adc_value) / 2
             log.debug("ADC Ch %d = %#x Temp = %f" % (31, adc_value, internal_temp))

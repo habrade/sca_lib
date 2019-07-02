@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-import subprocess
-
 import pvaccess
+import time
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
@@ -17,10 +16,6 @@ class TestADC(Gdpb):
 PREFIX = "labtest:SCA:0:"
 
 if __name__ == '__main__':
-
-    # run softIocPVA
-    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-
     SCA_ADC_VREF = 1.5
 
     test_adc = TestADC()
@@ -39,6 +34,7 @@ if __name__ == '__main__':
         for i in range(31):
             sca_dev.w_sel(i)
             sca_dev.start_conv()
+            time.sleep(0.0008)
             adc_value = sca_dev.r_data()
             volt_value = float(adc_value * SCA_ADC_VREF) / (2 ** 12)
             print("ADC Ch %d =  %#x \t Volt = %f" % (i, adc_value, volt_value))
@@ -49,6 +45,7 @@ if __name__ == '__main__':
         # read internal tenperature sensor
         sca_dev.w_sel(31)
         sca_dev.start_conv()
+        time.sleep(0.0008)
         adc_value = sca_dev.r_data()
         internal_temp = float(720 - adc_value) / 5
         print("ADC Ch %d = %#x \t Temp = %f" % (31, adc_value, internal_temp))
