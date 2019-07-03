@@ -9,8 +9,8 @@
   <widget type="label" version="2.0.0">
     <name>Label</name>
     <text>GBT-SCA Lab Test(66)</text>
-    <x>308</x>
-    <y>20</y>
+    <x>310</x>
+    <y>30</y>
     <width>240</width>
     <height>31</height>
     <font>
@@ -21,7 +21,7 @@
   <widget type="group" version="2.0.0">
     <name>GPIO</name>
     <x>19</x>
-    <y>380</y>
+    <y>450</y>
     <width>832</width>
     <height>280</height>
     <style>1</style>
@@ -156,17 +156,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -203,17 +202,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -250,17 +248,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -297,17 +294,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -344,17 +340,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -391,17 +386,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -438,17 +432,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -485,17 +478,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -532,17 +524,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -580,17 +571,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -628,17 +618,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -676,17 +665,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -724,17 +712,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -772,17 +759,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -820,17 +806,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -868,17 +853,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="On" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1070,17 +1054,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1117,17 +1100,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1164,17 +1146,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1211,17 +1192,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1258,17 +1238,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1305,17 +1284,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1352,17 +1330,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1399,17 +1376,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1446,17 +1422,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1494,17 +1469,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1542,17 +1516,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1590,17 +1563,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1638,17 +1610,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1686,17 +1657,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1734,17 +1704,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1782,17 +1751,16 @@
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
-          <off_label>In</off_label>
+          <off_label>I</off_label>
           <off_color>
             <color name="Button_Background" red="210" green="210" blue="210">
             </color>
           </off_color>
-          <on_label>Out</on_label>
+          <on_label>O</on_label>
           <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
+            <color name="OK" red="0" green="255" blue="0">
             </color>
           </on_color>
-          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1969,7 +1937,7 @@
   <widget type="group" version="2.0.0">
     <name>ADC</name>
     <x>19</x>
-    <y>71</y>
+    <y>140</y>
     <width>822</width>
     <height>290</height>
     <style>1</style>
@@ -2642,7 +2610,7 @@
   <widget type="group" version="2.0.0">
     <name>BME280</name>
     <x>19</x>
-    <y>680</y>
+    <y>80</y>
     <width>702</width>
     <height>40</height>
     <style>1</style>
@@ -2683,8 +2651,8 @@
   </widget>
   <widget type="group" version="2.0.0">
     <name>SCA ID</name>
-    <x>19</x>
-    <y>20</y>
+    <x>740</x>
+    <y>80</y>
     <width>102</width>
     <height>40</height>
     <style>1</style>
