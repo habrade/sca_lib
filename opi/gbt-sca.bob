@@ -149,22 +149,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
-        <widget type="slide_button" version="2.0.0">
+        <widget type="bool_button" version="2.0.0">
           <name>Boolean Button_51</name>
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
           <width>40</width>
           <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -178,18 +180,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_52</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_49</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -206,10 +196,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_52</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -223,18 +227,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_53</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_50</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -251,10 +243,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_53</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -268,18 +274,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_54</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_51</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -296,10 +290,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_54</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -313,18 +321,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_55</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_52</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -341,10 +337,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_55</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -358,18 +368,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_56</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_53</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -386,10 +384,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_56</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -403,18 +415,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_57</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_54</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -431,10 +431,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_57</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -448,18 +462,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_58</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_55</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -476,10 +478,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_58</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -493,18 +509,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_59</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_56</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -521,10 +525,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_59</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -539,18 +557,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_60</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_57</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -567,10 +573,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_60</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -585,18 +605,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_61</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_58</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -613,10 +621,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_61</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -631,18 +653,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_62</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_59</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -659,10 +669,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_62</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -677,18 +701,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_63</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_60</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -705,10 +717,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_63</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -723,18 +749,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_64</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_61</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -751,10 +765,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_64</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -769,18 +797,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_65</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_62</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -797,10 +813,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_65</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -815,18 +845,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_66</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_63</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -843,10 +861,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_66</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1031,22 +1063,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
-        <widget type="slide_button" version="2.0.0">
+        <widget type="bool_button" version="2.0.0">
           <name>Boolean Button_67</name>
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
           <width>40</width>
           <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1060,18 +1094,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_68</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_66</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1088,10 +1110,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_68</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1105,18 +1141,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_69</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_67</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1133,10 +1157,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_69</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1150,18 +1188,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_70</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_68</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1178,10 +1204,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_70</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1195,18 +1235,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_71</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_69</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1223,10 +1251,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_71</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1240,18 +1282,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_72</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_70</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1268,10 +1298,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_72</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1285,18 +1329,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_73</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_71</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1313,10 +1345,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_73</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1330,18 +1376,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_74</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_72</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1358,10 +1392,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_74</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1375,18 +1423,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_75</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_73</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1403,10 +1439,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_75</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1421,18 +1471,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_76</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_74</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1449,10 +1487,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_76</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1467,18 +1519,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_77</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_75</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1495,10 +1535,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_77</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1513,18 +1567,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_78</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_76</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1541,10 +1583,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_78</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1559,18 +1615,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_79</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_77</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1587,10 +1631,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_79</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1605,18 +1663,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_80</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_78</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1633,10 +1679,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_80</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1651,18 +1711,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_81</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_79</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1679,10 +1727,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_81</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
@@ -1697,18 +1759,6 @@
         <height>20</height>
         <style>3</style>
         <transparent>true</transparent>
-        <widget type="slide_button" version="2.0.0">
-          <name>Boolean Button_82</name>
-          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
-          <label></label>
-          <width>40</width>
-          <height>20</height>
-          <on_color>
-            <color name="Attention" red="255" green="160" blue="0">
-            </color>
-          </on_color>
-          <show_confirm_dialog>false</show_confirm_dialog>
-        </widget>
         <widget type="led" version="2.0.0">
           <name>LED_80</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
@@ -1725,10 +1775,24 @@
           <x>50</x>
           <width>50</width>
           <height>20</height>
+          <show_confirm_dialog>false</show_confirm_dialog>
+        </widget>
+        <widget type="bool_button" version="2.0.0">
+          <name>Boolean Button_82</name>
+          <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
+          <width>40</width>
+          <height>20</height>
+          <off_label>In</off_label>
+          <off_color>
+            <color name="Button_Background" red="210" green="210" blue="210">
+            </color>
+          </off_color>
+          <on_label>Out</on_label>
           <on_color>
             <color name="Attention" red="255" green="160" blue="0">
             </color>
           </on_color>
+          <show_led>false</show_led>
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
       </widget>
