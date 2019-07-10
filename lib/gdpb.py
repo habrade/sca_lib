@@ -8,8 +8,8 @@ class Gdpb(object):
         # ScaModule.__init__(self)
         self.__scaNum = scaNum
 
-        self.connection_file_path = ["../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml"]
-        self.device_id = ["C0S00_gdpb066"]
+        self.connection_file_path = ["../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml", "../dpbcontrols/etc/ipbus_lab67_gdpb_gbtx.xml"]
+        self.device_id = ["C0S00_gdpb066", "C0S00_gdpb067"]
 
         self.__connection_mgr = []
         self.__hw = []

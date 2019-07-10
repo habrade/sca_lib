@@ -12,8 +12,8 @@ log.setLevel(logging.DEBUG)
 
 class TestReadId(Gdpb):
     def __init__(self):
-        Gdpb.__init__(self)
-        self.sca_dev = self.sca_modules[0].sca_asic
+        Gdpb.__init__(self, scaNum=2)
+        self.sca_dev = self.sca_modules[1].sca_asic
 
 
 if __name__ == '__main__':

@@ -15,8 +15,8 @@ log.setLevel(logging.DEBUG)
 
 class TestBme280(Gdpb):
     def __init__(self):
-        Gdpb.__init__(self)
-        self.bme280_dev = self.sca_modules[0].bme280
+        Gdpb.__init__(self, scaNum=2)
+        self.bme280_dev = self.sca_modules[1].bme280
 
 
 if __name__ == '__main__':

@@ -8,8 +8,8 @@ from lib.sca_defs import *
 
 class TestADC(Gdpb):
     def __init__(self):
-        Gdpb.__init__(self)
-        self.adc_dev = self.sca_modules[0].adc
+        Gdpb.__init__(self, scaNum=2)
+        self.adc_dev = self.sca_modules[1].adc
 
 
 # ioc channels' prefix
@@ -19,7 +19,7 @@ if __name__ == '__main__':
     SCA_ADC_VREF = 1.5
 
     test_adc = TestADC()
-    sca_dev = test_adc.sca_modules[0].adc
+    sca_dev = test_adc.adc_dev
 
     # Reset Chip
     sca_dev.send_reset()
@@ -40,13 +40,13 @@ if __name__ == '__main__':
             if i == 31:
                 # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                 internal_temp = float(720 - adc_value) / 5
-                # print("ADC Ch %d = %#x \t Temp = %f" % (31, adc_value, internal_temp))
+                print("ADC Ch %d = %#x \t Temp = %f" % (31, adc_value, internal_temp))
                 ca_ch = pvaccess.Channel(ch_name)
                 ca_ch.putDouble(internal_temp)
             else:
                 # read internal tenperature sensor
                 volt_value = float(adc_value * SCA_ADC_VREF) / (2 ** 12)
-                # print("ADC Ch %d =  %#x \t Volt = %f" % (i, adc_value, volt_value))
+                print("ADC Ch %d =  %#x \t Volt = %f" % (i, adc_value, volt_value))
                 ca_ch = pvaccess.Channel(ch_name)
                 ca_ch.putDouble(volt_value)
 
