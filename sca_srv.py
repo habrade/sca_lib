@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 
-class ScaSrv():
+class ScaSrv(object):
     def __init__(self, scaNum=1):
         # run softIocPVA
         # subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

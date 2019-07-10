@@ -16,7 +16,7 @@ class Bme280(ScaI2c):
     def __init__(self, hw, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
                  h_mode=BME280_OSAMPLE_8,
                  standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
-        ScaI2c.__init__(self, hw=hw, chn=SCA_CH_I2C0)
+        super(Bme280, self).__init__(hw, SCA_CH_I2C0)
         self.BME280Data = []
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,

@@ -8,7 +8,7 @@ from lib.sca_defs import *
 
 class TestADC(Gdpb):
     def __init__(self):
-        Gdpb.__init__(self, scaNum=2)
+        super(TestADC, self).__init__(2)
         self.adc_dev = self.sca_modules[1].adc
 
 

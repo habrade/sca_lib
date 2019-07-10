@@ -12,7 +12,7 @@ log.setLevel(logging.DEBUG)
 class ScaAdc(Sca):
 
     def __init__(self, hw):
-        Sca.__init__(self, hw)
+        super(ScaAdc, self).__init__(hw)
 
     def enable_adc(self):
         self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)

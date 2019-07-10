@@ -13,7 +13,7 @@ log.setLevel(logging.DEBUG)
 
 class TestGPIO(Gdpb):
     def __init__(self):
-        Gdpb.__init__(self, scaNum=2)
+        super(TestGPIO, self).__init__(2)
         self.gpio_dev = self.sca_modules[1].gpio
 
 

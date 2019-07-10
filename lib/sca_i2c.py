@@ -13,7 +13,7 @@ log.setLevel(logging.DEBUG)
 class ScaI2c(Sca):
 
     def __init__(self, hw, chn):
-        Sca.__init__(self, hw)
+        super(ScaI2c, self).__init__(hw)
         self.__chn = chn
 
     @staticmethod
