@@ -1,22 +1,12 @@
 #!/usr/bin/env python
-import logging
 import time
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
-
-
-class TestReadId(Gdpb):
-    def __init__(self, afck_num):
-        super(TestReadId, self).__init__(afck_num)
-
-
 if __name__ == '__main__':
-    sca_dev = TestReadId(66)
+    afck_num = 66
+    sca_dev = Gdpb(afck_num)
 
     # Reset Chip
     sca_dev.send_reset()

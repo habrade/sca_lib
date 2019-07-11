@@ -10,14 +10,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
-
-class TestBme280(Gdpb):
-    def __init__(self, afck_num):
-        super(TestBme280, self).__init__(afck_num)
-
-
 if __name__ == '__main__':
-    sensor = TestBme280(67)
+    afck_num = 66
+    sensor = Gdpb(afck_num)
 
     # Reset SCA
     sensor.send_reset()
@@ -32,7 +27,7 @@ if __name__ == '__main__':
     # reset bme280
     sensor.rst_dev()
 
-    PREFIX = "labtest:SCA:0:"
+    PREFIX = "labtest:Gdpb:%d:SCA:" % afck_num
     degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
     hectopascals_ch = pvaccess.Channel(PREFIX + "BME280:Pressure")
     humidity_ch = pvaccess.Channel(PREFIX + "BME280:Humidity")

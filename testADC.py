@@ -6,17 +6,9 @@ import pvaccess
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
 
-
-class TestADC(Gdpb):
-    def __init__(self, afck_num):
-        super(TestADC, self).__init__(afck_num)
-
-
-# ioc channels' prefix
-PREFIX = "labtest:SCA:0:"
-
 if __name__ == '__main__':
-    sca_dev = TestADC(67)
+    afck_num = 66
+    sca_dev = Gdpb(afck_num)
 
     # Reset Chip
     sca_dev.send_reset()
@@ -25,6 +17,8 @@ if __name__ == '__main__':
 
     # Enable ADC channel
     sca_dev.enable_chn(SCA_CH_ADC, True)
+
+    PREFIX = "labtest:Gdpb:%d:SCA:" % afck_num
 
     while True:
         # read adc channels for 0 31

@@ -10,14 +10,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
-
-class TestGPIO(Gdpb):
-    def __init__(self, afck_num):
-        super(TestGPIO, self).__init__(afck_num)
-
-
 if __name__ == '__main__':
-    sca_dev = TestGPIO(67)
+    afck_num = 66
+    sca_dev = Gdpb(afck_num)
 
     # Reset Chip
     sca_dev.send_reset()
@@ -27,7 +22,7 @@ if __name__ == '__main__':
     # Enable GPIO
     sca_dev.enable_chn(sca_defs.SCA_CH_GPIO, True)
 
-    PREFIX = "labtest:SCA:0:"
+    PREFIX = "labtest:Gdpb:%d:SCA:" % afck_num
     ca_name_direction_set_1_half = PREFIX + "GPIO:CH_31_16:DIRECTION:SET"
     ca_name_direction_get_1_half = PREFIX + "GPIO:CH_31_16:DIRECTION:GET"
     ca_name_pinout_get_1_half = PREFIX + "GPIO:CH_31_16:PINOUT:GET"
