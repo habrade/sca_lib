@@ -14,17 +14,12 @@ log.setLevel(logging.DEBUG)
 
 
 class TestBme280(Gdpb):
-    def __init__(self):
-        super(TestBme280, self).__init__(2)
-        self.bme280_dev = self.sca_modules[1].bme280
+    def __init__(self, afck_num):
+        super(TestBme280, self).__init__(afck_num)
 
 
 if __name__ == '__main__':
-    # run softIocPVA
-    subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-
-    test_bme280 = TestBme280()
-    sensor = test_bme280.bme280_dev
+    sensor = TestBme280(67)
 
     # Reset SCA
     sensor.send_reset()

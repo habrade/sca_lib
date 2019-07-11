@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import logging
+import time
 
 from lib.sca_defs import *
 from lib.gdpb import Gdpb
@@ -11,14 +12,12 @@ log.setLevel(logging.DEBUG)
 
 
 class TestReadId(Gdpb):
-    def __init__(self):
-        super(TestReadId, self).__init__(2)
-        self.sca_dev = self.sca_modules[1].sca_asic
+    def __init__(self, afck_num):
+        super(TestReadId, self).__init__(afck_num)
 
 
 if __name__ == '__main__':
-    test_read_id = TestReadId()
-    sca_dev = test_read_id.sca_dev
+    sca_dev = TestReadId(66)
 
     # Reset Chip
     sca_dev.send_reset()
@@ -29,3 +28,4 @@ if __name__ == '__main__':
     # Read Chip ID
     while True:
         sca_id = sca_dev.read_sca_id()
+        time.sleep(1)

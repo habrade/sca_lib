@@ -12,14 +12,12 @@ log.setLevel(logging.DEBUG)
 
 
 class TestGPIO(Gdpb):
-    def __init__(self):
-        super(TestGPIO, self).__init__(2)
-        self.gpio_dev = self.sca_modules[1].gpio
+    def __init__(self, afck_num):
+        super(TestGPIO, self).__init__(afck_num)
 
 
 if __name__ == '__main__':
-    test_gpio = TestGPIO()
-    sca_dev = test_gpio.gpio_dev
+    sca_dev = TestGPIO(67)
 
     # Reset Chip
     sca_dev.send_reset()

@@ -1,25 +1,24 @@
+import logging
+
 import uhal
 
 from sca_module import ScaModule
 
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
+log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
 
-class Gdpb(object):
-    def __init__(self, scaNum=1):
-        # ScaModule.__init__(self)
-        self.__scaNum = scaNum
 
-        self.connection_file_path = ["../dpbcontrols/etc/ipbus_lab66_gdpb_gbtx.xml", "../dpbcontrols/etc/ipbus_lab67_gdpb_gbtx.xml"]
-        self.device_id = ["C0S00_gdpb066", "C0S00_gdpb067"]
+class Gdpb(ScaModule):
+    def __init__(self, afck_num):
+        self.__afck_num = afck_num
+        log.debug("Initial Gdpb, AFCK Number: %d" % self.__afck_num)
 
-        self.__connection_mgr = []
-        self.__hw = []
+        self.connection_file_path = "../dpbcontrols/etc/ipbus_lab%d_gdpb_gbtx.xml" % self.__afck_num
+        self.device_id = "C0S00_gdpb%03d" % self.__afck_num
 
-        for index in range(self.__scaNum):
-            print("index = %d" % index)
-            # Creating the HwInterface
-            self.__connection_mgr.append(uhal.ConnectionManager("file://" + self.connection_file_path[index]))
-            self.__hw.append(self.__connection_mgr[index].getDevice(self.device_id[index]))
+        self.__connection_mgr = uhal.ConnectionManager("file://" + self.connection_file_path)
+        self.__hw = self.__connection_mgr.getDevice(self.device_id)
 
-        self.sca_modules = []
-        for index in range(self.__scaNum):
-            self.sca_modules.append(ScaModule(self.__hw[index]))
+        super(Gdpb, self).__init__(self.__hw)

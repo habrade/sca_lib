@@ -15,14 +15,11 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 
-class ScaSrv(object):
-    def __init__(self, scaNum=1):
-        # run softIocPVA
-        # subprocess.Popen(["./runIoc.sh"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+class ScaSrv(Gdpb):
+    def __init__(self, afck_num):
+        super(TestADC, self).__init__(afck_num)
 
-        self.__scaNum = scaNum
-        self.gdpb = Gdpb(self.__scaNum)
-        self.__SCA_ADC_VREF = 1.5
+        self.__scaNum = 1
 
         self.ca_sca_id = []
         self.ca_gpio_direction_set_ch_31_16 = []
@@ -158,7 +155,7 @@ class ScaSrv(object):
                     # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                     self.ca_adc_channels[i].putDouble(internal_temp)
                 else:
-                    volt_value = float(adc_value * self.__SCA_ADC_VREF) / (2 ** 12)
+                    volt_value = float(adc_value * SCA_ADC_VREF) / (2 ** 12)
                     log.debug("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
                     self.ca_adc_channels[i].putDouble(volt_value)
 
@@ -188,4 +185,4 @@ class ScaSrv(object):
 
 
 if __name__ == '__main__':
-    scaSrv = ScaSrv(1)
+    scaSrv = ScaSrv(66)

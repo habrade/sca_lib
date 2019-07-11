@@ -7,19 +7,15 @@ from lib.sca_defs import *
 
 
 class TestADC(Gdpb):
-    def __init__(self):
-        super(TestADC, self).__init__(2)
-        self.adc_dev = self.sca_modules[1].adc
+    def __init__(self, afck_num):
+        super(TestADC, self).__init__(afck_num)
 
 
 # ioc channels' prefix
 PREFIX = "labtest:SCA:0:"
 
 if __name__ == '__main__':
-    SCA_ADC_VREF = 1.5
-
-    test_adc = TestADC()
-    sca_dev = test_adc.adc_dev
+    sca_dev = TestADC(67)
 
     # Reset Chip
     sca_dev.send_reset()

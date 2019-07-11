@@ -1,18 +1,16 @@
 import logging
-import time
 
 from sca_defs import *
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 
 class Sca(object):
     def __init__(self, hw=None):
-        sca_addr = 0x00
-        self.__sca_addr = sca_addr
+        self.__sca_addr = 0x00
         self.__trans_id = 0x01
 
         self._version = SCA_VERSION
