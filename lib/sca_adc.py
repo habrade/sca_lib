@@ -3,8 +3,7 @@ import logging
 from sca import Sca
 from sca_defs import *
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 

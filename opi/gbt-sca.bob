@@ -96,6 +96,7 @@
       <text>Set</text>
       <x>300</x>
       <width>40</width>
+      <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
     </widget>
     <widget type="label" version="2.0.0">
@@ -107,7 +108,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_110</name>
-      <text>CH</text>
+      <text>PIN</text>
       <x>210</x>
       <width>30</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -1775,8 +1776,9 @@
     <widget type="label" version="2.0.0">
       <name>Label_113</name>
       <text>Set</text>
-      <x>740</x>
+      <x>730</x>
       <width>40</width>
+      <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
     </widget>
     <widget type="label" version="2.0.0">
@@ -1788,7 +1790,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_115</name>
-      <text>CH</text>
+      <text>PIN</text>
       <x>650</x>
       <width>30</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -1806,6 +1808,7 @@
       <text>Set</text>
       <x>520</x>
       <width>40</width>
+      <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
     </widget>
     <widget type="label" version="2.0.0">
@@ -1817,7 +1820,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_63</name>
-      <text>CH</text>
+      <text>PIN</text>
       <x>430</x>
       <width>30</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -1825,7 +1828,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_87</name>
-      <text>CH</text>
+      <text>PIN</text>
       <width>30</width>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
@@ -1842,6 +1845,7 @@
       <text>Set</text>
       <x>90</x>
       <width>40</width>
+      <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
     </widget>
     <widget type="label" version="2.0.0">
@@ -1963,6 +1967,7 @@
         <name>Text Update</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -1983,6 +1988,7 @@
         <name>Text Update_1</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2003,6 +2009,7 @@
         <name>Text Update_2</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2023,6 +2030,7 @@
         <name>Text Update_3</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2043,6 +2051,7 @@
         <name>Text Update_4</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2063,6 +2072,7 @@
         <name>Text Update_5</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2083,6 +2093,7 @@
         <name>Text Update_6</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2103,6 +2114,7 @@
         <name>Text Update_7</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2123,6 +2135,7 @@
         <name>Text Update_32</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2144,6 +2157,7 @@
         <name>Text Update_33</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2165,6 +2179,7 @@
         <name>Text Update_34</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2186,6 +2201,7 @@
         <name>Text Update_35</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2207,6 +2223,7 @@
         <name>Text Update_36</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2228,6 +2245,7 @@
         <name>Text Update_37</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2249,6 +2267,7 @@
         <name>Text Update_38</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2270,6 +2289,7 @@
         <name>Text Update_39</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2290,6 +2310,7 @@
         <name>Text Update_40</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2311,6 +2332,7 @@
         <name>Text Update_41</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2332,6 +2354,7 @@
         <name>Text Update_42</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2353,6 +2376,7 @@
         <name>Text Update_43</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2374,6 +2398,7 @@
         <name>Text Update_44</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2395,6 +2420,7 @@
         <name>Text Update_45</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2416,6 +2442,7 @@
         <name>Text Update_46</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2437,6 +2464,7 @@
         <name>Text Update_47</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2457,6 +2485,7 @@
         <name>Text Update_48</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2478,6 +2507,7 @@
         <name>Text Update_49</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2499,6 +2529,7 @@
         <name>Text Update_50</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2520,6 +2551,7 @@
         <name>Text Update_51</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2541,6 +2573,7 @@
         <name>Text Update_52</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2562,6 +2595,7 @@
         <name>Text Update_53</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2583,6 +2617,7 @@
         <name>Text Update_54</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
     <widget type="group" version="2.0.0">
@@ -2604,6 +2639,7 @@
         <name>Text Update_55</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <width>50</width>
       </widget>
     </widget>
   </widget>

@@ -6,8 +6,7 @@ from bme280_defs import *
 from sca_defs import *
 from sca_i2c import ScaI2c
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 

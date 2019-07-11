@@ -1,23 +1,22 @@
 #!/usr/bin/env python
-import logging
-import time
-import threading
 import functools
+import logging
+import threading
+import time
 
 import pvaccess
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 
 class ScaSrv(Gdpb):
     def __init__(self, afck_num):
-        super(TestADC, self).__init__(afck_num)
+        super(ScaSrv, self).__init__(afck_num)
 
         self.__scaNum = 1
 

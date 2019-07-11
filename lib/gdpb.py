@@ -4,8 +4,7 @@ import uhal
 
 from sca_module import ScaModule
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 

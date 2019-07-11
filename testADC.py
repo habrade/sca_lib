@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import pvaccess
 import time
+
+import pvaccess
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
@@ -45,4 +46,3 @@ if __name__ == '__main__':
                 print("ADC Ch %d =  %#x \t Volt = %f" % (i, adc_value, volt_value))
                 ca_ch = pvaccess.Channel(ch_name)
                 ca_ch.putDouble(volt_value)
-

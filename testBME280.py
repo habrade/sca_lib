@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 import logging
-import subprocess
 
 import pvaccess
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
