@@ -12,7 +12,8 @@ log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
     afck_num = 66
-    sensor = Gdpb(afck_num)
+    link = 0
+    sensor = Gdpb(afck_num, link)
 
     # Reset SCA
     sensor.send_reset()

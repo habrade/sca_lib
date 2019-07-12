@@ -10,7 +10,7 @@ log.setLevel(logging.DEBUG)
 
 
 class Gdpb(ScaModule):
-    def __init__(self, afck_num):
+    def __init__(self, afck_num, link):
         self.__afck_num = afck_num
         log.debug("Initial Gdpb, AFCK Number: %d" % self.__afck_num)
 
@@ -20,4 +20,4 @@ class Gdpb(ScaModule):
         self.__connection_mgr = uhal.ConnectionManager("file://" + self.connection_file_path)
         self.__hw = self.__connection_mgr.getDevice(self.device_id)
 
-        super(Gdpb, self).__init__(self.__hw)
+        super(Gdpb, self).__init__(self.__hw, link)

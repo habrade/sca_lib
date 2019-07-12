@@ -14,12 +14,13 @@ log.setLevel(logging.INFO)
 
 
 class ScaSrv(Gdpb):
-    def __init__(self, afck_num):
-        super(ScaSrv, self).__init__(afck_num)
+    def __init__(self, afck_num, link):
+        super(ScaSrv, self).__init__(afck_num, link)
 
         self.__afck_num = afck_num
+        self.__link = link
 
-        self.__PREFIX = "labtest:Gdpb:%d:SCA:" % self.__afck_num
+        self.__PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (self.__afck_num, self.__link)
 
         self.ca_sca_id = pvaccess.Channel(self.__PREFIX + "ID")
         self.ca_gpio_direction_set_ch_31_16 = pvaccess.Channel(self.__PREFIX + "GPIO:CH_31_16:DIRECTION:SET")
@@ -154,4 +155,5 @@ class ScaSrv(Gdpb):
 
 if __name__ == '__main__':
     afck_num = 66
-    scaSrv = ScaSrv(afck_num)
+    link = 0
+    scaSrv = ScaSrv(afck_num, link)

@@ -12,7 +12,8 @@ log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
     afck_num = 66
-    sca_dev = Gdpb(afck_num)
+    link = 0
+    sca_dev = Gdpb(afck_num, link)
 
     # Reset Chip
     sca_dev.send_reset()

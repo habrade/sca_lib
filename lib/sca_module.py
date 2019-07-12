@@ -4,5 +4,5 @@ from bme280 import Bme280
 
 
 class ScaModule(ScaAdc, ScaGpio, Bme280):
-    def __init__(self, hw):
-        super(ScaModule, self).__init__(hw)
+    def __init__(self, hw, link):
+        super(ScaModule, self).__init__(hw, link)
