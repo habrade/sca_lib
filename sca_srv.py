@@ -58,11 +58,11 @@ class ScaSrv(Gdpb):
         threads = []
         for index_t in range(num_threads):
             if index_t == 0:
-                thread_function = self.GPIO_thread_func
+                thread_function = self.gpio_thread_func
             elif index_t == 1:
-                thread_function = self.ADC_thread_func
+                thread_function = self.adc_thread_func
             elif index_t == 2:
-                thread_function = self.BME280_thread_func
+                thread_function = self.bme280_thread_func
 
             t = threading.Thread(target=thread_function, args=())
             t.daemon = True
@@ -73,7 +73,7 @@ class ScaSrv(Gdpb):
         for thread in threads:
             thread.join()
 
-    def GPIO_thread_func(self):
+    def gpio_thread_func(self):
         self.enable_chn(SCA_CH_GPIO, True)
         while True:
             # GPIO Direction Set
@@ -108,7 +108,7 @@ class ScaSrv(Gdpb):
             self.ca_gpio_pinin_get_ch_31_16.putUShort(pinin_get >> 16)
             self.ca_gpio_pinin_get_ch_15_0.putUShort(pinin_get & 0xFFFF)
 
-    def ADC_thread_func(self):
+    def adc_thread_func(self):
         self.enable_chn(SCA_CH_ADC, True)
         while True:
             # read adc channels for 0 32
@@ -128,7 +128,7 @@ class ScaSrv(Gdpb):
                     log.debug("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
                     self.ca_adc_channels[i].putDouble(volt_value)
 
-    def BME280_thread_func(self):
+    def bme280_thread_func(self):
         # Enable I2C ch. 0
         self.enable_chn(SCA_CH_I2C0, True)
         self.set_frq(SCA_I2C_SPEED_100)
