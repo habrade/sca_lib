@@ -10,8 +10,8 @@ log.setLevel(logging.DEBUG)
 
 class ScaGpio(Sca):
 
-    def __init__(self, hw):
-        super(ScaGpio, self).__init__(hw)
+    def __init__(self):
+        super(ScaGpio, self).__init__()
 
     def set_direction(self, directions):
         """GPIO Direction Set, 1->output mode, 0->input mode"""
