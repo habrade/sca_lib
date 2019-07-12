@@ -11,9 +11,10 @@ log.setLevel(logging.DEBUG)
 
 class ScaI2c(Sca):
 
-    def __init__(self, chn):
-        super(ScaI2c, self).__init__()
+    def __init__(self, hw, link, chn):
+        super(ScaI2c, self).__init__(hw, link)
         self.__chn = chn
+        self.__link = link
 
     @staticmethod
     def _parse_status(status):
@@ -34,18 +35,18 @@ class ScaI2c(Sca):
 
     def r_ctrl_reg(self):
         self.send_command(self.__chn, SCA_I2C_W_CTRL, 0)
-        return self.get_reg_value("rxData") >> 24
+        return self.get_reg_value("rxData%d" % self.__link) >> 24
 
     def r_status(self):
         self.send_command(self.__chn, SCA_I2C_R_STATUS, 0)
-        return self.get_reg_value("rxData") >> 24
+        return self.get_reg_value("rxData%d" % self.__link) >> 24
 
     def w_mask(self, val):
         self.send_command(self.__chn, SCA_I2C_W_MASK, val << 24)
 
     def r_mask(self):
         self.send_command(self.__chn, SCA_I2C_R_MASK, 0)
-        return self.get_reg_value("rxData") >> 24
+        return self.get_reg_value("rxData%d" % self.__link) >> 24
 
     def w_data0(self, data):
         self.send_command(self.__chn, SCA_I2C_W_DATA0, data)
@@ -61,30 +62,30 @@ class ScaI2c(Sca):
 
     def r_data0(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
-        return self.get_reg_value("rxData")
+        return self.get_reg_value("rxData%d" % self.__link)
 
     def r_data1(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA1, 0)
-        return self.get_reg_value("rxData")
+        return self.get_reg_value("rxData%d" % self.__link)
 
     def r_data2(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
-        return self.get_reg_value("rxData")
+        return self.get_reg_value("rxData%d" % self.__link)
 
     def r_data3(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA3, 0)
-        return self.get_reg_value("rxData")
+        return self.get_reg_value("rxData%d" % self.__link)
 
     def s_7b_w(self, addr, data):
         temp = (addr << 24) + (data << 16)
         self.send_command(self.__chn, SCA_I2C_S_7B_W, temp)
-        status = self.get_reg_value("rxData") >> 24
+        status = self.get_reg_value("rxData%d" % self.__link) >> 24
         return self._parse_status(status)
 
     def s_7b_r(self, addr):
         self.send_command(self.__chn, SCA_I2C_S_7B_R, addr << 24)
         # temp =  status + data
-        temp = self.get_reg_value("rxData") >> 16
+        temp = self.get_reg_value("rxData%d" % self.__link) >> 16
         status = (temp & 0xff00) >> 8
         data = (temp & 0xff)
         if self._parse_status(status) == 0:
@@ -95,7 +96,7 @@ class ScaI2c(Sca):
     def s_10b_w(self, addr, data):
         temp = (addr << 16) + (data << 8)
         self.send_command(self.__chn, SCA_I2C_S_10B_W, temp)
-        status = self.get_reg_value("rxData") >> 24
+        status = self.get_reg_value("rxData%d" % self.__link) >> 24
         if status == 0x04:
             return True
         else:
@@ -105,18 +106,18 @@ class ScaI2c(Sca):
     def s_10b_r(self, addr):
         self.send_command(self.__chn, SCA_I2C_S_10B_R, addr << 16)
         # Return status + data
-        temp = self.get_reg_value("rxData") >> 16
+        temp = self.get_reg_value("rxData%d" % self.__link) >> 16
         status = (temp & 0xff00) >> 8
         data = (temp & 0x00ff)
         if status == 0x04:
             return data
         else:
             log.error("Error happened at this I2C read transaction, check status")
-        return self.get_reg_value("rxData") >> 16
+        return self.get_reg_value("rxData%d" % self.__link) >> 16
 
     def m_7b_w(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_7B_W, addr << 24)
-        status = self.get_reg_value("rxData") >> 24
+        status = self.get_reg_value("rxData%d" % self.__link) >> 24
         if status == 0x04:
             return True
         else:
@@ -124,7 +125,7 @@ class ScaI2c(Sca):
 
     def m_7b_r(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_7B_R, addr << 24)
-        status = self.get_reg_value("rxData") >> 24
+        status = self.get_reg_value("rxData%d" % self.__link) >> 24
         if self._parse_status(status) == 0:
             return True
         else:
@@ -132,7 +133,7 @@ class ScaI2c(Sca):
 
     def m_10b_w(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_10B_W, addr << 24)
-        status = self.get_reg_value("rxData") >> 24
+        status = self.get_reg_value("rxData%d" % self.__link) >> 24
         if status == 0x04:
             return True
         else:
@@ -140,7 +141,7 @@ class ScaI2c(Sca):
 
     def m_10b_r(self, addr):
         self.send_command(self.__chn, SCA_I2C_M_10B_R, addr << 24)
-        status = self.get_reg_value("rxData") >> 24
+        status = self.get_reg_value("rxData%d" % self.__link) >> 24
         return status
 
     def set_frq(self, frq):
@@ -193,22 +194,22 @@ class ScaI2c(Sca):
             log.error("Bytes of data should be from 1 to 16")
         else:
             self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
-            data0 = self.get_reg_value("rxData")
+            data0 = self.get_reg_value("rxData%d" % self.__link)
             data[0:4] = struct.pack('>I', data0)
 
             if nr_bytes > 4:
                 self.send_command(self.__chn, SCA_I2C_R_DATA1, 0)
-                data1 = self.get_reg_value("rxData")
+                data1 = self.get_reg_value("rxData%d" % self.__link)
                 data[4:8] = struct.pack('>I', data1)
 
             if nr_bytes > 8:
                 self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
-                data2 = self.get_reg_value("rxData")
+                data2 = self.get_reg_value("rxData%d" % self.__link)
                 data[8:12] = struct.pack('>I', data2)
 
             if nr_bytes > 12:
                 self.send_command(self.__chn, SCA_I2C_R_DATA3, 0)
-                data3 = self.get_reg_value("rxData")
+                data3 = self.get_reg_value("rxData%d" % self.__link)
                 data[12:16] = struct.pack('>I', data3)
 
             return data[0:nr_bytes]

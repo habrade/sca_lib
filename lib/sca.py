@@ -20,7 +20,7 @@ class Sca(object):
     def send_command(self, channel, command, data):
         node = self.__hw.getNode("GBT-SCA.txAddr%d" % self.__link)
         node.write(self.__sca_addr)
-        node = self.__hw.getNode("GBT-SCA.txTransIDy)
+        node = self.__hw.getNode("GBT-SCA.txTransID%d" % self.__link)
         node.write(self.__trans_id)
 
         self.__trans_id += 1
@@ -52,20 +52,20 @@ class Sca(object):
         log.debug("    rxLen = %#x\t" % self.get_reg_value("rxLen%d" % self.__link))
         log.debug("    rxErr = %#x\t" % self.get_reg_value("rxErr%d" % self.__link))
 
-        rxErr = self.get_reg_value("rxErr%d" % self.__link")
+        rxErr = self.get_reg_value("rxErr%d" % self.__link)
         if rxErr != 0x00:
             # raise Exception("ERROR! SCA rxErr Code: 0x%02x" % rxErr)
             log.fatal("Link: %d\tSCA rxErr Code: %#02x" % (self.__link, rxErr))
 
     def send_reset(self):
-        node = self.__hw.getNode("GBT-SCA.rst%d" % self.__link")
+        node = self.__hw.getNode("GBT-SCA.rst%d" % self.__link)
         node.write(0)
         node.write(1)
         node.write(0)
         self.__hw.dispatch()
 
     def send_connect(self):
-        node = self.__hw.getNode("GBT-SCA.connect%d" % self.__link")
+        node = self.__hw.getNode("GBT-SCA.connect%d" % self.__link)
         node.write(0)
         node.write(1)
         node.write(0)
