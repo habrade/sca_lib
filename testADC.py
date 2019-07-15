@@ -19,7 +19,7 @@ if __name__ == '__main__':
     # Enable ADC channel
     sca_dev.enable_chn(SCA_CH_ADC, True)
 
-    PREFIX = "labtest:Gdpb:%d:SCA:" % afck_num
+    PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (afck_num, link)
 
     while True:
         # read adc channels for 0 31

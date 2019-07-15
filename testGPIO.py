@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # Enable GPIO
     sca_dev.enable_chn(sca_defs.SCA_CH_GPIO, True)
 
-    PREFIX = "labtest:Gdpb:%d:SCA:" % afck_num
+    PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (afck_num, link)
     ca_name_direction_set_1_half = PREFIX + "GPIO:CH_31_16:DIRECTION:SET"
     ca_name_direction_get_1_half = PREFIX + "GPIO:CH_31_16:DIRECTION:GET"
     ca_name_pinout_get_1_half = PREFIX + "GPIO:CH_31_16:PINOUT:GET"

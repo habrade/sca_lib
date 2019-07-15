@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # reset bme280
     sensor.rst_dev()
 
-    PREFIX = "labtest:Gdpb:%d:SCA:" % afck_num
+    PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (afck_num, link)
     degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
     hectopascals_ch = pvaccess.Channel(PREFIX + "BME280:Pressure")
     humidity_ch = pvaccess.Channel(PREFIX + "BME280:Humidity")
