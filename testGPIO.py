@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import logging
+import sys
 
 import pvaccess
 
@@ -11,8 +12,13 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
-    afck_num = 66
-    link = 0
+    if len(sys.argv) == 3:
+        afck_num = int(sys.argv[1])
+        link = int(sys.argv[2])
+    else:
+        print("Usage:  ./readScaId.py board_num link_num")
+        sys.exit(1)
+
     sca_dev = Gdpb(afck_num, link)
 
     # Reset Chip

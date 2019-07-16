@@ -1,12 +1,19 @@
 #!/usr/bin/env python
+import sys
 import time
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
 
 if __name__ == '__main__':
-    afck_num = 66
-    link = 0
+
+    if len(sys.argv) == 3:
+        afck_num = int(sys.argv[1])
+        link = int(sys.argv[2])
+    else:
+        print("Usage:  ./readScaId.py board_num link_num")
+        sys.exit(1)
+
     sca_dev = Gdpb(afck_num, link)
 
     # Reset Chip
