@@ -19,20 +19,20 @@ if __name__ == '__main__':
         print("Usage:  ./readScaId.py board_num link_num")
         sys.exit(1)
 
-    sensor = Gdpb(afck_num, link)
+    testGdpb = Gdpb(afck_num, link)
 
     # Reset SCA
-    sensor.send_reset()
+    testGdpb.send_reset()
     # Connect SCA chip
-    sensor.send_connect()
+    testGdpb.send_connect()
 
     # Enable I2C ch. 0
-    sensor.enable_chn(SCA_CH_I2C0, True)
-    sensor.set_frq(SCA_I2C_SPEED_100)
-    sensor.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
+    testGdpb.enable_chn(SCA_CH_I2C0, True)
+    testGdpb.set_frq(SCA_I2C_SPEED_100)
+    testGdpb.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
 
     # reset bme280
-    sensor.rst_dev()
+    testGdpb.rst_dev()
 
     PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (afck_num, link)
     degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
@@ -40,15 +40,15 @@ if __name__ == '__main__':
     humidity_ch = pvaccess.Channel(PREFIX + "BME280:Humidity")
 
     # check BME280 ID
-    if sensor.read_id() != 0x60:
+    if testGdpb.read_id() != 0x60:
         log.error("BME280's ID is not right, should be 0x60 after reset")
 
     # read Temp, Pressure, Humidity
     while True:
-        degrees = sensor.read_temperature()
-        pascals = sensor.read_pressure()
+        degrees = testGdpb.read_temperature()
+        pascals = testGdpb.read_pressure()
         hectopascals = pascals / 100
-        humidity = sensor.read_humidity()
+        humidity = testGdpb.read_humidity()
 
         # Data put to epics channel
         degrees_ch.putDouble(degrees)
