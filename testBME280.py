@@ -1,17 +1,20 @@
 #!/usr/bin/env python
 import logging
 import sys
+import time
 
 import pvaccess
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
+from lib.bme280_defs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     if len(sys.argv) == 3:
         afck_num = int(sys.argv[1])
         link = int(sys.argv[2])
@@ -28,11 +31,12 @@ if __name__ == '__main__':
 
     # Enable I2C ch. 0
     testGdpb.enable_chn(SCA_CH_I2C0, True)
-    testGdpb.set_frq(SCA_I2C_SPEED_100)
+    testGdpb.set_frq(SCA_I2C_SPEED_1000)
     testGdpb.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
 
     # reset bme280
     testGdpb.rst_dev()
+    # testGdpb.set_sensor_mode(BME280_MODE_SLEEP_NORMAL)
 
     PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (afck_num, link)
     degrees_ch = pvaccess.Channel(PREFIX + "BME280:Temperature")
@@ -45,6 +49,7 @@ if __name__ == '__main__':
 
     # read Temp, Pressure, Humidity
     while True:
+
         degrees = testGdpb.read_temperature()
         pascals = testGdpb.read_pressure()
         hectopascals = pascals / 100
@@ -58,3 +63,5 @@ if __name__ == '__main__':
         log.debug("Temp = %f deg C" % degrees)
         log.debug("Pressure = %f hPa" % hectopascals)
         log.debug("Humidity = %f %%" % humidity)
+        
+        time.sleep(1)
