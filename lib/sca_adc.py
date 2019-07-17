@@ -58,11 +58,11 @@ class ScaAdc(Sca):
 
     def r_gain(self):
         self.send_command(SCA_CH_ADC, SCA_ADC_R_GAIN, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        return self.get_reg_value("rxData%d" % self.__link) & 0xFFFF
 
     def r_raw(self):
         self.send_command(SCA_CH_ADC, SCA_ADC_R_RAW, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
 
     def r_data(self):
         if self._version == 0x02:
@@ -70,8 +70,8 @@ class ScaAdc(Sca):
         elif self._version == 0x01:
             self.send_command(SCA_CH_ADC, SCAV1_ADC_R_DATA, 0)
 
-        return self.get_reg_value("rxData%d" % self.__link)
+        return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
 
     def r_ofs(self):
         self.send_command(SCA_CH_ADC, SCA_ADC_R_OFS, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
