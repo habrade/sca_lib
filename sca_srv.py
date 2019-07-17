@@ -55,7 +55,7 @@ class ScaSrv(Gdpb):
         self.ca_sca_id.putInt(sca_id)
 
     def create_threads(self):
-        num_threads = 2
+        num_threads = 3
         threads = []
         for index_t in range(num_threads):
             if index_t == 0:
@@ -125,7 +125,7 @@ class ScaSrv(Gdpb):
                     # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                     self.ca_adc_channels[i].putDouble(internal_temp)
                 else:
-                    volt_value = float(adc_value * SCA_ADC_VREF) / (2 ** 12)
+                    volt_value = float(1000 * adc_value * SCA_ADC_VREF) / (2 ** 12)
                     log.debug("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
                     self.ca_adc_channels[i].putDouble(volt_value)
 
