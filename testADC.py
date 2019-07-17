@@ -18,7 +18,7 @@ if __name__ == '__main__':
         afck_num = int(sys.argv[1])
         link = int(sys.argv[2])
     else:
-        log.debug("Usage:  ./readScaId.py board_num link_num")
+        print("Usage:  ./readScaId.py board_num link_num")
         sys.exit(1)
 
     sca_dev = Gdpb(afck_num, link)

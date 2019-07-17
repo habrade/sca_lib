@@ -1,5 +1,6 @@
 import logging
 import struct
+import binascii
 
 from sca import Sca
 from sca_defs import *
@@ -50,36 +51,48 @@ class ScaI2c(Sca):
         return self.get_reg_value("rxData%d" % self.__link) >> 24
 
     def w_data0(self, data):
+        log.debug("Write data0: %x" % data)
         self.send_command(self.__chn, SCA_I2C_W_DATA0, data)
 
     def w_data1(self, data):
+        log.debug("Write data1: %x" % data)
         self.send_command(self.__chn, SCA_I2C_W_DATA1, data)
 
     def w_data2(self, data):
+        log.debug("Write data2: %x" % data)
         self.send_command(self.__chn, SCA_I2C_W_DATA2, data)
 
     def w_data3(self, data):
+        log.debug("Write data3: %x" % data)
         self.send_command(self.__chn, SCA_I2C_W_DATA3, data)
 
     def r_data0(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        data0 = self.get_reg_value("rxData%d" % self.__link)
+        log.debug("I2C: Read DATA0 = %#x" % data0)
+        return data0
 
     def r_data1(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA1, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        data1 = self.get_reg_value("rxData%d" % self.__link)
+        log.debug("I2C: Read DATA1 = %#x" % data1)
+        return data1
 
     def r_data2(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        data2 = self.get_reg_value("rxData%d" % self.__link)
+        log.debug("I2C: Read DATA2 = %#x" % data2)
+        return data2
 
     def r_data3(self):
         self.send_command(self.__chn, SCA_I2C_R_DATA3, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        data3 = self.get_reg_value("rxData%d" % self.__link)
+        log.debug("I2C: Read DATA3 = %#x" % data3)
+        return data3
 
     def s_7b_w(self, addr, data):
         temp = (addr << 24) + (data << 16)
-        log.debug("s_7b_w: data to send %#x" % temp)
+        log.debug("s_7b_w send data: %#x" % data)
         self.send_command(self.__chn, SCA_I2C_S_7B_W, temp)
         status = self.get_reg_value("rxData%d" % self.__link) >> 24
         return self._parse_status(status)
@@ -90,6 +103,7 @@ class ScaI2c(Sca):
         temp = self.get_reg_value("rxData%d" % self.__link) >> 16
         status = (temp & 0xff00) >> 8
         data = (temp & 0xff)
+        log.debug("s_7b_r: %#02x" % data)
         if self._parse_status(status) == 0:
             return data
         else:
@@ -122,6 +136,7 @@ class ScaI2c(Sca):
             log.error("Error happened at this I2C write transaction, check status")
 
     def m_7b_r(self, addr):
+        log.debug("Multi read(7 bits I2C) starting...")
         self.send_command(self.__chn, SCA_I2C_M_7B_R, addr << 24)
         status = self.get_reg_value("rxData%d" % self.__link) >> 24
         if self._parse_status(status) == 0:
@@ -160,6 +175,7 @@ class ScaI2c(Sca):
             raise Exception("Mode out of index")
 
     def set_trans_byte_length(self, nr_bytes):
+        log.debug("Set data number to be transferred: %d" % nr_bytes)
         if nr_bytes in range(1, 17):
             self._ctrl_reg = (nr_bytes << 2) | (self._ctrl_reg & 0x83)
             self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
@@ -182,31 +198,38 @@ class ScaI2c(Sca):
             self.send_command(self.__chn, SCA_I2C_W_DATA0, struct.unpack('>I', data_temp[0:4])[0])
 
     def get_data_reg(self, nr_bytes):
+        log.debug("get_data_reg, number: %d" % nr_bytes)
         data = bytearray(16)
         if (nr_bytes > 16) or (nr_bytes < 1):
             log.error("Bytes of data should be from 1 to 16")
         else:
-            self.send_command(self.__chn, SCA_I2C_R_DATA0, 0)
-            data0 = self.get_reg_value("rxData%d" % self.__link)
-            log.debug("data0: %#04x" % data0)
-            data[0:4] = struct.pack('>I', data0)
+            if self.r_data0():
+                data0 = self.get_reg_value("rxData%d" % self.__link)
+                log.debug("data0: %#04x" % data0)
+                data[0:4] = struct.pack('>I', data0)
 
             if nr_bytes > 4:
-                self.send_command(self.__chn, SCA_I2C_R_DATA1, 0)
-                data1 = self.get_reg_value("rxData%d" % self.__link)
-                log.debug("data1: %#04x" % data1)
-                data[4:8] = struct.pack('>I', data1)
+                if self.r_data1():
+                    data1 = self.get_reg_value("rxData%d" % self.__link)
+                    log.debug("data1: %#04x" % data1)
+                    data[4:8] = struct.pack('>I', data1)
 
             if nr_bytes > 8:
-                self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
-                data2 = self.get_reg_value("rxData%d" % self.__link)
-                log.debug("data2: %#04x" % data2)
-                data[8:12] = struct.pack('>I', data2)
+                if self.r_data2():
+                    self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
+                    data2 = self.get_reg_value("rxData%d" % self.__link)
+                    log.debug("data2: %#04x" % data2)
+                    data[8:12] = struct.pack('>I', data2)
 
             if nr_bytes > 12:
-                self.send_command(self.__chn, SCA_I2C_R_DATA3, 0)
-                data3 = self.get_reg_value("rxData%d" % self.__link)
-                log.debug("data3: %#04x" % data3)
-                data[12:16] = struct.pack('>I', data3)
+                if self.r_data3():
+                    data3 = self.get_reg_value("rxData%d" % self.__link)
+                    log.debug("data3: %#04x" % data3)
+                    data[12:16] = struct.pack('>I', data3)
 
-            return data[0:nr_bytes]
+            log.debug("get_data_reg: ")
+            print binascii.hexlify(data)
+            ret_val = data[0:nr_bytes]
+            for b in ret_val:
+                print hex(b)
+            return ret_val

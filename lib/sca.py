@@ -4,7 +4,7 @@ from sca_defs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class Sca(object):
@@ -40,17 +40,17 @@ class Sca(object):
         self.__hw.dispatch()
 
         log.debug("Link: %d" % self.__link)
-        log.debug("    txTransID = %#x\t" % self.get_reg_value("txTransID%d" % self.__link))
-        log.debug("    rxTransID = %#x\t" % self.get_reg_value("rxTransID%d" % self.__link))
-        log.debug("    txChn = %#x\t" % self.get_reg_value("txChn%d" % self.__link))
-        log.debug("    rxChn = %#x\t" % self.get_reg_value("rxChn%d" % self.__link))
-        log.debug("    txCmd = %#x\t" % self.get_reg_value("txCmd%d" % self.__link))
-        log.debug("    rxAddr = %#x\t" % self.get_reg_value("rxAddr%d" % self.__link))
-        log.debug("    txData = %#x\t" % self.get_reg_value("txData%d" % self.__link))
-        log.debug("    rxData = %#x\t" % self.get_reg_value("rxData%d" % self.__link))
-        log.debug("    rxCtrl = %#x\t" % self.get_reg_value("rxCtrl%d" % self.__link))
-        log.debug("    rxLen = %#x\t" % self.get_reg_value("rxLen%d" % self.__link))
-        log.debug("    rxErr = %#x\t" % self.get_reg_value("rxErr%d" % self.__link))
+        log.debug("    txTransID = %#02x\t" % self.get_reg_value("txTransID%d" % self.__link))
+        log.debug("    rxTransID = %#02x\t" % self.get_reg_value("rxTransID%d" % self.__link))
+        log.debug("    txChn = %#02x\t" % self.get_reg_value("txChn%d" % self.__link))
+        log.debug("    rxChn = %#02x\t" % self.get_reg_value("rxChn%d" % self.__link))
+        log.debug("    txCmd = %#02x\t" % self.get_reg_value("txCmd%d" % self.__link))
+        log.debug("    rxAddr = %#02x\t" % self.get_reg_value("rxAddr%d" % self.__link))
+        log.debug("    txData = %#08x\t" % self.get_reg_value("txData%d" % self.__link))
+        log.debug("    rxData = %#08x\t" % self.get_reg_value("rxData%d" % self.__link))
+        log.debug("    rxCtrl = %#02x\t" % self.get_reg_value("rxCtrl%d" % self.__link))
+        log.debug("    rxLen = %#02x\t" % self.get_reg_value("rxLen%d" % self.__link))
+        log.debug("    rxErr = %#1x\t" % self.get_reg_value("rxErr%d" % self.__link))
 
         rxErr = self.get_reg_value("rxErr%d" % self.__link)
         if rxErr != 0x00:
