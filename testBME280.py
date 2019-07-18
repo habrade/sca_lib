@@ -34,8 +34,8 @@ if __name__ == "__main__":
     testGdpb.set_frq(SCA_I2C_SPEED_1000)
     testGdpb.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
 
-    # reset bme280
-    testGdpb.rst_dev()
+    # # reset bme280
+    # testGdpb.rst_dev()
     # testGdpb.set_sensor_mode(BME280_MODE_SLEEP_NORMAL)
 
     PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (afck_num, link)
