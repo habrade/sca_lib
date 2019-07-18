@@ -69,10 +69,13 @@ class Bme280(ScaI2c):
         self.dig_H4 = 0
         self.dig_H5 = 0
         self.dig_H6 = 0
+
+        # reset bme280
+        self.rst_dev()
+
         # self._load_calibration()
-        self._write_reg(BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
-        self._write_reg(BME280_REGISTER_CONTROL, 0x27)  # Normal mode
-        # self._load_calibration()
+
+        self._write_reg(BME280_REGISTER_CONTROL, 0x25)  # Force mode
         time.sleep(0.002)
         self._write_reg(BME280_REGISTER_CONFIG, ((standby << 5) | (set_filter << 2)))
         time.sleep(0.002)
@@ -142,7 +145,8 @@ class Bme280(ScaI2c):
         """Write an 8-bit value to the specified register."""
         log.debug("Write %#02x to register %#02x" % (value, register))
         data = [register, value & 0xFF]
-        return self._write_block(bytes(data))
+        log.debug("write_reg: length =%d" % len(data))
+        return self._write_block(data)
 
     def _write16(self, register, value):
         """Write a 16-bit value to the specified register."""
@@ -206,6 +210,7 @@ class Bme280(ScaI2c):
 
     def _write_block(self, value):
         nr_bytes = len(value)
+        log.debug("write_block: length =%d" % nr_bytes)
         self.set_trans_byte_length(nr_bytes)
         self.set_data_reg(value)
         return self.m_7b_w(BME280_I2CADDR)
@@ -214,6 +219,7 @@ class Bme280(ScaI2c):
         log.debug("read_block, reg:%#x number:%d" % (register, nr_bytes))
         self.set_trans_byte_length(nr_bytes)
         self._write_raw8(register)
+        time.sleep(0.2)
         if self.m_7b_r(BME280_I2CADDR):
             return self.get_data_reg(nr_bytes)
         else:
