@@ -7,12 +7,12 @@ from sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class ScaI2c(Sca):
 
-    def __init__(self, hw, link, chn):
+    def __init__(self, hw, link, chn=SCA_CH_I2C0):
         super(ScaI2c, self).__init__(hw, link)
         self.__chn = chn
         self.__link = link
@@ -103,8 +103,8 @@ class ScaI2c(Sca):
         temp = self.get_reg_value("rxData%d" % self.__link) >> 16
         status = (temp & 0xff00) >> 8
         data = (temp & 0xff)
-        log.debug("s_7b_r: %#02x" % data)
         if self._parse_status(status) == 0:
+            log.debug("s_7b_r: %#02x" % data)
             return data
         else:
             log.error("Error happened at this I2C read transaction, check status")
@@ -235,3 +235,95 @@ class ScaI2c(Sca):
             for b in ret_val:
                 print hex(b)
             return ret_val
+
+    def _write_raw8(self, slave_addr, value):
+        """Write an 8-bit value on the bus (without register)."""
+        log.debug("Write %#02x on the bus (without register)" % value)
+        return self.s_7b_w(slave_addr, value)
+
+    def _write_reg(self, slave_addr, register, value):
+        """Write an 8-bit value to the specified register."""
+        log.debug("Write %#02x to register %#02x" % (value, register))
+        data = [register, value & 0xFF]
+        return self._write_block(slave_addr, data)
+
+    def _write16(self, slave_addr, register, value):
+        """Write a 16-bit value to the specified register."""
+        log.debug("Write %#04x to register pair %#02x, %#02x" % (value, register, register + 1))
+        value = value & 0xFFFF
+        data = (register << 24) | (((value >> 8) & 0xff) << 16) | ((register + 1) << 8) | (value & 0xff)
+        self._write_block(slave_addr, data)
+
+    def _read_u8(self, slave_addr, register):
+        """To be able to read registers, first the register must be sent in write mode"""
+        self._write_raw8(slave_addr, register)
+        result = self.s_7b_r(slave_addr)
+        log.debug("read_u8: %#02x" % result)
+        return result
+
+    def _read_s8(self, slave_addr, register):
+        """Read a signed byte from the specified register."""
+        result = self._read_u8(slave_addr, register)
+        if result > 127:
+            result -= 256
+        log.debug("read_s8: %#02x  %d" % (result, result))
+        return result
+
+    def _read_u16(self, slave_addr, register, little_endian=True):
+        """Read an unsigned 16-bit value from the specified register, with the
+        specified endianness (default little endian, or least significant byte
+        first)."""
+        # result_bytes = self._read_block(register, 2)
+        result_array = self._read_block(slave_addr, register, 2)
+        result = (result_array[1] << 8) + result_array[0]
+        # result = (((resultLE & 0xFF) << 8) | ((resultLE >> 8) & 0xFF)) & 0xFFFF
+        # Swap bytes if using big endian because read_word_data assumes little
+        # endian on ARM (little endian) systems.
+        if not little_endian:
+            result = ((result << 8) & 0xFF00) + (result >> 8)
+        log.debug("Read 0x%04X from register pair %#02x, %#02x", result, register, register + 1)
+        return result
+
+    def _read_s16(self, slave_addr, register, little_endian=True):
+        """Read a signed 16-bit value from the specified register, with the specified endianness
+        (default little endian, or least significant byte first)."""
+        result = self._read_u16(slave_addr, register, little_endian)
+        if result > 32767:
+            result -= 65536
+        log.debug("read_s16: %#04x %d" % (result, result))
+        return result
+
+    def _read_u16LE(self, slave_addr, register):
+        """Read an unsigned 16-bit value from the specified register, in little endian byte order."""
+        return self._read_u16(slave_addr, register, little_endian=True)
+
+    def _read_u16BE(self, slave_addr, register):
+        """Read an unsigned 16-bit value from the specified register, in big
+        endian byte order."""
+        return self._read_u16(slave_addr, register, little_endian=False)
+
+    def _read_s16LE(self, slave_addr, register):
+        """Read a signed 16-bit value from the specified register, in little endian byte order."""
+        return self._read_s16(slave_addr, register, little_endian=True)
+
+    def _read_s16BE(self, slave_addr, register):
+        """Read a signed 16-bit value from the specified register, in big
+        endian byte order."""
+        return self._read_s16(slave_addr, register, little_endian=False)
+
+    def _write_block(self, slave_addr, value):
+        nr_bytes = len(value)
+        log.debug("write_block: length =%d" % nr_bytes)
+        self.set_trans_byte_length(nr_bytes)
+        self.set_data_reg(value)
+        return self.m_7b_w(slave_addr)
+
+    def _read_block(self, slave_addr, register, nr_bytes):
+        log.debug("read_block, reg:%#x number:%d" % (register, nr_bytes))
+        # self.set_trans_byte_length(nr_bytes)
+        assert 1 <= nr_bytes << 16
+        data_block = bytearray(nr_bytes)
+        for index in range(nr_bytes):
+            data_block[index] = self._read_u8(slave_addr, register + index)
+            # data_block.append(self._read_u8(register + index))
+        return data_block

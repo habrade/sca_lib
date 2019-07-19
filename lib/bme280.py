@@ -7,15 +7,14 @@ from sca_i2c import ScaI2c
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class Bme280(ScaI2c):
-    def __init__(self, hw, link, t_mode=BME280_OSAMPLE_1, p_mode=BME280_OSAMPLE_1,
-                 h_mode=BME280_OSAMPLE_1,
-                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
+    def __init__(self, hw, link, t_mode=BME280_OSAMPLE_2, p_mode=BME280_OSAMPLE_2,
+                 h_mode=BME280_OSAMPLE_2,
+                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_4):
         super(Bme280, self).__init__(hw, link, SCA_CH_I2C0)
-        self.BME280Data = []
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,
                           BME280_OSAMPLE_8, BME280_OSAMPLE_16]:
@@ -49,48 +48,46 @@ class Bme280(ScaI2c):
                 'Unexpected filter value {0}.'.format(set_filter))
         self._filter = set_filter
 
-        # reset bme280
         self.rst_dev()
-
         self._load_calibration()
 
-        self._write_reg(BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
         time.sleep(0.002)
-        self._write_reg(BME280_REGISTER_CONFIG, ((standby << 5) | (set_filter << 2)))
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONFIG, ((standby << 5) | (set_filter << 2)))
         time.sleep(0.002)
-        self._write_reg(BME280_REGISTER_CONTROL_HUM, h_mode)  # Set Humidity Oversample
-        self._write_reg(BME280_REGISTER_CONTROL,
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL_HUM, h_mode)  # Set Humidity Oversample
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL,
                         ((t_mode << 5) | (p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
         self.t_fine = 0.0
 
     def _load_calibration(self):
 
-        self.dig_T1 = self._read_u16LE(BME280_REGISTER_DIG_T1)
-        self.dig_T2 = self._read_s16LE(BME280_REGISTER_DIG_T2)
-        self.dig_T3 = self._read_s16LE(BME280_REGISTER_DIG_T3)
+        self.dig_T1 = self._read_u16LE(BME280_I2CADDR, BME280_REGISTER_DIG_T1)
+        self.dig_T2 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_T2)
+        self.dig_T3 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_T3)
 
-        self.dig_P1 = self._read_u16LE(BME280_REGISTER_DIG_P1)
-        self.dig_P2 = self._read_s16LE(BME280_REGISTER_DIG_P2)
-        self.dig_P3 = self._read_s16LE(BME280_REGISTER_DIG_P3)
-        self.dig_P4 = self._read_s16LE(BME280_REGISTER_DIG_P4)
-        self.dig_P5 = self._read_s16LE(BME280_REGISTER_DIG_P5)
-        self.dig_P6 = self._read_s16LE(BME280_REGISTER_DIG_P6)
-        self.dig_P7 = self._read_s16LE(BME280_REGISTER_DIG_P7)
-        self.dig_P8 = self._read_s16LE(BME280_REGISTER_DIG_P8)
-        self.dig_P9 = self._read_s16LE(BME280_REGISTER_DIG_P9)
+        self.dig_P1 = self._read_u16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P1)
+        self.dig_P2 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P2)
+        self.dig_P3 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P3)
+        self.dig_P4 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P4)
+        self.dig_P5 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P5)
+        self.dig_P6 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P6)
+        self.dig_P7 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P7)
+        self.dig_P8 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P8)
+        self.dig_P9 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P9)
 
-        self.dig_H1 = self._read_u8(BME280_REGISTER_DIG_H1)
-        self.dig_H2 = self._read_s16LE(BME280_REGISTER_DIG_H2)
-        self.dig_H3 = self._read_u8(BME280_REGISTER_DIG_H3)
-        self.dig_H6 = self._read_s8(BME280_REGISTER_DIG_H7)
+        self.dig_H1 = self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H1)
+        self.dig_H2 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_H2)
+        self.dig_H3 = self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H3)
+        self.dig_H6 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H7)
 
-        h4 = self._read_s8(BME280_REGISTER_DIG_H4)
+        h4 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H4)
         h4 = (h4 << 4)
-        self.dig_H4 = h4 | (self._read_u8(BME280_REGISTER_DIG_H5) & 0x0F)
+        self.dig_H4 = h4 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) & 0x0F)
 
-        h5 = self._read_s8(BME280_REGISTER_DIG_H6)
+        h5 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H6)
         h5 = (h5 << 4)
-        self.dig_H5 = h5 | (self._read_u8(BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
+        self.dig_H5 = h5 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
 
         log.debug("dig_T1 = %d" % self.dig_T1)
         log.debug("dig_T2 = %d" % self.dig_T2)
@@ -116,96 +113,8 @@ class Bme280(ScaI2c):
         log.debug("dig_H5 = %d" % self.dig_H5)
         log.debug("dig_H6 = %d" % self.dig_H6)
 
-    def _write_raw8(self, value):
-        """Write an 8-bit value on the bus (without register)."""
-        log.debug("Write %#02x on the bus (without register)" % value)
-        return self.s_7b_w(BME280_I2CADDR, value)
-
-    def _write_reg(self, register, value):
-        """Write an 8-bit value to the specified register."""
-        log.debug("Write %#02x to register %#02x" % (value, register))
-        data = [register, value & 0xFF]
-        return self._write_block(data)
-
-    def _write16(self, register, value):
-        """Write a 16-bit value to the specified register."""
-        log.debug("Write %#04x to register pair %#02x, %#02x" % (value, register, register + 1))
-        value = value & 0xFFFF
-        self._write_block((register << 24) | ((value & 0xff) << 16) | (
-                register + 1) << 8 | (value >> 8 & 0xff))
-
-    def _read_u8(self, register):
-        """To be able to read registers, first the register must be sent in write mode"""
-        log.debug("read_u8")
-        self._write_raw8(register)
-        return self.s_7b_r(BME280_I2CADDR)
-
-    def _read_s8(self, register):
-        """Read a signed byte from the specified register."""
-        result = self._read_u8(register)
-        if result > 127:
-            result -= 256
-        return result
-
-    def _read_u16(self, register, little_endian=True):
-        """Read an unsigned 16-bit value from the specified register, with the
-        specified endianness (default little endian, or least significant byte
-        first)."""
-        # result_bytes = self._read_block(register, 2)
-        result_7_0 = self._read_u8(register)
-        result_15_8 = self._read_u8(register + 1)
-        result = (result_15_8 << 8) + result_7_0
-        log.debug("Read 0x%04X from register pair %#02x, %#02x", result, register, register + 1)
-        # Swap bytes if using big endian because read_word_data assumes little
-        # endian on ARM (little endian) systems.
-        if not little_endian:
-            result = ((result << 8) & 0xFF00) + (result >> 8)
-        return result
-
-    def _read_s16(self, register, little_endian=True):
-        """Read a signed 16-bit value from the specified register, with the specified endianness
-        (default little endian, or least significant byte first)."""
-        result = self._read_u16(register, little_endian)
-        if result > 32767:
-            result -= 65536
-        return result
-
-    def _read_u16LE(self, register):
-        """Read an unsigned 16-bit value from the specified register, in little endian byte order."""
-        return self._read_u16(register, little_endian=True)
-
-    def _read_u16BE(self, register):
-        """Read an unsigned 16-bit value from the specified register, in big
-        endian byte order."""
-        return self._read_u16(register, little_endian=False)
-
-    def _read_s16LE(self, register):
-        """Read a signed 16-bit value from the specified register, in little endian byte order."""
-        return self._read_s16(register, little_endian=True)
-
-    def _read_s16BE(self, register):
-        """Read a signed 16-bit value from the specified register, in big
-        endian byte order."""
-        return self._read_s16(register, little_endian=False)
-
-    def _write_block(self, value):
-        nr_bytes = len(value)
-        log.debug("write_block: length =%d" % nr_bytes)
-        self.set_trans_byte_length(nr_bytes)
-        self.set_data_reg(value)
-        return self.m_7b_w(BME280_I2CADDR)
-
-    def _read_block(self, register, nr_bytes):
-        log.debug("read_block, reg:%#x number:%d" % (register, nr_bytes))
-        # self.set_trans_byte_length(nr_bytes)
-        assert 1 <= nr_bytes << 16
-        data_block = []
-        for index in range(nr_bytes):
-            data_block.append(self._read_u8(register + index))
-        return data_block
-
     def rst_dev(self):
-        self._write_reg(BME280_REGISTER_SOFTRESET, 0xB6)
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_SOFTRESET, 0xB6)
 
     # def set_sensor_mode(self, mode):
     #     mode_list = [BME280_MODE_NORMAL_SLEEP, BME280_MODE_SLEEP_NORMAL, BME280_MODE_SLEEP_FORCE]
@@ -216,16 +125,18 @@ class Bme280(ScaI2c):
     #         raise Exception("Mode out of index")
 
     def read_id(self):
-        return self._read_u8(BME280_REGISTER_CHIPID)
+        return self._read_u8(BME280_I2CADDR, BME280_REGISTER_CHIPID)
 
     def read_raw_temp(self):
         """Waits for reading to become available on device."""
         """Does a single burst read of all data values from device."""
         """Returns the raw (uncompensated) temperature from the sensor."""
         log.debug("First check whether BME280 Status OK!")
-        while (self._read_u8(BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
+        while (self._read_u8(BME280_I2CADDR, BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
             time.sleep(0.002)
-        self.BME280Data = self._read_block(BME280_REGISTER_DATA, 8)
+        self.BME280Data = self._read_block(BME280_I2CADDR, BME280_REGISTER_DATA, 8)
+        for data in self.BME280Data:
+            log.debug("BME280 Data: %#x" % data)
 
         raw = ((self.BME280Data[3] << 16) | (self.BME280Data[4] << 8) | self.BME280Data[5]) >> 4
         log.debug("raw temperature: %#x" % raw)
@@ -244,7 +155,7 @@ class Bme280(ScaI2c):
         """Assumes that the temperature has already been read """
         """i.e. that self.BME280Data[] has been populated."""
         raw = (self.BME280Data[6] << 8) | self.BME280Data[7]
-        log.debug("raw temperature: %#x" % raw)
+        log.debug("raw humidity: %#x" % raw)
         return raw
 
     def read_temperature(self):
