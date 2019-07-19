@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-import time
 import logging
 import sys
+import time
 
 import pvaccess
 
@@ -11,7 +11,6 @@ from lib.sca_defs import *
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
-
 
 if __name__ == '__main__':
     if len(sys.argv) == 3:
@@ -53,9 +52,10 @@ if __name__ == '__main__':
                 ca_ch.putDouble(internal_temp)
             else:
                 # read internal tenperature sensor
-                volt_value = 1000*float(adc_value * SCA_ADC_VREF) / (2 ** 12)
-                log.debug("ADC Ch %d =  %d \t Volt = %f mV \t RAW = %d \t OFS = %d \t Gain = %d" % (i, adc_value, volt_value, adc_raw, adc_ofs, adc_gain))
+                volt_value = 1000 * float(adc_value * SCA_ADC_VREF) / (2 ** 12)
+                log.debug("ADC Ch %d =  %d \t Volt = %f mV \t RAW = %d \t OFS = %d \t Gain = %d" % (
+                    i, adc_value, volt_value, adc_raw, adc_ofs, adc_gain))
                 ca_ch = pvaccess.Channel(ch_name)
                 ca_ch.putDouble(volt_value)
-        
+
         time.sleep(1)

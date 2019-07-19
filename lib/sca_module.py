@@ -1,8 +1,8 @@
 import logging
 
+from bme280 import Bme280
 from sca_adc import ScaAdc
 from sca_gpio import ScaGpio
-from bme280 import Bme280
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)

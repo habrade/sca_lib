@@ -1,6 +1,6 @@
+import binascii
 import logging
 import struct
-import binascii
 
 from sca import Sca
 from sca_defs import *

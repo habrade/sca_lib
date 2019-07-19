@@ -1,7 +1,5 @@
 import logging
-import struct
 import time
-import sys
 
 from bme280_defs import *
 from sca_defs import *
@@ -61,7 +59,8 @@ class Bme280(ScaI2c):
         self._write_reg(BME280_REGISTER_CONFIG, ((standby << 5) | (set_filter << 2)))
         time.sleep(0.002)
         self._write_reg(BME280_REGISTER_CONTROL_HUM, h_mode)  # Set Humidity Oversample
-        self._write_reg(BME280_REGISTER_CONTROL, ((t_mode << 5) | (p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
+        self._write_reg(BME280_REGISTER_CONTROL,
+                        ((t_mode << 5) | (p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
         self.t_fine = 0.0
 
     def _load_calibration(self):
@@ -154,7 +153,7 @@ class Bme280(ScaI2c):
         first)."""
         # result_bytes = self._read_block(register, 2)
         result_7_0 = self._read_u8(register)
-        result_15_8 = self._read_u8(register+1)
+        result_15_8 = self._read_u8(register + 1)
         result = (result_15_8 << 8) + result_7_0
         log.debug("Read 0x%04X from register pair %#02x, %#02x", result, register, register + 1)
         # Swap bytes if using big endian because read_word_data assumes little
@@ -202,7 +201,7 @@ class Bme280(ScaI2c):
         assert 1 <= nr_bytes << 16
         data_block = []
         for index in range(nr_bytes):
-            data_block.append(self._read_u8(register+index))
+            data_block.append(self._read_u8(register + index))
         return data_block
 
     def rst_dev(self):

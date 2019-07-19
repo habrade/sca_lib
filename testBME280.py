@@ -7,12 +7,10 @@ import pvaccess
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
-from lib.bme280_defs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
-
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
@@ -49,7 +47,6 @@ if __name__ == "__main__":
 
     # read Temp, Pressure, Humidity
     while True:
-
         degrees = testGdpb.read_temperature()
         pascals = testGdpb.read_pressure()
         hectopascals = pascals / 100
