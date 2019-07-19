@@ -2670,7 +2670,7 @@
         <color red="0" green="51" blue="0">
         </color>
       </foreground_color>
-      <format>10</format>
+      <format>4</format>
     </widget>
   </widget>
 </display>
