@@ -320,10 +320,11 @@ class ScaI2c(Sca):
 
     def _read_block(self, slave_addr, register, nr_bytes):
         log.debug("read_block, reg:%#x number:%d" % (register, nr_bytes))
-        # self.set_trans_byte_length(nr_bytes)
+        self.set_trans_byte_length(nr_bytes)
         assert 1 <= nr_bytes << 16
         data_block = bytearray(nr_bytes)
-        for index in range(nr_bytes):
-            data_block[index] = self._read_u8(slave_addr, register + index)
-            # data_block.append(self._read_u8(register + index))
+        #for index in range(nr_bytes):
+        #    data_block[index] = self._read_u8(slave_addr, register + index)
+        self.m_7b_r(slave_addr)
+        data_block = self.get_data_reg(nr_bytes)
         return data_block
