@@ -29,8 +29,8 @@ if __name__ == "__main__":
 
     # Enable I2C ch. 0
     testGdpb.enable_chn(SCA_CH_I2C0, True)
-    testGdpb.set_frq(SCA_I2C_SPEED_1000)
-    testGdpb.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
+    testGdpb.set_frq(SCA_I2C_SPEED_100)
+    testGdpb.set_mode(SCA_I2C_MODE_CMOS)
 
     # # reset bme280
     # testGdpb.rst_dev()

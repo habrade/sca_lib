@@ -201,40 +201,38 @@ class ScaI2c(Sca):
 
     def get_data_reg(self, nr_bytes):
         log.debug("get_data_reg, number: %d" % nr_bytes)
-        data = bytearray(16)
+        data = bytearray(nr_bytes)
         if (nr_bytes > 16) or (nr_bytes < 1):
             log.error("Bytes of data should be from 1 to 16")
         else:
-            if self.r_data0():
-                data0 = self.get_reg_value("rxData%d" % self.__link)
-                log.debug("data0: %#04x" % data0)
-                data[0:4] = struct.pack('>I', data0)
+            if self.r_data3():
+                data3 = self.get_reg_value("rxData%d" % self.__link)
+                log.debug("data3: %#04x" % data3)
+                data[0:4] = struct.pack('>I', data3)
 
             if nr_bytes > 4:
+                if self.r_data2():
+                    data2 = self.get_reg_value("rxData%d" % self.__link)
+                    log.debug("data2: %#04x" % data2)
+                    data[4:8] = struct.pack('>I', data2)
+
+            if nr_bytes > 8:
                 if self.r_data1():
                     data1 = self.get_reg_value("rxData%d" % self.__link)
                     log.debug("data1: %#04x" % data1)
-                    data[4:8] = struct.pack('>I', data1)
-
-            if nr_bytes > 8:
-                if self.r_data2():
-                    self.send_command(self.__chn, SCA_I2C_R_DATA2, 0)
-                    data2 = self.get_reg_value("rxData%d" % self.__link)
-                    log.debug("data2: %#04x" % data2)
-                    data[8:12] = struct.pack('>I', data2)
+                    data[8:12] = struct.pack('>I', data1)
 
             if nr_bytes > 12:
-                if self.r_data3():
-                    data3 = self.get_reg_value("rxData%d" % self.__link)
-                    log.debug("data3: %#04x" % data3)
-                    data[12:16] = struct.pack('>I', data3)
+                if self.r_data0():
+                    data0 = self.get_reg_value("rxData%d" % self.__link)
+                    log.debug("data0: %#04x" % data0)
+                    data[12:16] = struct.pack('>I', data0)
 
             log.debug("get_data_reg: ")
             print binascii.hexlify(data)
-            ret_val = data[0:nr_bytes]
-            for b in ret_val:
+            for b in data:
                 print hex(b)
-            return ret_val
+            return data
 
     def _write_raw8(self, slave_addr, value):
         """Write an 8-bit value on the bus (without register)."""
@@ -321,10 +319,9 @@ class ScaI2c(Sca):
     def _read_block(self, slave_addr, register, nr_bytes):
         log.debug("read_block, reg:%#x number:%d" % (register, nr_bytes))
         self.set_trans_byte_length(nr_bytes)
-        assert 1 <= nr_bytes << 16
+        assert 1 <= nr_bytes <= 16
         data_block = bytearray(nr_bytes)
-        #for index in range(nr_bytes):
-        #    data_block[index] = self._read_u8(slave_addr, register + index)
+        self.s_7b_w(slave_addr, register)
         self.m_7b_r(slave_addr)
         data_block = self.get_data_reg(nr_bytes)
         return data_block
