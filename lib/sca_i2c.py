@@ -205,33 +205,27 @@ class ScaI2c(Sca):
         if (nr_bytes > 16) or (nr_bytes < 1):
             log.error("Bytes of data should be from 1 to 16")
         else:
-            if self.r_data3():
-                data3 = self.get_reg_value("rxData%d" % self.__link)
-                log.debug("data3: %#04x" % data3)
-                data[0:4] = struct.pack('>I', data3)
+            data3 = self.r_data3()
+            log.debug("data3: %#04x" % data3)
+            data[0:4] = struct.pack('>I', data3)
 
             if nr_bytes > 4:
-                if self.r_data2():
-                    data2 = self.get_reg_value("rxData%d" % self.__link)
-                    log.debug("data2: %#04x" % data2)
-                    data[4:8] = struct.pack('>I', data2)
+                data2 = self.r_data2()
+                log.debug("data2: %#04x" % data2)
+                data[4:8] = struct.pack('>I', data2)
 
             if nr_bytes > 8:
-                if self.r_data1():
-                    data1 = self.get_reg_value("rxData%d" % self.__link)
-                    log.debug("data1: %#04x" % data1)
-                    data[8:12] = struct.pack('>I', data1)
+                data1 = self.r_data1()
+                log.debug("data1: %#04x" % data1)
+                data[8:12] = struct.pack('>I', data1)
 
             if nr_bytes > 12:
-                if self.r_data0():
-                    data0 = self.get_reg_value("rxData%d" % self.__link)
-                    log.debug("data0: %#04x" % data0)
-                    data[12:16] = struct.pack('>I', data0)
+                data0 = self.r_data0()
+                log.debug("data0: %#04x" % data0)
+                data[12:16] = struct.pack('>I', data0)
 
             log.debug("get_data_reg: ")
             print binascii.hexlify(data)
-            for b in data:
-                print hex(b)
             return data
 
     def _write_raw8(self, slave_addr, value):
