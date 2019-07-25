@@ -2,6 +2,7 @@
 import logging
 import threading
 import time
+import sys
 
 import pvaccess
 
@@ -10,7 +11,7 @@ from lib.sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
+log.setLevel(logging.DEBUG)
 
 
 class ScaSrv(Gdpb):
@@ -122,26 +123,25 @@ class ScaSrv(Gdpb):
         # read adc channels for 0 32
         for i in range(32):
             self.w_sel(i)
-            self.start_conv()
-            time.sleep(0.01)
-            adc_value = self.r_data()
+            adc_value = self.start_conv()
+            volt_value = float(1000 * adc_value * SCA_ADC_VREF) / (2 ** 12 - 1)
+            time.sleep(0.001)
             # read internal tenperature sensor
             if i == 31:
-                internal_temp = (725 - adc_value) / 2
-                log.debug("ADC Ch %d = %#x Temp = %f" % (i, adc_value, internal_temp))
+                internal_temp = (716 - volt_value) / 1.82
+                log.debug("adc ch %d = %#x temp = %.2f deg C" % (i, adc_value, internal_temp))
                 # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                 self.ca_adc_channels[i].putDouble(internal_temp)
             else:
-                volt_value = float(1000 * adc_value * SCA_ADC_VREF) / (2 ** 12)
-                log.debug("ADC Ch %d =  %#x Volt = %f" % (i, adc_value, volt_value))
+                log.debug("ADC Ch %d =  %#x Volt = %.2f mV" % (i, adc_value, volt_value))
                 self.ca_adc_channels[i].putDouble(volt_value)
 
     def bme280_thread_func(self):
         # while True
         # time.sleep(1)
-        offset_t = -6
-        factor_h = 2
-        offset_h = 4.2
+        offset_t = -6.5
+        factor_h = 1
+        offset_h = 0
         degrees = self.read_temperature() + offset_t
         # degrees = self.read_temperature()
         pascals = self.read_pressure()
@@ -152,17 +152,21 @@ class ScaSrv(Gdpb):
         self.ca_bme280_degrees.putDouble(degrees)
         self.ca_bme280_hectopascals.putDouble(hectopascals)
         self.ca_bme280_humidity.putDouble(humidity)
-        log.debug("Temp = %f deg C" % degrees)
-        log.debug("Pressure = %f hPa" % hectopascals)
-        log.debug("Humidity = %f %%" % humidity)
+        log.debug("Temp = %.2f deg C" % degrees)
+        log.debug("Pressure = %.2f hPa" % hectopascals)
+        log.debug("Humidity = %.2f %%" % humidity)
 
 
 if __name__ == '__main__':
-    afck_num = 66
-    link = 0
+    if len(sys.argv) == 3:
+        afck_num = int(sys.argv[1])
+        link = int(sys.argv[2])
+    else:
+        print("Usage:  ./readScaId.py board_num link_num")
+        sys.exit(1)
+
     scaSrv = ScaSrv(afck_num, link)
     while True:
-        scaSrv.gpio_thread_func()
-        scaSrv.adc_thread_func()
+        # scaSrv.gpio_thread_func()
+        # scaSrv.adc_thread_func()
         scaSrv.bme280_thread_func()
-

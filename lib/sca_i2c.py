@@ -7,7 +7,7 @@ from sca_defs import *
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 
 class ScaI2c(Sca):
@@ -224,8 +224,8 @@ class ScaI2c(Sca):
                 log.debug("data0: %#04x" % data0)
                 data[12:16] = struct.pack('>I', data0)
 
-            log.debug("get_data_reg: ")
-            print binascii.hexlify(data)
+            # log.debug("get_data_reg: ")
+            # print binascii.hexlify(data)
             return data
 
     def _write_raw8(self, slave_addr, value):
