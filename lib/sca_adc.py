@@ -23,9 +23,11 @@ class ScaAdc(Sca):
         elif self._version == 0x01:
             self.send_command(SCA_CH_ADC, SCAV1_ADC_GO, 1)
 
-        return self.get_reg_value("rxData%d" % self.__link) & 0b111111111111
+        adc = self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+        return adc
 
     def w_sel(self, sel):
+        assert 0 <= sel << 31
         if self._version == 0x02:
             self.send_command(SCA_CH_ADC, SCA_ADC_W_MUX, sel)
         elif self._version == 0x01:
@@ -37,7 +39,9 @@ class ScaAdc(Sca):
         elif self._version == 0x01:
             self.send_command(SCA_CH_ADC, SCAV1_ADC_R_INSEL, 0)
 
-        return self.get_reg_value("rxData%d" % self.__link)
+        sel = self.get_reg_value("rxData%d" % self.__link)
+        assert 0 <= sel << 31
+        return sel
 
     def w_curr(self, curr):
         if self._version == 0x02:
@@ -50,7 +54,6 @@ class ScaAdc(Sca):
             self.send_command(SCA_CH_ADC, SCA_ADC_R_CURR, 0)
         elif self._version == 0x01:
             self.send_command(SCA_CH_ADC, SCAV1_ADC_R_CUREN, 0)
-
         return self.get_reg_value("rxData%d" % self.__link)
 
     def w_gain(self, gain):
@@ -69,7 +72,6 @@ class ScaAdc(Sca):
             self.send_command(SCA_CH_ADC, SCA_ADC_R_DATA, 0)
         elif self._version == 0x01:
             self.send_command(SCA_CH_ADC, SCAV1_ADC_R_DATA, 0)
-
         return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
 
     def r_ofs(self):
