@@ -139,10 +139,15 @@ class ScaSrv(Gdpb):
     def bme280_thread_func(self):
         # while True
         # time.sleep(1)
-        degrees = self.read_temperature()
+        offset_t = -6
+        factor_h = 2
+        offset_h = 4.2
+        degrees = self.read_temperature() + offset_t
+        # degrees = self.read_temperature()
         pascals = self.read_pressure()
         hectopascals = pascals / 100
-        humidity = self.read_humidity()
+        humidity = self.read_humidity() * factor_h + offset_h
+        # humidity = self.read_humidity()
         # Data put to epics channel
         self.ca_bme280_degrees.putDouble(degrees)
         self.ca_bme280_hectopascals.putDouble(hectopascals)
