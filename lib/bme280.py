@@ -132,7 +132,8 @@ class Bme280(ScaI2c):
         """Does a single burst read of all data values from device."""
         """Returns the raw (uncompensated) temperature from the sensor."""
         log.debug("First check whether BME280 Status OK!")
-        while (self._read_u8(BME280_I2CADDR, BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
+        while (self._read_u8(BME280_I2CADDR,
+                             BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
             time.sleep(0.002)
         self.BME280Data = self._read_block(BME280_I2CADDR, BME280_REGISTER_DATA, 8)
         for data in self.BME280Data:

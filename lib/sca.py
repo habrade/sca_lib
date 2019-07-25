@@ -108,7 +108,7 @@ class Sca(object):
         if ret_val:
             sca_id = self.get_reg_value("rxData%d" % self.__link)
             log.info("Link = %d \t SCA Version = %#02x \t SCA ID = %#06x" %
-                    (self.__link, self._version, sca_id))
+                     (self.__link, self._version, sca_id))
             return sca_id
         else:
             log.error("SCA command error")
@@ -131,7 +131,7 @@ class Sca(object):
             else:
                 return SCA_CTRL_R_CRD
         else:
-            raise Exception("Link = %d \t Channel out of range" % self.__link)
+            raise Exception("Channel out of range")
 
     def get_chn_enabled(self, chn):
         if (chn >= 1) and (chn <= 31):
@@ -162,8 +162,8 @@ class Sca(object):
             write_cmd = self.get_node_control_cmd(chn, True)
             ret_val.append(self.send_command(SCA_CH_CTRL, write_cmd, mask << 24))
             if False in ret_val:
-                return False
                 log.error("Sca command error")
+                return False
             else:
                 return True
         else:

@@ -155,11 +155,11 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                return False
                 log.error("Error happened at this I2C write transaction, check status")
+                return False
         else:
-            return False
             log.error("SCA command error!")
+            return False
 
     def m_7b_r(self, addr):
         log.debug("Multi read(7 bits I2C) starting...")
@@ -168,11 +168,11 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                return False
                 log.error("Error happened at this I2C read transaction, check status")
+                return False
         else:
-            return False
             log.error("SCA command error!")
+            return False
 
     def m_10b_w(self, addr):
         if self.send_command(self.__chn, SCA_I2C_M_10B_W, addr << 24):
@@ -180,11 +180,11 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                return False
                 log.error("Error happened at this I2C read transaction, check status")
+                return False
         else:
-            return False
             log.error("SCA command error!")
+            return False
 
     def m_10b_r(self, addr):
         if self.send_command(self.__chn, SCA_I2C_M_10B_R, addr << 24):
@@ -192,11 +192,11 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                return False
                 log.error("Error happened at this I2C read transaction, check status")
+                return False
         else:
-            return False
             log.error("SCA command error!")
+            return False
 
     def set_frq(self, frq):
         frq_list = [SCA_I2C_SPEED_100, SCA_I2C_SPEED_200, SCA_I2C_SPEED_400,
@@ -361,7 +361,6 @@ class ScaI2c(Sca):
         log.debug("read_block, reg:%#x number:%d" % (register, nr_bytes))
         self.set_trans_byte_length(nr_bytes)
         assert 1 <= nr_bytes <= 16
-        data_block = bytearray(nr_bytes)
         self.s_7b_w(slave_addr, register)
         self.m_7b_r(slave_addr)
         data_block = self.get_data_reg(nr_bytes)
