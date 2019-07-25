@@ -107,7 +107,7 @@ SCA_GPIO_R_EDGESEL = 0x81
 # --- ADC channel (SCA V2) --------------------------------
 SCA_ADC_GO = 0x02
 SCA_ADC_W_CURR = 0x60
-SCA_ADC_R_CURR = 0x60
+SCA_ADC_R_CURR = 0x61
 SCA_ADC_W_MUX = 0x50
 SCA_ADC_R_MUX = 0x51
 SCA_ADC_W_GAIN = 0x10
