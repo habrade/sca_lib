@@ -85,7 +85,6 @@ class ScaSrv(Gdpb):
             thread.join()
 
     def gpio_thread_func(self):
-        # while True:
         # GPIO Direction Set
         direction_set_1 = self.ca_gpio_direction_set_ch_31_16.get().getInt()
         direction_set_2 = self.ca_gpio_direction_set_ch_15_0.get().getInt()
@@ -119,17 +118,17 @@ class ScaSrv(Gdpb):
         self.ca_gpio_pinin_get_ch_15_0.putUShort(pinin_get & 0xFFFF)
 
     def adc_thread_func(self):
-        # while True:
         # read adc channels for 0 32
         for i in range(32):
             self.w_sel(i)
             adc_value = self.start_conv()
             volt_value = float(1000 * adc_value * SCA_ADC_VREF) / (2 ** 12 - 1)
-            time.sleep(0.001)
+            # The masimum conversation rate is 3.5KHz(2.857ms)
+            time.sleep(5 / 1000)
             # read internal tenperature sensor
             if i == 31:
                 internal_temp = (716 - volt_value) / 1.82
-                log.debug("adc ch %d = %#x temp = %.2f deg C" % (i, adc_value, internal_temp))
+                log.debug("ADC Ch %d = %#x Temp = %.2f deg C" % (i, adc_value, internal_temp))
                 # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                 self.ca_adc_channels[i].putDouble(internal_temp)
             else:
@@ -137,8 +136,6 @@ class ScaSrv(Gdpb):
                 self.ca_adc_channels[i].putDouble(volt_value)
 
     def bme280_thread_func(self):
-        # while True
-        # time.sleep(1)
         offset_t = -6.5
         factor_h = 1
         offset_h = 0
@@ -167,6 +164,7 @@ if __name__ == '__main__':
 
     scaSrv = ScaSrv(afck_num, link)
     while True:
-        # scaSrv.gpio_thread_func()
-        # scaSrv.adc_thread_func()
+        scaSrv.gpio_thread_func()
+        scaSrv.adc_thread_func()
+        time.sleep(1)
         scaSrv.bme280_thread_func()

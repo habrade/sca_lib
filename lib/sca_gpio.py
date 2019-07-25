@@ -16,22 +16,28 @@ class ScaGpio(Sca):
 
     def set_direction(self, directions):
         """GPIO Direction Set, 1->output mode, 0->input mode"""
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_W_DIRECTION, directions)
+        return self.send_command(SCA_CH_GPIO, SCA_GPIO_W_DIRECTION, directions)
 
     def get_direction(self):
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DIRECTION, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        if self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DIRECTION, 0):
+            return self.get_reg_value("rxData%d" % self.__link)
+        else:
+            log.error("Sca command error")
 
     def write_pin_out(self, pins):
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_W_DATAOUT, pins)
+        return self.send_command(SCA_CH_GPIO, SCA_GPIO_W_DATAOUT, pins)
 
     def read_pin_out(self):
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DATAOUT, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        if self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DATAOUT, 0):
+            return self.get_reg_value("rxData%d" % self.__link)
+        else:
+            log.error("Sca command error")
 
     def read_pin_in(self):
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DATAIN, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+        if self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DATAIN, 0):
+            return self.get_reg_value("rxData%d" % self.__link)
+        else:
+            log.error("Sca command error")
 
     def get_pins_bit_value(self, pins_index):
         if pins_index < 0 or pins_index > 31:
@@ -48,14 +54,3 @@ class ScaGpio(Sca):
             if set_value:
                 pins |= 1 << pins_index
             self.write_pin_out(pins)
-
-    def test_gpio(self, pins):
-        log.info("set GPIO value: %#x" % pins)
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_W_DATAOUT, pins)
-        log.info("Get GPIO value")
-        self.send_command(SCA_CH_GPIO, SCA_GPIO_R_DATAOUT, 0)
-        log.info("GPIO = %#x" % self.get_reg_value("rxData%d" % self.__link))
-        if self.get_reg_value("rxData%d" % self.__link) == pins:
-            log.info("pass!")
-        else:
-            log.error('oops! GPIO test faild')

@@ -114,7 +114,7 @@ class Bme280(ScaI2c):
         log.debug("dig_H6 = %d" % self.dig_H6)
 
     def rst_dev(self):
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_SOFTRESET, 0xB6)
+        return self._write_reg(BME280_I2CADDR, BME280_REGISTER_SOFTRESET, 0xB6)
 
     # def set_sensor_mode(self, mode):
     #     mode_list = [BME280_MODE_NORMAL_SLEEP, BME280_MODE_SLEEP_NORMAL, BME280_MODE_SLEEP_FORCE]

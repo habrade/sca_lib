@@ -15,65 +15,89 @@ class ScaAdc(Sca):
         self.__link = link
 
     def enable_adc(self):
-        self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
+        return self.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
 
     def start_conv(self):
+        ret_val = []
         if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_GO, 1)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCA_ADC_GO, 1))
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_GO, 1)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCAV1_ADC_GO, 1))
 
-        adc = self.get_reg_value("rxData%d" % self.__link) & 0xFFF
-        return adc
+        if False in ret_val:
+            log.error("Sca command error")
+        else:
+            adc = self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+            return adc
 
     def w_sel(self, sel):
         assert 0 <= sel << 31
         if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_W_MUX, sel)
+            return self.send_command(SCA_CH_ADC, SCA_ADC_W_MUX, sel)
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_W_INSEL, sel)
+            return self.send_command(SCA_CH_ADC, SCAV1_ADC_W_INSEL, sel)
 
     def r_sel(self):
+        ret_val = []
         if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_R_MUX, 0)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCA_ADC_R_MUX, 0))
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_INSEL, 0)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCAV1_ADC_R_INSEL, 0))
 
-        sel = self.get_reg_value("rxData%d" % self.__link)
-        assert 0 <= sel << 31
-        return sel
+        if False in ret_val:
+            log.error("Sca command error")
+        else:
+            sel = self.get_reg_value("rxData%d" % self.__link)
+            assert 0 <= sel << 31
+            return sel
 
     def w_curr(self, curr):
         if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_W_CURR, curr)
+            return self.send_command(SCA_CH_ADC, SCA_ADC_W_CURR, curr)
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_W_CUREN, curr)
+            return self.send_command(SCA_CH_ADC, SCAV1_ADC_W_CUREN, curr)
 
     def r_curr(self):
+        ret_val = []
         if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_R_CURR, 0)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCA_ADC_R_CURR, 0))
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_CUREN, 0)
-        return self.get_reg_value("rxData%d" % self.__link)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCAV1_ADC_R_CUREN, 0))
+
+        if False in ret_val:
+            log.error("Sca command error")
+        else:
+            return self.get_reg_value("rxData%d" % self.__link)
 
     def w_gain(self, gain):
-        self.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
+        return self.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
 
     def r_gain(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_R_GAIN, 0)
-        return self.get_reg_value("rxData%d" % self.__link) & 0xFFFF
+        if self.send_command(SCA_CH_ADC, SCA_ADC_R_GAIN, 0):
+            return self.get_reg_value("rxData%d" % self.__link) & 0xFFFF
+        else:
+            log.error("Sca command error")
 
     def r_raw(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_R_RAW, 0)
-        return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+        if self.send_command(SCA_CH_ADC, SCA_ADC_R_RAW, 0):
+            return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+        else:
+            log.error("Sca command error")
 
     def r_data(self):
+        ret_val = []
         if self._version == 0x02:
-            self.send_command(SCA_CH_ADC, SCA_ADC_R_DATA, 0)
+            ret_val.append(self.send_command(SCA_CH_ADC, SCA_ADC_R_DATA, 0))
         elif self._version == 0x01:
-            self.send_command(SCA_CH_ADC, SCAV1_ADC_R_DATA, 0)
-        return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+            ret_val.append(self.send_command(SCA_CH_ADC, SCAV1_ADC_R_DATA, 0))
+
+        if False in ret_val:
+            log.error("Sca command error")
+        else:
+            return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
 
     def r_ofs(self):
-        self.send_command(SCA_CH_ADC, SCA_ADC_R_OFS, 0)
-        return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+        if self.send_command(SCA_CH_ADC, SCA_ADC_R_OFS, 0):
+            return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
+        else:
+            log.error("Sca command error")
