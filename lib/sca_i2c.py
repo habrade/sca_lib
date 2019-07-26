@@ -15,8 +15,8 @@ __email__ = "habrade@gmail.com"
 
 class ScaI2c(Sca):
 
-    def __init__(self, hw, link, chn=SCA_CH_I2C0):
-        super(ScaI2c, self).__init__(hw, link)
+    def __init__(self, link, chn=SCA_CH_I2C0):
+        super(ScaI2c, self).__init__(link)
         self.__chn = chn
         self.__link = link
         self._ctrl_reg = self.r_ctrl_reg()

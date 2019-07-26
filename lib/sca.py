@@ -11,14 +11,16 @@ __email__ = "habrade@gmail.com"
 
 
 class Sca(object):
-    def __init__(self, hw=None, link=0):
+    def __init__(self, link=0):
         self.__sca_addr = 0x00
         self.__trans_id = 0x01
 
         self._version = SCA_VERSION
 
-        self.__hw = hw
         self.__link = link
+
+    def set_hw(self, hw):
+        self.__hw = hw
 
     def send_command(self, channel, command, data):
         node = self.__hw.getNode("GBT-SCA.txAddr%d" % self.__link)

@@ -13,8 +13,8 @@ __email__ = "habrade@gmail.com"
 
 class ScaGpio(Sca):
 
-    def __init__(self, hw, link):
-        super(ScaGpio, self).__init__(hw, link)
+    def __init__(self, link):
+        super(ScaGpio, self).__init__(link)
         self.__link = link
 
     def set_direction(self, directions):

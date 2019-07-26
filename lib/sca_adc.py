@@ -13,8 +13,8 @@ __email__ = "habrade@gmail.com"
 
 class ScaAdc(Sca):
 
-    def __init__(self, hw, link):
-        super(ScaAdc, self).__init__(hw, link)
+    def __init__(self, link):
+        super(ScaAdc, self).__init__(link)
         self.__link = link
 
     def enable_adc(self):

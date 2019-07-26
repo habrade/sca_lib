@@ -13,5 +13,5 @@ __email__ = "habrade@gmail.com"
 
 
 class ScaModule(ScaAdc, ScaGpio, Bme280):
-    def __init__(self, hw, link):
-        super(ScaModule, self).__init__(hw, link)
+    def __init__(self, link):
+        super(ScaModule, self).__init__(link)
