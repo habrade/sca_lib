@@ -8,6 +8,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelna
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+__author__ = "Sheng Dong"
+__email__ = "habrade@gmail.com"
 
 class ScaModule(ScaAdc, ScaGpio, Bme280):
     def __init__(self, hw, link):

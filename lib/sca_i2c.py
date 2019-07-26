@@ -9,6 +9,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s  %(name)s  %(leveln
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
+__author__ = "Sheng Dong"
+__email__ = "habrade@gmail.com"
 
 class ScaI2c(Sca):
 

@@ -13,6 +13,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(leve
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+__author__ = "Sheng Dong"
+__email__ = "habrade@gmail.com"
 
 class ScaSrv(Gdpb):
     def __init__(self, afck_num, link):
