@@ -12,6 +12,7 @@ log.setLevel(logging.INFO)
 __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
+
 class ScaI2c(Sca):
 
     def __init__(self, hw, link, chn=SCA_CH_I2C0):

@@ -8,6 +8,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelna
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+__author__ = "Sheng Dong"
+__email__ = "habrade@gmail.com"
+
 
 class Gdpb(ScaModule):
     def __init__(self, afck_num, link):

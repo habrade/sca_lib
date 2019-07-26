@@ -9,6 +9,7 @@ log.setLevel(logging.INFO)
 __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
+
 class Sca(object):
     def __init__(self, hw=None, link=0):
         self.__sca_addr = 0x00

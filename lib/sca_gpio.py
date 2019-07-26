@@ -10,6 +10,7 @@ log.setLevel(logging.DEBUG)
 __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
+
 class ScaGpio(Sca):
 
     def __init__(self, hw, link):

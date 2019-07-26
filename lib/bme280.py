@@ -12,6 +12,7 @@ log.setLevel(logging.INFO)
 __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
+
 class Bme280(ScaI2c):
     def __init__(self, hw, link, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
                  h_mode=BME280_OSAMPLE_8,

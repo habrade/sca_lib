@@ -16,6 +16,7 @@ log.setLevel(logging.DEBUG)
 __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
+
 class ScaSrv(Gdpb):
     def __init__(self, afck_num, link):
         super(ScaSrv, self).__init__(afck_num, link)
