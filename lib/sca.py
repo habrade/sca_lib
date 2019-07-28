@@ -16,7 +16,6 @@ class Sca(object):
         self.__trans_id = 0x01
 
         self._version = SCA_VERSION
-
         self.__link = link
 
     def set_hw(self, hw):
@@ -112,7 +111,7 @@ class Sca(object):
 
         if ret_val:
             sca_id = self.get_reg_value("rxData%d" % self.__link)
-            log.info("Link = %d \t SCA Version = %#02x \t SCA ID = %#06x" %
+            log.debug("Link = %d \t SCA Version = %#02x \t SCA ID = %#06x" %
                      (self.__link, self._version, sca_id))
             return sca_id
         else:
