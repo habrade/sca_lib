@@ -131,7 +131,8 @@ class ScaSrv(Gdpb):
                 self.ca_adc_channels[i].putDouble(internal_temp)
             else:
                 log.debug("ADC Ch %d \t Volt = %.2f mV" % (i, volt_value))
-                self.ca_adc_channels[i].putDouble(volt_value)
+                # put the real value which should be displayed, because of the ADC input limitation(1V)
+                self.ca_adc_channels[i].putDouble(volt_value / 100)
 
     def bme280_thread_func(self):
         offset_t = -6.5
