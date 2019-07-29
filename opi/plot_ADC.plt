@@ -28,7 +28,7 @@
   </legend_font>
   <axes>
     <axis>
-      <visible>false</visible>
+      <visible>true</visible>
       <name>Value 1</name>
       <use_axis_name>false</use_axis_name>
       <use_trace_names>true</use_trace_names>
@@ -38,10 +38,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>-1.03</min>
+      <max>21.630000000000003</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -55,10 +55,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>30.770000000000003</min>
+      <max>106.23000000000002</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -72,10 +72,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>664.5</min>
+      <max>2325.5</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -89,10 +89,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>117.85</min>
+      <max>407.15</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -106,10 +106,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>188.95</min>
+      <max>652.05</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -123,10 +123,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>167.35</min>
+      <max>577.65</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -140,10 +140,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>157.35</min>
+      <max>545.65</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -157,10 +157,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>117.85</min>
+      <max>407.15</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -174,10 +174,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>118.7</min>
+      <max>411.3</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -191,10 +191,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>-2.345</min>
+      <max>49.245000000000005</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -208,10 +208,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>1500.0</max>
+      <min>97.95</min>
+      <max>341.05</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
   </axes>

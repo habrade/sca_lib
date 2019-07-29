@@ -6,7 +6,7 @@
     <afck_num>66</afck_num>
     <link>0</link>
   </macros>
-  <width>1100</width>
+  <width>1700</width>
   <height>900</height>
   <widget type="label" version="2.0.0">
     <name>Label</name>
@@ -2672,5 +2672,149 @@
       </foreground_color>
       <format>4</format>
     </widget>
+  </widget>
+  <widget type="stripchart" version="2.0.0">
+    <name>Strip Chart_1</name>
+    <x>870</x>
+    <y>80</y>
+    <width>340</width>
+    <height>329</height>
+    <title>BME280 Temperature</title>
+    <time_range>30 min</time_range>
+    <y_axes>
+      <y_axis>
+        <title></title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>$(traces[0].y_pv)</name>
+        <y_pv>labtest:Gdpb:66:SCA:0:BME280:Temperature</y_pv>
+        <axis>0</axis>
+        <trace_type>1</trace_type>
+        <color>
+          <color red="102" green="128" blue="230">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="stripchart" version="2.0.0">
+    <name>Strip Chart_2</name>
+    <x>1230</x>
+    <y>80</y>
+    <width>340</width>
+    <height>329</height>
+    <title>BME280 Pressure</title>
+    <time_range>30 min</time_range>
+    <y_axes>
+      <y_axis>
+        <title></title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>$(traces[0].y_pv)</name>
+        <y_pv>labtest:Gdpb:66:SCA:0:BME280:Pressure</y_pv>
+        <axis>0</axis>
+        <trace_type>1</trace_type>
+        <color>
+          <color red="128" green="102" blue="204">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="stripchart" version="2.0.0">
+    <name>Strip Chart_3</name>
+    <x>1230</x>
+    <y>440</y>
+    <width>340</width>
+    <height>329</height>
+    <title>BME280 Humidity</title>
+    <time_range>30 min</time_range>
+    <y_axes>
+      <y_axis>
+        <title></title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>$(traces[0].y_pv)</name>
+        <y_pv>labtest:Gdpb:66:SCA:0:BME280:Humidity</y_pv>
+        <axis>0</axis>
+        <trace_type>1</trace_type>
+        <color>
+          <color red="153" green="102" blue="153">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="stripchart" version="2.0.0">
+    <name>Strip Chart_4</name>
+    <x>880</x>
+    <y>440</y>
+    <width>340</width>
+    <height>329</height>
+    <title>SCA Chip Temperature</title>
+    <time_range>30 min</time_range>
+    <y_axes>
+      <y_axis>
+        <title></title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>$(traces[0].y_pv)</name>
+        <y_pv>labtest:Gdpb:66:SCA:0:ADC:CH:31</y_pv>
+        <axis>0</axis>
+        <trace_type>2</trace_type>
+        <color>
+          <color red="102" green="153" blue="153">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
   </widget>
 </display>

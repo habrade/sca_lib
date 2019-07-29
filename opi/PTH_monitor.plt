@@ -5,7 +5,7 @@
   <update_period>3.0</update_period>
   <scroll_step>5</scroll_step>
   <scroll>true</scroll>
-  <start>-1 hours</start>
+  <start>-36 minutes -6 seconds</start>
   <end>now</end>
   <archive_rescale>STAGGER</archive_rescale>
   <foreground>
@@ -38,8 +38,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-579.0</min>
-      <max>-57.0</max>
+      <min>-3054.8282605698096</min>
+      <max>3647.2261243752555</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>
@@ -55,8 +55,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-950.0</min>
-      <max>3320.0</max>
+      <min>-21202.464890101703</min>
+      <max>33620.853546134764</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>
@@ -72,8 +72,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>0.0</min>
-      <max>10.0</max>
+      <min>-47.4296601641726</min>
+      <max>80.96218629071375</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>
