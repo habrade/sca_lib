@@ -36,10 +36,8 @@ def main():
     # Connect SCA chip
     testGdpb.send_connect()
 
-    # Enable I2C ch. 0
-    testGdpb.enable_chn(SCA_CH_I2C0, True)
-    testGdpb.set_frq(SCA_I2C_SPEED_1000)
-    testGdpb.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
+    # Initial BME280
+    testGdpb._initial_sensor()
 
     # Enable ADC
     testGdpb.enable_chn(SCA_CH_ADC, True)
@@ -72,7 +70,7 @@ def main():
             if i == 31:
                 # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                 internal_temp = float(716 - volt_value) / 1.82
-                print("ADC Ch {0:d} = {1:d} \t Temp = {2:.2f}deg C".format(31, adc_value, internal_temp))
+                print("ADC Ch {0:d} = {1:d} \t Temp = {2:.2f} deg C".format(31, adc_value, internal_temp))
             else:
                 # read internal tenperature sensor
                 print("ADC Ch {0:d} =  {1:d} \t Volt = {2:f} mV \t RAW = {3:d} \t OFS = {4:d} \t Gain = {5:d} \t".format(

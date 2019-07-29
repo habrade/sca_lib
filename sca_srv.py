@@ -32,10 +32,8 @@ class ScaSrv(Gdpb):
         self.enable_chn(SCA_CH_ADC, True)
         # Enable GPIO
         self.enable_chn(SCA_CH_GPIO, True)
-        # Enable I2C ch. 0
-        self.enable_chn(SCA_CH_I2C0, True)
-        self.set_frq(SCA_I2C_SPEED_1000)
-        self.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
+        # Initial BME280
+        self._initial_sensor()
 
         self.__PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (self.__afck_num, self.__link)
 
@@ -57,12 +55,9 @@ class ScaSrv(Gdpb):
         for ch_index in range(32):
             self.ca_adc_channels.append(pvaccess.Channel(self.__PREFIX + "ADC:CH:" + str(ch_index)))
 
-        self.read_sca_modules_ids()
         # self.create_threads()
 
     def read_sca_modules_ids(self):
-        # read SCA ID
-        self.enable_chn(SCA_CH_ADC, True)
         sca_id = self.read_sca_id()
         # put to epics channel
         self.ca_sca_id.putInt(sca_id)
@@ -126,16 +121,16 @@ class ScaSrv(Gdpb):
             self.w_sel(i)
             adc_value = self.start_conv()
             volt_value = float(1000 * adc_value * SCA_ADC_VREF) / (2 ** 12 - 1)
-            # The masimum conversation rate is 3.5KHz(2.857ms)
+            # The maximum conversation rate is 3.5KHz(2.857ms)
             time.sleep(5 / 1000)
             # read internal tenperature sensor
             if i == 31:
                 internal_temp = (716 - volt_value) / 1.82
-                log.debug("ADC Ch %d = %#x Temp = %.2f deg C" % (i, adc_value, internal_temp))
+                log.debug("ADC Ch %d \t Temp = %.2f deg C" % (i, internal_temp))
                 # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                 self.ca_adc_channels[i].putDouble(internal_temp)
             else:
-                log.debug("ADC Ch %d =  %#x Volt = %.2f mV" % (i, adc_value, volt_value))
+                log.debug("ADC Ch %d \t Volt = %.2f mV" % (i, volt_value))
                 self.ca_adc_channels[i].putDouble(volt_value)
 
     def bme280_thread_func(self):
@@ -166,6 +161,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
     scaSrv = ScaSrv(afck_num, link)
+    scaSrv.read_sca_modules_ids()
     while True:
         scaSrv.gpio_thread_func()
         scaSrv.adc_thread_func()

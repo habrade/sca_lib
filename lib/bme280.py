@@ -50,18 +50,23 @@ class Bme280(ScaI2c):
             raise ValueError(
                 'Unexpected filter value {0}.'.format(set_filter))
         self._filter = set_filter
+        self.t_fine = 0.0
+        # self._initial_sensor()
 
+    def _initial_sensor(self):
+        self.enable_chn(SCA_CH_I2C0, True)
+        self.set_frq(SCA_I2C_SPEED_1000)
+        self.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
         self.rst_dev()
         self._load_calibration()
 
         self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
         time.sleep(0.002)
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONFIG, ((standby << 5) | (set_filter << 2)))
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONFIG, ((self._standby << 5) | (self._filter << 2)))
         time.sleep(0.002)
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL_HUM, h_mode)  # Set Humidity Oversample
+        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL_HUM, self._h_mode)  # Set Humidity Oversample
         self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL,
-                        ((t_mode << 5) | (p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
-        self.t_fine = 0.0
+                        ((self._t_mode << 5) | (self._p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
 
     def _load_calibration(self):
 

@@ -15,11 +15,10 @@ __email__ = "habrade@gmail.com"
 
 class ScaI2c(Sca):
 
-    def __init__(self, link, chn=SCA_CH_I2C0):
+    def __init__(self, link, chn):
         super(ScaI2c, self).__init__(link)
         self.__chn = chn
         self.__link = link
-        self._ctrl_reg = self.r_ctrl_reg()
 
     @staticmethod
     def _parse_status(status):
@@ -205,6 +204,7 @@ class ScaI2c(Sca):
         frq_list = [SCA_I2C_SPEED_100, SCA_I2C_SPEED_200, SCA_I2C_SPEED_400,
                     SCA_I2C_SPEED_1000]
         if frq in frq_list:
+            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
             self._ctrl_reg = (frq << 0) | (self._ctrl_reg & 0xfc)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
@@ -213,6 +213,7 @@ class ScaI2c(Sca):
     def set_mode(self, mode):
         mode_list = [SCA_I2C_MODE_OPEN_DRAIN, SCA_I2C_MODE_CMOS]
         if mode in mode_list:
+            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
             self._ctrl_reg = (mode << 7) | (self._ctrl_reg & 0x7f)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
@@ -220,8 +221,9 @@ class ScaI2c(Sca):
 
     def set_trans_byte_length(self, nr_bytes):
         log.debug("Set data number to be transferred: %d" % nr_bytes)
-        log.debug("Old ctrl_reg: %#x" % self._ctrl_reg)
         if nr_bytes in range(1, 17):
+            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
+            log.debug("Old ctrl_reg: %#x" % self._ctrl_reg)
             self._ctrl_reg = (nr_bytes << 2) | (self._ctrl_reg & 0x83)
             log.debug("New ctrl_reg: %#x" % self._ctrl_reg)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
