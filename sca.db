@@ -2,9 +2,9 @@ record(longin, "$(P):ID") {
 }
 
 record(ai, "$(P):ADC:CH:0") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
@@ -98,153 +98,153 @@ record(ai, "$(P):ADC:CH:11") {
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:12") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:13") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:14") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:15") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:16") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:17") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:18") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:19") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:20") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:21") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:22") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:23") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:24") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:25") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:26") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:27") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:28") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:29") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:30") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")

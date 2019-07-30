@@ -1963,7 +1963,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_2</name>
-        <text>$(CH)</text>
+        <text>RSSI</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update</name>
@@ -1983,7 +1983,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_3</name>
-        <text>$(CH)</text>
+        <text>VOUT_3_6</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_1</name>
@@ -2003,7 +2003,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_4</name>
-        <text>$(CH)</text>
+        <text>VIN_3_3</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_2</name>
@@ -2023,7 +2023,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_5</name>
-        <text>$(CH)</text>
+        <text>V3_3</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_3</name>
@@ -2043,7 +2043,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_6</name>
-        <text>$(CH)</text>
+        <text>VIN_2_5</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_4</name>
@@ -2063,7 +2063,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_7</name>
-        <text>$(CH)</text>
+        <text>V2_5</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_5</name>
@@ -2083,7 +2083,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_8</name>
-        <text>$(CH)</text>
+        <text>VIN_1_8</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_6</name>
@@ -2103,7 +2103,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_9</name>
-        <text>$(CH)</text>
+        <text>V1_8A</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_7</name>
@@ -2123,7 +2123,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_34</name>
-        <text>$(CH)</text>
+        <text>V1_8D</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_32</name>
@@ -2144,7 +2144,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_35</name>
-        <text>$(CH)</text>
+        <text>VIN_1_5</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_33</name>
@@ -2165,7 +2165,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_36</name>
-        <text>$(CH)</text>
+        <text>V1_5</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_34</name>
@@ -2186,7 +2186,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_37</name>
-        <text>$(CH)</text>
+        <text>V_ext</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_35</name>
@@ -2207,7 +2207,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_38</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_36</name>
@@ -2228,7 +2228,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_39</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_37</name>
@@ -2249,7 +2249,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_40</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_38</name>
@@ -2270,7 +2270,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_41</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_39</name>
@@ -2290,7 +2290,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_42</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_40</name>
@@ -2311,7 +2311,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_43</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_41</name>
@@ -2332,7 +2332,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_44</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_42</name>
@@ -2353,7 +2353,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_45</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_43</name>
@@ -2374,7 +2374,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_46</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_44</name>
@@ -2395,7 +2395,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_47</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_45</name>
@@ -2416,7 +2416,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_48</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_46</name>
@@ -2437,7 +2437,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_49</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_47</name>
@@ -2457,7 +2457,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_50</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_48</name>
@@ -2478,7 +2478,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_51</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_49</name>
@@ -2499,7 +2499,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_52</name>
-        <text>$(CH)</text>
+        <text>FLOAT</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_50</name>
@@ -2520,7 +2520,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_53</name>
-        <text>$(CH)</text>
+        <text>V_CNTR4</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_51</name>
@@ -2541,7 +2541,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_54</name>
-        <text>$(CH)</text>
+        <text>V_CNTR3</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_52</name>
@@ -2562,7 +2562,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_55</name>
-        <text>$(CH)</text>
+        <text>V_CNTR2</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_53</name>
@@ -2583,7 +2583,7 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_56</name>
-        <text>$(CH)</text>
+        <text>V_CNTR1</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_54</name>
@@ -2604,12 +2604,16 @@
       <transparent>true</transparent>
       <widget type="label" version="2.0.0">
         <name>Label_57</name>
-        <text>Temp</text>
+        <text>Sensor</text>
       </widget>
       <widget type="textupdate" version="2.0.0">
         <name>Text Update_55</name>
         <pv_name>$(P):ADC:CH:$(CH)</pv_name>
         <x>80</x>
+        <background_color>
+          <color name="Button_Background" red="210" green="210" blue="210">
+          </color>
+        </background_color>
       </widget>
     </widget>
   </widget>
@@ -2783,7 +2787,7 @@
   </widget>
   <widget type="stripchart" version="2.0.0">
     <name>Strip Chart_4</name>
-    <x>880</x>
+    <x>870</x>
     <y>440</y>
     <width>340</width>
     <height>329</height>
