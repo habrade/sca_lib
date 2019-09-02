@@ -16,8 +16,8 @@ __email__ = "habrade@gmail.com"
 class Bme280(ScaI2c):
     def __init__(self, link, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
                  h_mode=BME280_OSAMPLE_8,
-                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off):
-        super(Bme280, self).__init__(link, SCA_CH_I2C0)
+                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off, sca_i2c_ch=SCA_CH_I2C1):
+        super(Bme280, self).__init__(link, sca_i2c_ch)
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,
                           BME280_OSAMPLE_8, BME280_OSAMPLE_16]:
@@ -54,8 +54,7 @@ class Bme280(ScaI2c):
         # self._initial_sensor()
 
     def _initial_sensor(self):
-        self.enable_chn(SCA_CH_I2C0, True)
-        self.set_frq(SCA_I2C_SPEED_1000)
+        self.set_frq(SCA_I2C_SPEED_100)
         self.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
         self.rst_dev()
         self._load_calibration()
@@ -89,37 +88,43 @@ class Bme280(ScaI2c):
         self.dig_H3 = self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H3)
         self.dig_H6 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H7)
 
-        h4 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H4)
-        h4 = (h4 << 4)
-        self.dig_H4 = h4 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) & 0x0F)
+        try:
+            h4 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H4)
+            h4 = (h4 << 4)
+            self.dig_H4 = h4 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) & 0x0F)
 
-        h5 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H6)
-        h5 = (h5 << 4)
-        self.dig_H5 = h5 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
+            h5 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H6)
+            h5 = (h5 << 4)
+            self.dig_H5 = h5 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
 
-        log.debug("dig_T1 = %d" % self.dig_T1)
-        log.debug("dig_T2 = %d" % self.dig_T2)
-        log.debug("dig_T3 = %d" % self.dig_T3)
 
-        log.debug("dig_P1 = %d" % self.dig_P1)
-        log.debug("dig_P2 = %d" % self.dig_P2)
-        log.debug("dig_P3 = %d" % self.dig_P3)
-        log.debug("dig_P4 = %d" % self.dig_P4)
-        log.debug("dig_P5 = %d" % self.dig_P5)
-        log.debug("dig_P6 = %d" % self.dig_P6)
-        log.debug("dig_P7 = %d" % self.dig_P7)
-        log.debug("dig_P8 = %d" % self.dig_P8)
-        log.debug("dig_P9 = %d" % self.dig_P9)
+            log.debug("dig_T1 = %d" % self.dig_T1)
+            log.debug("dig_T2 = %d" % self.dig_T2)
+            log.debug("dig_T3 = %d" % self.dig_T3)
 
-        # log.debug("0xE4 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H4))
-        # log.debug("0xE5 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H5))
-        # log.debug("0xE6 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H6))
-        log.debug("dig_H1 = %d" % self.dig_H1)
-        log.debug("dig_H2 = %d" % self.dig_H2)
-        log.debug("dig_H3 = %d" % self.dig_H3)
-        log.debug("dig_H4 = %d" % self.dig_H4)
-        log.debug("dig_H5 = %d" % self.dig_H5)
-        log.debug("dig_H6 = %d" % self.dig_H6)
+            log.debug("dig_P1 = %d" % self.dig_P1)
+            log.debug("dig_P2 = %d" % self.dig_P2)
+            log.debug("dig_P3 = %d" % self.dig_P3)
+            log.debug("dig_P4 = %d" % self.dig_P4)
+            log.debug("dig_P5 = %d" % self.dig_P5)
+            log.debug("dig_P6 = %d" % self.dig_P6)
+            log.debug("dig_P7 = %d" % self.dig_P7)
+            log.debug("dig_P8 = %d" % self.dig_P8)
+            log.debug("dig_P9 = %d" % self.dig_P9)
+
+            # log.debug("0xE4 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H4))
+            # log.debug("0xE5 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H5))
+            # log.debug("0xE6 = %#02x" % self._read_u8(BME280_REGISTER_DIG_H6))
+            log.debug("dig_H1 = %d" % self.dig_H1)
+            log.debug("dig_H2 = %d" % self.dig_H2)
+            log.debug("dig_H3 = %d" % self.dig_H3)
+            log.debug("dig_H4 = %d" % self.dig_H4)
+            log.debug("dig_H5 = %d" % self.dig_H5)
+            log.debug("dig_H6 = %d" % self.dig_H6)
+
+        except TypeError:
+            self.dig_H4 = 0
+            self.dig_H5 = 0
 
     def rst_dev(self):
         return self._write_reg(BME280_I2CADDR, BME280_REGISTER_SOFTRESET, 0xB6)
@@ -133,23 +138,32 @@ class Bme280(ScaI2c):
     #         raise Exception("Mode out of index")
 
     def read_id(self):
-        return self._read_u8(BME280_I2CADDR, BME280_REGISTER_CHIPID)
+        try:
+            return self._read_u8(BME280_I2CADDR, BME280_REGISTER_CHIPID)
+        except TypeError:
+            pass
 
     def read_raw_temp(self):
         """Waits for reading to become available on device."""
         """Does a single burst read of all data values from device."""
         """Returns the raw (uncompensated) temperature from the sensor."""
         log.debug("First check whether BME280 Status OK!")
-        while (self._read_u8(BME280_I2CADDR,
-                             BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
-            time.sleep(0.002)
-        self.BME280Data = self._read_block(BME280_I2CADDR, BME280_REGISTER_DATA, 8)
+        try:
+            while (self._read_u8(BME280_I2CADDR,
+                                BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
+                time.sleep(0.002)
+            self.BME280Data = self._read_block(BME280_I2CADDR, BME280_REGISTER_DATA, 8)
+        except TypeError:
+            self.BME280Data = bytearray(8)
+
         for data in self.BME280Data:
             log.debug("BME280 Data: %#x" % data)
 
         raw = ((self.BME280Data[3] << 16) | (self.BME280Data[4] << 8) | self.BME280Data[5]) >> 4
         log.debug("raw temperature: %#x" % raw)
         return raw
+
+
 
     def read_raw_pressure(self):
         """Returns the raw (uncompensated) pressure level from the sensor."""
@@ -170,14 +184,18 @@ class Bme280(ScaI2c):
     def read_temperature(self):
         """Gets the compensated temperature in degrees celsius."""
         # float in Python is double precision
-        UT = float(self.read_raw_temp())
-        var1 = (UT / 16384.0 - float(self.dig_T1) / 1024.0) * \
-               float(self.dig_T2)
-        var2 = ((UT / 131072.0 - float(self.dig_T1) / 8192.0) * (
-                UT / 131072.0 - float(self.dig_T1) / 8192.0)) * float(self.dig_T3)
-        self.t_fine = int(var1 + var2)
-        temp = (var1 + var2) / 5120.0
-        return temp
+        try:
+            UT = float(self.read_raw_temp())
+
+            var1 = (UT / 16384.0 - float(self.dig_T1) / 1024.0) * \
+                float(self.dig_T2)
+            var2 = ((UT / 131072.0 - float(self.dig_T1) / 8192.0) * (
+                    UT / 131072.0 - float(self.dig_T1) / 8192.0)) * float(self.dig_T3)
+            self.t_fine = int(var1 + var2)
+            temp = (var1 + var2) / 5120.0
+            return temp
+        except TypeError:
+            return 0
 
     def read_pressure(self):
         """Gets the compensated pressure in Pascals."""
@@ -199,17 +217,20 @@ class Bme280(ScaI2c):
         return p
 
     def read_humidity(self):
-        adc = float(self.read_raw_humidity())
-        # print 'Raw humidity = {0:d}'.format (adc)
-        h = float(self.t_fine) - 76800.0
-        h = (adc - (float(self.dig_H4) * 64.0 + float(self.dig_H5) / 16384.0 * h)) * (float(self.dig_H2) / 65536.0 * (
-                1.0 + float(self.dig_H6) / 67108864.0 * h * (1.0 + float(self.dig_H3) / 67108864.0 * h)))
-        h = h * (1.0 - float(self.dig_H1) * h / 524288.0)
-        if h > 100:
-            h = 100
-        elif h < 0:
-            h = 0
-        return h
+        try:
+            adc = float(self.read_raw_humidity())
+            # print 'Raw humidity = {0:d}'.format (adc)
+            h = float(self.t_fine) - 76800.0
+            h = (adc - (float(self.dig_H4) * 64.0 + float(self.dig_H5) / 16384.0 * h)) * (float(self.dig_H2) / 65536.0 * (
+                    1.0 + float(self.dig_H6) / 67108864.0 * h * (1.0 + float(self.dig_H3) / 67108864.0 * h)))
+            h = h * (1.0 - float(self.dig_H1) * h / 524288.0)
+            if h > 100:
+                h = 100
+            elif h < 0:
+                h = 0
+            return h
+        except TypeError:
+            return 0
 
     def read_temperature_f(self):
         # Wrapper to get temp in F

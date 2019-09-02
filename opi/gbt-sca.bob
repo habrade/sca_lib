@@ -3,14 +3,14 @@
   <name>Display</name>
   <macros>
     <P>labtest:Gdpb:$(afck_num):SCA:$(link)</P>
-    <afck_num>66</afck_num>
-    <link>1</link>
+    <afck_num>67</afck_num>
+    <link>0</link>
   </macros>
   <width>1700</width>
   <height>900</height>
   <widget type="label" version="2.0.0">
     <name>Label</name>
-    <text>GBT-SCA Lab Test(66)</text>
+    <text>GBT-SCA Lab Test(67)</text>
     <x>310</x>
     <y>30</y>
     <width>240</width>
@@ -852,7 +852,7 @@
           <show_confirm_dialog>false</show_confirm_dialog>
         </widget>
         <widget type="bool_button" version="2.0.0">
-          <name>Boolean Button_66</name>
+          <name>Boolean Button_67</name>
           <pv_name>$(P):GPIO:CH_$(Channels):DIRECTION:SET.B$(Bit)</pv_name>
           <width>40</width>
           <height>20</height>
@@ -1081,7 +1081,7 @@
         <style>3</style>
         <transparent>true</transparent>
         <widget type="led" version="2.0.0">
-          <name>LED_66</name>
+          <name>LED_67</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PININ:GET.B$(Bit)</pv_name>
           <x>110</x>
           <off_color>
@@ -1090,7 +1090,7 @@
           </off_color>
         </widget>
         <widget type="slide_button" version="2.0.0">
-          <name>Combo Box_66</name>
+          <name>Combo Box_67</name>
           <pv_name>$(P):GPIO:CH_$(Channels):PINOUT:SET.B$(Bit)</pv_name>
           <label></label>
           <x>50</x>

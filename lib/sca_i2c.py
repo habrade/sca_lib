@@ -18,7 +18,9 @@ class ScaI2c(Sca):
     def __init__(self, link, chn):
         super(ScaI2c, self).__init__(link)
         self.__chn = chn
+        self.enable_chn(self.__chn, True)
         self.__link = link
+        self.r_ctrl_reg()
 
     @staticmethod
     def _parse_status(status):
@@ -75,36 +77,52 @@ class ScaI2c(Sca):
         return self.send_command(self.__chn, SCA_I2C_W_DATA3, data)
 
     def r_data0(self):
+        data0 = 0
         if self.send_command(self.__chn, SCA_I2C_R_DATA0, 0):
-            data0 = self.get_reg_value("rxData%d" % self.__link)
-            log.debug("Read DATA0 = %#x" % data0)
-            return data0
+            try:
+                data0 = self.get_reg_value("rxData%d" % self.__link)
+                log.debug("Read DATA0 = %#x" % data0)
+            except TypeError:
+                pass
         else:
             log.error("SCA command error!")
+        return data0
 
     def r_data1(self):
+        data1 = 0
         if self.send_command(self.__chn, SCA_I2C_R_DATA1, 0):
-            data1 = self.get_reg_value("rxData%d" % self.__link)
-            log.debug("Read DATA1 = %#x" % data1)
-            return data1
+            try:
+                data1 = self.get_reg_value("rxData%d" % self.__link)
+                log.debug("Read DATA1 = %#x" % data1)
+            except TypeError:
+                pass
         else:
             log.error("SCA command error!")
+        return data1
 
     def r_data2(self):
+        data2 = 0
         if self.send_command(self.__chn, SCA_I2C_R_DATA2, 0):
-            data2 = self.get_reg_value("rxData%d" % self.__link)
-            log.debug("Read DATA2 = %#x" % data2)
-            return data2
+            try:
+                data2 = self.get_reg_value("rxData%d" % self.__link)
+                log.debug("Read DATA2 = %#x" % data2)
+            except TypeError:
+                pass
         else:
             log.error("SCA command error!")
+        return data2
 
     def r_data3(self):
+        data3 = 0
         if self.send_command(self.__chn, SCA_I2C_R_DATA3, 0):
-            data3 = self.get_reg_value("rxData%d" % self.__link)
-            log.debug("Read DATA3 = %#x" % data3)
-            return data3
+            try:
+                data3 = self.get_reg_value("rxData%d" % self.__link)
+                log.debug("Read DATA3 = %#x" % data3)
+            except TypeError:
+                pass
         else:
             log.error("SCA command error!")
+        return data3
 
     def s_7b_w(self, addr, data):
         temp = (addr << 24) + (data << 16)
@@ -204,8 +222,9 @@ class ScaI2c(Sca):
         frq_list = [SCA_I2C_SPEED_100, SCA_I2C_SPEED_200, SCA_I2C_SPEED_400,
                     SCA_I2C_SPEED_1000]
         if frq in frq_list:
-            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
+            log.debug("Control reg in set frq, Old: %#x" % self._ctrl_reg)
             self._ctrl_reg = (frq << 0) | (self._ctrl_reg & 0xfc)
+            log.debug("Control reg in set frq, New: %#x" % self._ctrl_reg)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
             raise Exception("Frequency out of index")
@@ -213,8 +232,9 @@ class ScaI2c(Sca):
     def set_mode(self, mode):
         mode_list = [SCA_I2C_MODE_OPEN_DRAIN, SCA_I2C_MODE_CMOS]
         if mode in mode_list:
-            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
+            log.debug("Control reg in set mode, Old: %#x" % self._ctrl_reg)
             self._ctrl_reg = (mode << 7) | (self._ctrl_reg & 0x7f)
+            log.debug("Control reg in set mode, New: %#x" % self._ctrl_reg)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
             raise Exception("Mode out of index")
@@ -222,7 +242,6 @@ class ScaI2c(Sca):
     def set_trans_byte_length(self, nr_bytes):
         log.debug("Set data number to be transferred: %d" % nr_bytes)
         if nr_bytes in range(1, 17):
-            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
             log.debug("Old ctrl_reg: %#x" % self._ctrl_reg)
             self._ctrl_reg = (nr_bytes << 2) | (self._ctrl_reg & 0x83)
             log.debug("New ctrl_reg: %#x" % self._ctrl_reg)
@@ -237,19 +256,18 @@ class ScaI2c(Sca):
             data_temp = bytearray(16)
             data_temp[0:len(data)] = data
             # log.debug("data = %x" % data)
-            ret_val = []
-            if len(data) > 12:
-                ret_val.append(self.send_command(self.__chn, SCA_I2C_W_DATA3, struct.unpack('>I', data_temp[12:16])[0]))
-            if len(data) > 8:
-                ret_val.append(self.send_command(self.__chn, SCA_I2C_W_DATA2, struct.unpack('>I', data_temp[8:12])[0]))
-            if len(data) > 4:
-                ret_val.append(self.send_command(self.__chn, SCA_I2C_W_DATA1, struct.unpack('>I', data_temp[4:8])[0]))
-            ret_val.append(self.send_command(self.__chn, SCA_I2C_W_DATA0, struct.unpack('>I', data_temp[0:4])[0]))
+            try:
+                if len(data) > 12:
+                    self.send_command(self.__chn, SCA_I2C_W_DATA3, struct.unpack('>I', data_temp[12:16])[0])
+                if len(data) > 8:
+                    self.send_command(self.__chn, SCA_I2C_W_DATA2, struct.unpack('>I', data_temp[8:12])[0])
+                if len(data) > 4:
+                    self.send_command(self.__chn, SCA_I2C_W_DATA1, struct.unpack('>I', data_temp[4:8])[0])
+                self.send_command(self.__chn, SCA_I2C_W_DATA0, struct.unpack('>I', data_temp[0:4])[0])
 
-            if False in ret_val:
-                return False
-            else:
                 return True
+            except TypeError:
+                return False
 
     def get_data_reg(self, nr_bytes):
         log.debug("get_data_reg, number: %d" % nr_bytes)
@@ -301,17 +319,23 @@ class ScaI2c(Sca):
     def _read_u8(self, slave_addr, register):
         """To be able to read registers, first the register must be sent in write mode"""
         self._write_raw8(slave_addr, register)
-        result = self.s_7b_r(slave_addr)
-        log.debug("read_u8: %#02x" % result)
-        return result
+        try:
+            result = self.s_7b_r(slave_addr)
+            log.debug("read_u8: %#02x" % result)
+            return result
+        except TypeError:
+            log.error("read u8 failed!")
 
     def _read_s8(self, slave_addr, register):
         """Read a signed byte from the specified register."""
-        result = self._read_u8(slave_addr, register)
-        if result > 127:
-            result -= 256
-        log.debug("read_s8: %#02x  %d" % (result, result))
-        return result
+        try:
+            result = self._read_u8(slave_addr, register)
+            if result > 127:
+                result -= 256
+            log.debug("read_s8: %#02x  %d" % (result, result))
+            return result
+        except TypeError:
+            log.error("read s8 failed!")
 
     def _read_u16(self, slave_addr, register, little_endian=True):
         """Read an unsigned 16-bit value from the specified register, with the

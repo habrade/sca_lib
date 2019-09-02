@@ -139,7 +139,7 @@ class ScaSrv(Gdpb):
                 self.ca_adc_channels[i].putDouble(volt_value)
 
     def bme280_thread_func(self):
-        offset_t = -6.5
+        offset_t = -4.5
         factor_h = 2.173
         offset_h = 3.246
         degrees = self.read_temperature() + offset_t

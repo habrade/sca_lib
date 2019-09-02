@@ -10,6 +10,52 @@ __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
 
+# define Python user-defined exceptions
+class Error(Exception):
+    """Base class for other exceptions"""
+    pass
+
+
+class ScaGenericError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Generic error flag")
+
+
+class ScaInvalidChannelError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Invalid channel request")
+
+
+class ScaInvalidCommandError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Invalid command request")
+
+
+class ScaInvalidTransactionNumberError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Invalid transaction number request")
+
+
+class ScaInvalidLengthError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Invalid Length")
+
+
+class ScaChannelDisableError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Channel not enable")
+
+
+class ScaChannelBusyError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Channel currently busy")
+
+
+class ScaChannelCommandInTreatmentError(Error):
+    """Raised when the sca command get error"""
+    print("SCA command error: Command in treatment")
+
+
 class Sca(object):
     def __init__(self, link=0):
         self.__sca_addr = 0x00
@@ -57,7 +103,13 @@ class Sca(object):
         log.debug("    rxErr = %#1x\t" % self.get_reg_value("rxErr%d" % self.__link))
 
         rxErr = self.get_reg_value("rxErr%d" % self.__link)
-        return self.check_error(rxErr)
+        if rxErr == 0:
+            return True
+        else:
+            try:
+                self.check_error(rxErr)
+            finally:
+                return False
 
     def send_reset(self):
         node = self.__hw.getNode("GBT-SCA.rst%d" % self.__link)
@@ -82,26 +134,24 @@ class Sca(object):
 
     @staticmethod
     def check_error(err_code):
-        if err_code == 0x00:
-            return True
+        if err_code & (0x1 << 0):
+            raise ScaGenericError()
+        elif err_code & (0x1 << 1):
+            raise ScaInvalidChannelError()
+        elif err_code & (0x1 << 2):
+            raise ScaInvalidCommandError()
+        elif err_code & (0x1 << 3):
+            raise ScaInvalidTransactionNumberError()
+        elif err_code & (0x1 << 4):
+            raise ScaInvalidLengthError()
+        elif err_code & (0x1 << 5):
+            raise ScaChannelDisableError()
+        elif err_code & (0x1 << 6):
+            raise ScaChannelBusyError()
+        elif err_code & (0x1 << 7):
+            raise ScaChannelCommandInTreatmentError()
         else:
-            if err_code & (0x1 << 0):
-                log.error("SCA command error: Generic error flag")
-            elif err_code & (0x1 << 1):
-                log.error("SCA command error: Invalid channel request")
-            elif err_code & (0x1 << 2):
-                log.error("SCA command error: Invalid command request")
-            elif err_code & (0x1 << 3):
-                log.error("SCA command error: Invalid transaction number request")
-            elif err_code & (0x1 << 4):
-                log.error("SCA command error: Invalid length")
-            elif err_code & (0x1 << 5):
-                log.error("SCA command error: Channel not enable")
-            elif err_code & (0x1 << 6):
-                log.error("SCA command error: Channel currently busy")
-            elif err_code & (0x1 << 7):
-                log.error("SCA command error: Command in treatment")
-            return False
+            pass
 
     def read_sca_id(self):
         if self._version == 0x01:
