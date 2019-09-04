@@ -4,16 +4,16 @@
   <macros>
     <P>labtest:Gdpb:$(afck_num):SCA:$(link)</P>
     <afck_num>67</afck_num>
-    <link>1</link>
+    <link>0</link>
   </macros>
   <width>1700</width>
   <height>900</height>
   <widget type="label" version="2.0.0">
     <name>Label</name>
-    <text>GBT-SCA Lab Test(67)</text>
-    <x>310</x>
+    <text>GBT-SCA Lab Test</text>
+    <x>290</x>
     <y>30</y>
-    <width>240</width>
+    <width>200</width>
     <height>31</height>
     <font>
       <font name="Header 1" family="Liberation Sans" style="BOLD" size="22.0">
@@ -2822,5 +2822,30 @@
         <visible>true</visible>
       </trace>
     </traces>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_1</name>
+    <text>AFCK $(afck_num)</text>
+    <x>700</x>
+    <y>40</y>
+    <width>70</width>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_10</name>
+    <text> LINK $(link)</text>
+    <x>770</x>
+    <y>40</y>
+    <width>60</width>
+  </widget>
+  <widget type="choice" version="2.0.0">
+    <name>Choice Button</name>
+    <x>620</x>
+    <y>10</y>
+    <width>1</width>
+    <height>1</height>
+    <items>
+      <item>Item 1</item>
+      <item>Item 2</item>
+    </items>
   </widget>
 </display>
