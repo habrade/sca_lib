@@ -76,23 +76,23 @@ record(ai, "$(P):ADC:CH:8") {
 record(ai, "$(P):ADC:CH:9") { 
     field(EGU, "V")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "15.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:10") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")
 }
 record(ai, "$(P):ADC:CH:11") { 
-    field(EGU, "V")
+    field(EGU, "mV")
     field(PREC, "2")
-    field(HIHI, "10.0")
+    field(HIHI, "1000.0")
     field(HHSV, "MAJOR")
     field(LOLO, "0")
     field(LLSV, "MAJOR")

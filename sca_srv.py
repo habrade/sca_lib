@@ -131,7 +131,11 @@ class ScaSrv(Gdpb):
                 log.debug("ADC Ch %d \t Temp = %.2f deg C" % (i, internal_temp))
                 # not vert accurate number to caluate the internal temprature, the manual doesn't give a formular.
                 self.ca_adc_channels[i].putDouble(internal_temp)
-            elif 1 <= i <= 11:
+            elif i == 9:
+                log.debug("ADC Ch %d \t Volt = %.2f mV" % (i, volt_value))
+                # put the real value which should be displayed, because of the ADC input limitation(1V)
+                self.ca_adc_channels[i].putDouble(volt_value / 10)
+            elif 1 <= i <= 8:
                 log.debug("ADC Ch %d \t Volt = %.2f mV" % (i, volt_value))
                 # put the real value which should be displayed, because of the ADC input limitation(1V)
                 self.ca_adc_channels[i].putDouble(volt_value / 100)
