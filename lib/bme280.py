@@ -16,7 +16,7 @@ __email__ = "habrade@gmail.com"
 class Bme280(ScaI2c):
     def __init__(self, link, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
                  h_mode=BME280_OSAMPLE_8,
-                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off, sca_i2c_ch=SCA_CH_I2C1):
+                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off, sca_i2c_ch=SCA_CH_I2C1): # change here master out SCA_CH_I2C0 or SCA_CH_I2C1
         super(Bme280, self).__init__(link, sca_i2c_ch)
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,
@@ -54,7 +54,7 @@ class Bme280(ScaI2c):
         # self._initial_sensor()
 
     def _initial_sensor(self):
-        self.set_frq(SCA_I2C_SPEED_100)
+        self.set_frq(SCA_I2C_SPEED_1000)
         self.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
         self.rst_dev()
         self._load_calibration()

@@ -33,6 +33,8 @@ class ScaSrv(Gdpb):
         # Enable GPIO
         self.enable_chn(SCA_CH_GPIO, True)
         # Initial BME280
+        self.enable_chn(SCA_CH_I2C0, True)
+        self.enable_chn(SCA_CH_I2C1, True)
         self._initial_sensor()
 
         self.__PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (self.__afck_num, self.__link)
@@ -172,3 +174,4 @@ if __name__ == '__main__':
         scaSrv.adc_thread_func()
         time.sleep(1)
         scaSrv.bme280_thread_func()
+
