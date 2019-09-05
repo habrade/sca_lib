@@ -61,6 +61,7 @@ class ScaSrv(Gdpb):
 
     def read_sca_modules_ids(self):
         sca_id = self.read_sca_id()
+        log.debug("SCA ID: {0:#x}".format(sca_id))
         # put to epics channel
         self.ca_sca_id.putInt(sca_id)
 
@@ -164,18 +165,18 @@ class ScaSrv(Gdpb):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 3:
-        afck_num = int(sys.argv[1])
-        link = int(sys.argv[2])
-    else:
-        print("Usage:  ./readScaId.py board_num link_num")
-        sys.exit(1)
+    afck_num_lists = [67]
+    links_per_gdpb = 2
+    scaSrv_lists = []
 
-    scaSrv = ScaSrv(afck_num, link)
-    scaSrv.read_sca_modules_ids()
+    for afck_num in afck_num_lists:
+        for link in range(links_per_gdpb):
+            scaSrv_lists.append(ScaSrv(afck_num, link))
+            scaSrv_lists[link].read_sca_modules_ids()
+
     while True:
-        scaSrv.gpio_thread_func()
-        scaSrv.adc_thread_func()
-        time.sleep(1)
-        scaSrv.bme280_thread_func()
-
+        for scaSrv in scaSrv_lists:
+            scaSrv.gpio_thread_func()
+            scaSrv.adc_thread_func()
+            # time.sleep(1)
+            scaSrv.bme280_thread_func()
