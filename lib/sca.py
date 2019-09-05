@@ -135,21 +135,21 @@ class Sca(object):
     @staticmethod
     def check_error(err_code):
         if err_code & (0x1 << 0):
-            raise ScaGenericError()
+            raise ScaGenericError
         elif err_code & (0x1 << 1):
-            raise ScaInvalidChannelError()
+            raise ScaInvalidChannelError
         elif err_code & (0x1 << 2):
-            raise ScaInvalidCommandError()
+            raise ScaInvalidCommandError
         elif err_code & (0x1 << 3):
-            raise ScaInvalidTransactionNumberError()
+            raise ScaInvalidTransactionNumberError
         elif err_code & (0x1 << 4):
-            raise ScaInvalidLengthError()
+            raise ScaInvalidLengthError
         elif err_code & (0x1 << 5):
-            raise ScaChannelDisableError()
+            raise ScaChannelDisableError
         elif err_code & (0x1 << 6):
-            raise ScaChannelBusyError()
+            raise ScaChannelBusyError
         elif err_code & (0x1 << 7):
-            raise ScaChannelCommandInTreatmentError()
+            raise ScaChannelCommandInTreatmentError
         else:
             pass
 
