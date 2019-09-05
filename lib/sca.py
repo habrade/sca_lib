@@ -165,7 +165,7 @@ class Sca(object):
             log.debug("Link = %d \t SCA Version = %#02x \t SCA ID = %#06x" %
                       (self.__link, self._version, sca_id))
         else:
-            log.error("SCA command error")
+            log.error("read_sca_id: SCA command error")
         return sca_id
 
     @staticmethod
@@ -186,7 +186,7 @@ class Sca(object):
             else:
                 return SCA_CTRL_R_CRD
         else:
-            raise Exception("Channel out of range")
+            raise Exception("get_node_control_cmd: Channel out of range")
 
     def get_chn_enabled(self, chn):
         if (chn >= 1) and (chn <= 31):
@@ -197,15 +197,15 @@ class Sca(object):
                 bit = chn & 0x07
                 return mask & (1 << bit)
             else:
-                log.error("SCA command error")
+                log.error("get_chn_enabled: SCA command error")
         else:
             raise Exception("Link = %d \t Channel out of range" % self.__link)
 
     def enable_chn(self, chn, enabled):
         if (chn >= 1) and (chn <= 31):
-            ret_val = []
+            ret_send_cmd = True
             read_cmd = self.get_node_control_cmd(chn, False)
-            ret_val.append(self.send_command(SCA_CH_CTRL, read_cmd, 0))
+            ret_send_cmd &= self.send_command(SCA_CH_CTRL, read_cmd, 0)
             mask = self.get_reg_value("rxData%d" % self.__link) >> 24
             log.debug("Link = %d \t Channel Mask = %#02x" % (self.__link, mask))
             bit = chn & 0x07
@@ -215,14 +215,10 @@ class Sca(object):
                 mask &= ~(1 << bit)
             log.debug("Link = %d \t Channel new Mask = %#02x" % (self.__link, mask))
             write_cmd = self.get_node_control_cmd(chn, True)
-            ret_val.append(self.send_command(SCA_CH_CTRL, write_cmd, mask << 24))
-            if False in ret_val:
-                log.error("Sca command error")
-                return False
-            else:
-                return True
+            ret_send_cmd &= self.send_command(SCA_CH_CTRL, write_cmd, mask << 24)
+            return ret_send_cmd
         else:
-            raise Exception("Link = %d \t Channel out of range" % self.__link)
+            raise Exception("enable_chn: Link = %d \t Channel out of range" % self.__link)
 
     def enable_all_channels(self):
         return (self.enable_chn(SCA_CH_SPI, True) &

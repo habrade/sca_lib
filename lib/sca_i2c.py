@@ -43,13 +43,15 @@ class ScaI2c(Sca):
             self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
             return self._ctrl_reg
         else:
-            log.error("SCA command error!")
+            return -1
+            log.error("r_ctrl_reg: SCA command error!")
 
     def r_status(self):
         if self.send_command(self.__chn, SCA_I2C_R_STATUS, 0):
             return self.get_reg_value("rxData%d" % self.__link) >> 24
         else:
-            log.error("SCA command error!")
+            return -1
+            log.error("r_status: SCA command error!")
 
     def w_mask(self, val):
         return self.send_command(self.__chn, SCA_I2C_W_MASK, val << 24)
@@ -58,7 +60,8 @@ class ScaI2c(Sca):
         if self.send_command(self.__chn, SCA_I2C_R_MASK, 0):
             return self.get_reg_value("rxData%d" % self.__link) >> 24
         else:
-            log.error("SCA command error!")
+            return -1
+            log.error("r_mask: SCA command error!")
 
     def w_data0(self, data):
         log.debug("Write DATA0: %x" % data)
@@ -85,7 +88,7 @@ class ScaI2c(Sca):
             except TypeError:
                 pass
         else:
-            log.error("SCA command error!")
+            log.error("r_data0: SCA command error!")
         return data0
 
     def r_data1(self):
@@ -97,7 +100,7 @@ class ScaI2c(Sca):
             except TypeError:
                 pass
         else:
-            log.error("SCA command error!")
+            log.error("r_data1: SCA command error!")
         return data1
 
     def r_data2(self):
@@ -109,7 +112,7 @@ class ScaI2c(Sca):
             except TypeError:
                 pass
         else:
-            log.error("SCA command error!")
+            log.error("r_data2: SCA command error!")
         return data2
 
     def r_data3(self):
@@ -121,7 +124,7 @@ class ScaI2c(Sca):
             except TypeError:
                 pass
         else:
-            log.error("SCA command error!")
+            log.error("r_data3: SCA command error!")
         return data3
 
     def s_7b_w(self, addr, data):
@@ -131,7 +134,7 @@ class ScaI2c(Sca):
             status = self.get_reg_value("rxData%d" % self.__link) >> 24
             return self._parse_status(status)
         else:
-            log.error("SCA command error!")
+            log.error("s_7b_w: SCA command error!")
 
     def s_7b_r(self, addr):
         if self.send_command(self.__chn, SCA_I2C_S_7B_R, addr << 24):
@@ -143,9 +146,9 @@ class ScaI2c(Sca):
                 log.debug("s_7b_r: %#02x" % data)
                 return data
             else:
-                log.error("Error happened at this I2C read transaction, check status")
+                log.error("s_7b_r: Error happened at this I2C read transaction, check status")
         else:
-            log.error("SCA command error!")
+            log.error("s_7b_r: SCA command error!")
 
     def s_10b_w(self, addr, data):
         temp = (addr << 16) + (data << 8)
@@ -153,7 +156,7 @@ class ScaI2c(Sca):
             status = self.get_reg_value("rxData%d" % self.__link) >> 24
             return self._parse_status(status)
         else:
-            log.error("SCA command error!")
+            log.error("s_10b_w: SCA command error!")
 
     def s_10b_r(self, addr):
         if self.send_command(self.__chn, SCA_I2C_S_10B_R, addr << 16):
@@ -164,10 +167,10 @@ class ScaI2c(Sca):
             if status == 0x04:
                 return data
             else:
-                log.error("Error happened at this I2C read transaction, check status")
+                log.error("s_10b_r: Error happened at this I2C read transaction, check status")
             return self.get_reg_value("rxData%d" % self.__link) >> 16
         else:
-            log.error("SCA command error!")
+            log.error("s_10b_r: SCA command error!")
 
     def m_7b_w(self, addr):
         if self.send_command(self.__chn, SCA_I2C_M_7B_W, addr << 24):
@@ -175,10 +178,10 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                log.error("Error happened at this I2C write transaction, check status")
+                log.error("m_7b_w: Error happened at this I2C write transaction, check status")
                 return False
         else:
-            log.error("SCA command error!")
+            log.error("m_7b_w: SCA command error!")
             return False
 
     def m_7b_r(self, addr):
@@ -188,10 +191,10 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                log.error("Error happened at this I2C read transaction, check status")
+                log.error("m_7b_r: Error happened at this I2C read transaction, check status")
                 return False
         else:
-            log.error("SCA command error!")
+            log.error("m_7b_r: SCA command error!")
             return False
 
     def m_10b_w(self, addr):
@@ -200,10 +203,10 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                log.error("Error happened at this I2C read transaction, check status")
+                log.error("m_10b_w: Error happened at this I2C read transaction, check status")
                 return False
         else:
-            log.error("SCA command error!")
+            log.error("m_10b_w: SCA command error!")
             return False
 
     def m_10b_r(self, addr):
@@ -212,46 +215,46 @@ class ScaI2c(Sca):
             if self._parse_status(status) == 0:
                 return True
             else:
-                log.error("Error happened at this I2C read transaction, check status")
+                log.error("m_10b_r: Error happened at this I2C read transaction, check status")
                 return False
         else:
-            log.error("SCA command error!")
+            log.error("m_10b_r: SCA command error!")
             return False
 
     def set_frq(self, frq):
         frq_list = [SCA_I2C_SPEED_100, SCA_I2C_SPEED_200, SCA_I2C_SPEED_400,
                     SCA_I2C_SPEED_1000]
         if frq in frq_list:
-            log.debug("Control reg in set frq, Old: %#x" % self._ctrl_reg)
+            log.debug("set_frq: Control reg in set frq, Old: %#x" % self._ctrl_reg)
             self._ctrl_reg = (frq << 0) | (self._ctrl_reg & 0xfc)
-            log.debug("Control reg in set frq, New: %#x" % self._ctrl_reg)
+            log.debug("set_frq: Control reg in set frq, New: %#x" % self._ctrl_reg)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
-            raise Exception("Frequency out of index")
+            raise Exception("set_frq: Frequency out of index")
 
     def set_mode(self, mode):
         mode_list = [SCA_I2C_MODE_OPEN_DRAIN, SCA_I2C_MODE_CMOS]
         if mode in mode_list:
-            log.debug("Control reg in set mode, Old: %#x" % self._ctrl_reg)
+            log.debug("set_mode: Control reg in set mode, Old: %#x" % self._ctrl_reg)
             self._ctrl_reg = (mode << 7) | (self._ctrl_reg & 0x7f)
-            log.debug("Control reg in set mode, New: %#x" % self._ctrl_reg)
+            log.debug("set_mode: Control reg in set mode, New: %#x" % self._ctrl_reg)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
-            raise Exception("Mode out of index")
+            raise Exception("set_mode: Mode out of index")
 
     def set_trans_byte_length(self, nr_bytes):
         log.debug("Set data number to be transferred: %d" % nr_bytes)
         if nr_bytes in range(1, 17):
-            log.debug("Old ctrl_reg: %#x" % self._ctrl_reg)
+            log.debug("set_trans_byte_length: Old ctrl_reg: %#x" % self._ctrl_reg)
             self._ctrl_reg = (nr_bytes << 2) | (self._ctrl_reg & 0x83)
-            log.debug("New ctrl_reg: %#x" % self._ctrl_reg)
+            log.debug("set_trans_byte_length: New ctrl_reg: %#x" % self._ctrl_reg)
             return self.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
-            raise Exception("Number of Bytes out of range, should be 1 to 16")
+            raise Exception("set_trans_byte_length: Number of Bytes out of range, should be 1 to 16")
 
     def set_data_reg(self, data):
         if (len(data) > 16) or (len(data) < 1):
-            raise Exception("Data lenth should between 1 and 16")
+            raise Exception("set_data_reg: Data lenth should between 1 and 16")
         else:
             data_temp = bytearray(16)
             data_temp[0:len(data)] = data
