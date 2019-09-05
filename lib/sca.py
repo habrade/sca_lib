@@ -154,18 +154,19 @@ class Sca(object):
             pass
 
     def read_sca_id(self):
-        if self._version == 0x01:
-            ret_val = self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V1, SCA_CTRL_DATA_R_ID)
-        else:
-            ret_val = self.send_command(SCA_CH_ADC, SCA_CTRL_R_ID_V2, SCA_CTRL_DATA_R_ID)
+        sca_id = 0x000000
 
-        if ret_val:
+        readID_cmd = SCA_CTRL_R_ID_V2
+        if self._version == 0x01:
+            readID_cmd = SCA_CTRL_R_ID_V1
+
+        if self.send_command(SCA_CH_ADC, readID_cmd, SCA_CTRL_DATA_R_ID):
             sca_id = self.get_reg_value("rxData%d" % self.__link)
             log.debug("Link = %d \t SCA Version = %#02x \t SCA ID = %#06x" %
-                     (self.__link, self._version, sca_id))
-            return sca_id
+                      (self.__link, self._version, sca_id))
         else:
             log.error("SCA command error")
+        return sca_id
 
     @staticmethod
     def get_node_control_cmd(chn, for_write):
