@@ -26,7 +26,7 @@ def main():
         afck_num = int(sys.argv[1])
         link = int(sys.argv[2])
     else:
-        print("Usage:  ./readScaId.py board_num link_num")
+        print("Usage:  ./test_cli.py board_num link_num")
         sys.exit(1)
 
     testGdpb = Gdpb(afck_num, link)
@@ -80,13 +80,18 @@ def main():
         offset_t = -6.5
         factor_h = 2.173
         offset_h = 3.246
-        scaAttr.temperature = testGdpb.read_temperature() + offset_t
-        print("BME280 Temperature = {0:.2f} deg C".format(scaAttr.temperature))
-        scaAttr.pressure = testGdpb.read_pressure() / 100
-        print("BME280 Pressure = {0:.2f} hPa".format(scaAttr.pressure))
-        scaAttr.humidity = testGdpb.read_humidity() * factor_h + offset_h
-        print("BME280 Humidity = {0:.2f} %%".format(scaAttr.humidity))
+        do_cali = True
+        if do_cali:
+            scaAttr.temperature = testGdpb.read_temperature() + offset_t
+            scaAttr.humidity = testGdpb.read_humidity() * factor_h + offset_h
+        else:
+            scaAttr.temperature = testGdpb.read_temperature()
+            scaAttr.humidity = testGdpb.read_humidity()
 
+        scaAttr.pressure = testGdpb.read_pressure() / 100
+        print("BME280 Temperature = {0:.2f} deg C".format(scaAttr.temperature))
+        print("BME280 Pressure = {0:.2f} hPa".format(scaAttr.pressure))
+        print("BME280 Humidity = {0:.2f} %%".format(scaAttr.humidity))
 
 if __name__ == "__main__":
     main()
