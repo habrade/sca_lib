@@ -3,8 +3,6 @@
   <name>Display</name>
   <macros>
     <P>labtest:Gdpb:$(afck_num):SCA:$(link)</P>
-    <afck_num>67</afck_num>
-    <link>1</link>
   </macros>
   <width>1700</width>
   <height>900</height>
