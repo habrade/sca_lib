@@ -149,12 +149,15 @@ class ScaSrv(Gdpb):
         offset_t = -4.5
         factor_h = 2.173
         offset_h = 3.246
-        degrees = self.read_temperature() + offset_t
-        # degrees = self.read_temperature()
+        do_cali = True
+        if do_cali:
+            degrees = self.read_temperature() + offset_t
+            humidity = self.read_humidity() * factor_h + offset_h
+        else:
+            degrees = self.read_temperature()
+            humidity = self.read_humidity()
         pascals = self.read_pressure()
         hectopascals = pascals / 100
-        humidity = self.read_humidity() * factor_h + offset_h
-        # humidity = self.read_humidity()
         # Data put to epics channel
         self.ca_bme280_degrees.putDouble(degrees)
         self.ca_bme280_hectopascals.putDouble(hectopascals)
