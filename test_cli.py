@@ -36,14 +36,15 @@ def main():
     # Connect SCA chip
     testGdpb.send_connect()
 
-    # Initial BME280
-    testGdpb._initial_sensor()
-
     # Enable ADC
     testGdpb.enable_chn(SCA_CH_ADC, True)
-
     # Enable GPIO
     testGdpb.enable_chn(SCA_CH_GPIO, True)
+    # Enable I2c
+    testGdpb.enable_chn(SCA_CH_I2C0, True)
+    testGdpb.enable_chn(SCA_CH_I2C1, True)
+    # Initial BME280
+    testGdpb._initial_sensor()
 
     scaAttr = ScaAttribute()
 
