@@ -20,7 +20,7 @@ class ScaI2c(Sca):
         self.__chn = chn
         self.enable_chn(self.__chn, True)
         self.__link = link
-        self.r_ctrl_reg()
+        self._ctrl_reg = self.r_ctrl_reg()
 
     @staticmethod
     def _parse_status(status):
@@ -40,18 +40,18 @@ class ScaI2c(Sca):
 
     def r_ctrl_reg(self):
         if self.send_command(self.__chn, SCA_I2C_R_CTRL, 0):
-            self._ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
-            return self._ctrl_reg
+            ctrl_reg = self.get_reg_value("rxData%d" % self.__link) >> 24
+            return ctrl_reg
         else:
-            return -1
             log.error("r_ctrl_reg: SCA command error!")
+            return -1
 
     def r_status(self):
         if self.send_command(self.__chn, SCA_I2C_R_STATUS, 0):
             return self.get_reg_value("rxData%d" % self.__link) >> 24
         else:
-            return -1
             log.error("r_status: SCA command error!")
+            return -1
 
     def w_mask(self, val):
         return self.send_command(self.__chn, SCA_I2C_W_MASK, val << 24)
@@ -60,8 +60,8 @@ class ScaI2c(Sca):
         if self.send_command(self.__chn, SCA_I2C_R_MASK, 0):
             return self.get_reg_value("rxData%d" % self.__link) >> 24
         else:
-            return -1
             log.error("r_mask: SCA command error!")
+            return -1
 
     def w_data0(self, data):
         log.debug("Write DATA0: %x" % data)

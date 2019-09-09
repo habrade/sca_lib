@@ -75,15 +75,15 @@ class ScaAdc(Sca):
         if self.send_command(SCA_CH_ADC, SCA_ADC_R_GAIN, 0):
             return self.get_reg_value("rxData%d" % self.__link) & 0xFFFF
         else:
-            return -1
             log.error("r_gain: Sca command error")
+            return -1
 
     def r_raw(self):
         if self.send_command(SCA_CH_ADC, SCA_ADC_R_RAW, 0):
             return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
         else:
-            return -1
             log.error("r_raw: Sca command error")
+            return -1
 
     def r_data(self):
         cmd = SCA_ADC_R_DATA
@@ -100,5 +100,5 @@ class ScaAdc(Sca):
         if self.send_command(SCA_CH_ADC, SCA_ADC_R_OFS, 0):
             return self.get_reg_value("rxData%d" % self.__link) & 0xFFF
         else:
-            return -1
             log.error("r_ofs: Sca command error")
+            return -1
