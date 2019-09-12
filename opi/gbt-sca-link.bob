@@ -5,23 +5,10 @@
     <P>labtest:Gdpb:$(afck_num):SCA:$(link)</P>
   </macros>
   <width>1700</width>
-  <height>900</height>
-  <widget type="label" version="2.0.0">
-    <name>Label</name>
-    <text>GBT-SCA Lab Test</text>
-    <x>290</x>
-    <y>30</y>
-    <width>200</width>
-    <height>31</height>
-    <font>
-      <font name="Header 1" family="Liberation Sans" style="BOLD" size="22.0">
-      </font>
-    </font>
-  </widget>
+  <height>700</height>
   <widget type="group" version="2.0.0">
     <name>GPIO</name>
-    <x>19</x>
-    <y>450</y>
+    <y>370</y>
     <width>832</width>
     <height>280</height>
     <style>1</style>
@@ -1940,8 +1927,7 @@
   </widget>
   <widget type="group" version="2.0.0">
     <name>ADC</name>
-    <x>19</x>
-    <y>140</y>
+    <y>60</y>
     <width>822</width>
     <height>290</height>
     <style>1</style>
@@ -2619,8 +2605,6 @@
   </widget>
   <widget type="group" version="2.0.0">
     <name>BME280</name>
-    <x>19</x>
-    <y>80</y>
     <width>702</width>
     <height>40</height>
     <style>1</style>
@@ -2661,8 +2645,7 @@
   </widget>
   <widget type="group" version="2.0.0">
     <name>SCA ID</name>
-    <x>740</x>
-    <y>80</y>
+    <x>721</x>
     <width>102</width>
     <height>40</height>
     <style>1</style>
@@ -2676,174 +2659,5 @@
       </foreground_color>
       <format>4</format>
     </widget>
-  </widget>
-  <widget type="stripchart" version="2.0.0">
-    <name>Strip Chart_1</name>
-    <x>870</x>
-    <y>80</y>
-    <width>340</width>
-    <height>329</height>
-    <title>BME280 Temperature</title>
-    <time_range>30 min</time_range>
-    <y_axes>
-      <y_axis>
-        <title></title>
-        <autoscale>true</autoscale>
-        <log_scale>false</log_scale>
-        <minimum>0.0</minimum>
-        <maximum>100.0</maximum>
-        <show_grid>false</show_grid>
-        <visible>true</visible>
-      </y_axis>
-    </y_axes>
-    <traces>
-      <trace>
-        <name>$(traces[0].y_pv)</name>
-        <y_pv>$(P):BME280:Temperature</y_pv>
-        <axis>0</axis>
-        <trace_type>1</trace_type>
-        <color>
-          <color red="102" green="128" blue="230">
-          </color>
-        </color>
-        <line_width>2</line_width>
-        <point_type>0</point_type>
-        <point_size>10</point_size>
-        <visible>true</visible>
-      </trace>
-    </traces>
-  </widget>
-  <widget type="stripchart" version="2.0.0">
-    <name>Strip Chart_2</name>
-    <x>1230</x>
-    <y>80</y>
-    <width>340</width>
-    <height>329</height>
-    <title>BME280 Pressure</title>
-    <time_range>30 min</time_range>
-    <y_axes>
-      <y_axis>
-        <title></title>
-        <autoscale>true</autoscale>
-        <log_scale>false</log_scale>
-        <minimum>0.0</minimum>
-        <maximum>100.0</maximum>
-        <show_grid>false</show_grid>
-        <visible>true</visible>
-      </y_axis>
-    </y_axes>
-    <traces>
-      <trace>
-        <name>$(traces[0].y_pv)</name>
-        <y_pv>$(P):BME280:Pressure</y_pv>
-        <axis>0</axis>
-        <trace_type>1</trace_type>
-        <color>
-          <color red="128" green="102" blue="204">
-          </color>
-        </color>
-        <line_width>2</line_width>
-        <point_type>0</point_type>
-        <point_size>10</point_size>
-        <visible>true</visible>
-      </trace>
-    </traces>
-  </widget>
-  <widget type="stripchart" version="2.0.0">
-    <name>Strip Chart_3</name>
-    <x>1230</x>
-    <y>440</y>
-    <width>340</width>
-    <height>329</height>
-    <title>BME280 Humidity</title>
-    <time_range>30 min</time_range>
-    <y_axes>
-      <y_axis>
-        <title></title>
-        <autoscale>true</autoscale>
-        <log_scale>false</log_scale>
-        <minimum>0.0</minimum>
-        <maximum>100.0</maximum>
-        <show_grid>false</show_grid>
-        <visible>true</visible>
-      </y_axis>
-    </y_axes>
-    <traces>
-      <trace>
-        <name>$(traces[0].y_pv)</name>
-        <y_pv>$(P):BME280:Humidity</y_pv>
-        <axis>0</axis>
-        <trace_type>1</trace_type>
-        <color>
-          <color red="153" green="102" blue="153">
-          </color>
-        </color>
-        <line_width>2</line_width>
-        <point_type>0</point_type>
-        <point_size>10</point_size>
-        <visible>true</visible>
-      </trace>
-    </traces>
-  </widget>
-  <widget type="stripchart" version="2.0.0">
-    <name>Strip Chart_4</name>
-    <x>870</x>
-    <y>440</y>
-    <width>340</width>
-    <height>329</height>
-    <title>SCA Chip Temperature</title>
-    <time_range>30 min</time_range>
-    <y_axes>
-      <y_axis>
-        <title></title>
-        <autoscale>true</autoscale>
-        <log_scale>false</log_scale>
-        <minimum>0.0</minimum>
-        <maximum>100.0</maximum>
-        <show_grid>false</show_grid>
-        <visible>true</visible>
-      </y_axis>
-    </y_axes>
-    <traces>
-      <trace>
-        <name>$(traces[0].y_pv)</name>
-        <y_pv>$(P):ADC:CH:31</y_pv>
-        <axis>0</axis>
-        <trace_type>2</trace_type>
-        <color>
-          <color red="102" green="153" blue="153">
-          </color>
-        </color>
-        <line_width>2</line_width>
-        <point_type>0</point_type>
-        <point_size>10</point_size>
-        <visible>true</visible>
-      </trace>
-    </traces>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_1</name>
-    <text>AFCK $(afck_num)</text>
-    <x>700</x>
-    <y>40</y>
-    <width>70</width>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_10</name>
-    <text> LINK $(link)</text>
-    <x>770</x>
-    <y>40</y>
-    <width>60</width>
-  </widget>
-  <widget type="choice" version="2.0.0">
-    <name>Choice Button</name>
-    <x>620</x>
-    <y>10</y>
-    <width>1</width>
-    <height>1</height>
-    <items>
-      <item>Item 1</item>
-      <item>Item 2</item>
-    </items>
   </widget>
 </display>

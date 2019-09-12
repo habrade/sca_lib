@@ -2,7 +2,7 @@
 <display version="2.0.0">
   <name>Display</name>
   <width>2000</width>
-  <height>1000</height>
+  <height>700</height>
   <widget type="navtabs" version="2.0.0">
     <name>Navigation Tabs</name>
     <tabs>
@@ -56,7 +56,7 @@
       </tab>
     </tabs>
     <width>1750</width>
-    <height>860</height>
+    <height>700</height>
     <selected_color>
       <color name="Grid" red="128" green="128" blue="128">
       </color>
