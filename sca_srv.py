@@ -94,10 +94,13 @@ class ScaSrv(Gdpb):
         self.set_direction(direction_set)
         time.sleep(0.01)
         # GPIO Direction Get
-        direction_get = self.get_direction()
-        log.debug("GPIO Direction Get =  %#x" % direction_get)
-        self.ca_gpio_direction_get_ch_31_16.putUShort(direction_get >> 16)
-        self.ca_gpio_direction_get_ch_15_0.putUShort(direction_get & 0xFFFF)
+        try:
+            direction_get = self.get_direction()
+            log.debug("GPIO Direction Get =  %#x" % direction_get)
+            self.ca_gpio_direction_get_ch_31_16.putUShort(direction_get >> 16)
+            self.ca_gpio_direction_get_ch_15_0.putUShort(direction_get & 0xFFFF)
+        except TypeError:
+            pass
         time.sleep(0.01)
         # GPIO PinOut Set
         pinout_set_1 = self.ca_gpio_pinout_set_ch_31_16.get().getInt()
@@ -107,16 +110,22 @@ class ScaSrv(Gdpb):
         self.write_pin_out(pinout_set)
         time.sleep(0.01)
         # GPIO PinOut Get
-        pinout_get = self.read_pin_out()
-        log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
-        self.ca_gpio_pinout_get_ch_31_16.putUShort(pinout_get >> 16)
-        self.ca_gpio_pinout_get_ch_15_0.putUShort(pinout_get & 0xFFFF)
+        try:
+            pinout_get = self.read_pin_out()
+            log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
+            self.ca_gpio_pinout_get_ch_31_16.putUShort(pinout_get >> 16)
+            self.ca_gpio_pinout_get_ch_15_0.putUShort(pinout_get & 0xFFFF)
+        except TypeError:
+            pass
         time.sleep(0.01)
         # GPIO PinIn Get
-        pinin_get = self.read_pin_in()
-        log.debug("GPIO PININ Get =  %#x" % pinin_get)
-        self.ca_gpio_pinin_get_ch_31_16.putUShort(pinin_get >> 16)
-        self.ca_gpio_pinin_get_ch_15_0.putUShort(pinin_get & 0xFFFF)
+        try:
+            pinin_get = self.read_pin_in()
+            log.debug("GPIO PININ Get =  %#x" % pinin_get)
+            self.ca_gpio_pinin_get_ch_31_16.putUShort(pinin_get >> 16)
+            self.ca_gpio_pinin_get_ch_15_0.putUShort(pinin_get & 0xFFFF)
+        except TypeError:
+            pass
 
     def adc_thread_func(self):
         # read adc channels for 0 32
