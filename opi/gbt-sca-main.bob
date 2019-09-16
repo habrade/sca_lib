@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <display version="2.0.0">
   <name>Display</name>
-  <width>2000</width>
+  <width>2200</width>
   <height>1000</height>
   <widget type="navtabs" version="2.0.0">
     <name>Navigation Tabs</name>

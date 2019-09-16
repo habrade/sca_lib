@@ -4,7 +4,7 @@
   <macros>
     <P>labtest:Gdpb:$(afck_num):SCA:$(link)</P>
   </macros>
-  <width>1700</width>
+  <width>2000</width>
   <height>700</height>
   <widget type="group" version="2.0.0">
     <name>GPIO</name>
@@ -2659,5 +2659,37 @@
       </foreground_color>
       <format>4</format>
     </widget>
+  </widget>
+  <widget type="databrowser" version="2.0.0">
+    <name>Temperature</name>
+    <file>bme280_temp.plt</file>
+    <x>870</x>
+    <y>19</y>
+    <width>360</width>
+    <height>274</height>
+  </widget>
+  <widget type="databrowser" version="2.0.0">
+    <name>Temperature_1</name>
+    <file>bme280_pressure.plt</file>
+    <x>1290</x>
+    <y>19</y>
+    <width>360</width>
+    <height>274</height>
+  </widget>
+  <widget type="databrowser" version="2.0.0">
+    <name>Temperature_2</name>
+    <file>bme280_humidity.plt</file>
+    <x>1290</x>
+    <y>360</y>
+    <width>360</width>
+    <height>274</height>
+  </widget>
+  <widget type="databrowser" version="2.0.0">
+    <name>Temperature_3</name>
+    <file>SCA_temp.plt</file>
+    <x>870</x>
+    <y>360</y>
+    <width>360</width>
+    <height>274</height>
   </widget>
 </display>
