@@ -88,7 +88,7 @@ class Bme280(object):
         self.dig_P9 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P9)
 
         self.dig_H1 = self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H1)
-        self.dig_H2 = self._sca_i2c.read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_H2)
+        self.dig_H2 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_H2)
         self.dig_H3 = self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H3)
         self.dig_H6 = self._sca_i2c.read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H7)
 

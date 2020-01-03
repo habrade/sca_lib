@@ -14,14 +14,14 @@ __email__ = "s.dong@mails.ccnu.edu.cn"
 
 class Gdpb(object):
     def __init__(self, afck_num, link):
-        super(Gdpb, self).__init__(self.__link)
+        super(Gdpb, self).__init__()
         assert isinstance(afck_num, int)
         assert isinstance(link, int)
         assert 0 <= link < 6, "Argument link out of range, should be from 0 to 5"
         self.__afck_num = afck_num
         self.__link = link
 
-        self.connection_file_path = "../dpbcontrols/etc/ipbus_lab%d_gdpb_gbtx.xml" % self.__afck_num
+        self.connection_file_path = "/opt/dpbcontrols/etc/ipbus_lab%d_gdpb_gbtx.xml" % self.__afck_num
         self.device_id = "C0S00_gdpb%03d" % self.__afck_num
 
         self.__connection_mgr = uhal.ConnectionManager("file://" + self.connection_file_path)

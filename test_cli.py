@@ -1,12 +1,11 @@
 #!/usr/bin/env python2
-import sys
 import time
 
 from lib.gdpb import Gdpb
 from lib.sca_defs import *
 
 
-class ScaAttribute():
+class ScaAttribute:
     def __init__(self):
         self.id = None
 
@@ -21,6 +20,11 @@ class ScaAttribute():
 
 
 def main():
+    import sys
+    if sys.version_info > (3, 0, 0):
+        sys.stderr.write("You need python 2 to run this script\n")
+        exit(1)
+
     if len(sys.argv) == 3:
         afck_num = int(sys.argv[1])
         link = int(sys.argv[2])
@@ -43,20 +47,20 @@ def main():
     test_gdpb.scaModule.enable_chn(SCA_CH_I2C0, True)
     test_gdpb.scaModule.enable_chn(SCA_CH_I2C1, True)
     # Initial BME280
-    test_gdpb.scaModule._initial_sensor()
+    test_gdpb.scaModule.initial_sensor()
 
-    scaAttr = ScaAttribute()
+    sca_attr = ScaAttribute()
 
     while True:
         # Read Chip ID
-        scaAttr.id = test_gdpb.scaModule.read_sca_id()
-        print("SCA ID = {0:#x}".format(scaAttr.id))
+        sca_attr.id = test_gdpb.scaModule.read_sca_id()
+        print("SCA ID = {0:#x}".format(sca_attr.id))
 
         # Read GPIO direction and pin in
-        scaAttr.gpio_direc = test_gdpb.scaModule.get_direction()
-        print("GPIO Direction = {0:#x}".format(scaAttr.gpio_direc))
-        scaAttr.gpio_pin_in = test_gdpb.scaModule.read_pin_in()
-        print("GPIO PIN IN = {0:#x}".format(scaAttr.gpio_pin_in))
+        sca_attr.gpio_direc = test_gdpb.scaModule.get_direction()
+        print("GPIO Direction = {0:#x}".format(sca_attr.gpio_direc))
+        sca_attr.gpio_pin_in = test_gdpb.scaModule.read_pin_in()
+        print("GPIO PIN IN = {0:#x}".format(sca_attr.gpio_pin_in))
 
         # READ ADCfor i in range(32):
         for i in range(32):
@@ -83,16 +87,16 @@ def main():
         offset_h = 3.246
         do_cali = True
         if do_cali:
-            scaAttr.temperature = test_gdpb.scaModule.read_temperature() + offset_t
-            scaAttr.humidity = test_gdpb.scaModule.read_humidity() * factor_h + offset_h
+            sca_attr.temperature = test_gdpb.scaModule.read_temperature() + offset_t
+            sca_attr.humidity = test_gdpb.scaModule.read_humidity() * factor_h + offset_h
         else:
-            scaAttr.temperature = test_gdpb.scaModule.read_temperature()
-            scaAttr.humidity = test_gdpb.scaModule.read_humidity()
+            sca_attr.temperature = test_gdpb.scaModule.read_temperature()
+            sca_attr.humidity = test_gdpb.scaModule.read_humidity()
 
-        scaAttr.pressure = test_gdpb.scaModule.read_pressure() / 100
-        print("BME280 Temperature = {0:.2f} deg C".format(scaAttr.temperature))
-        print("BME280 Pressure = {0:.2f} hPa".format(scaAttr.pressure))
-        print("BME280 Humidity = {0:.2f} %%".format(scaAttr.humidity))
+        sca_attr.pressure = test_gdpb.scaModule.read_pressure() / 100
+        print("BME280 Temperature = {0:.2f} deg C".format(sca_attr.temperature))
+        print("BME280 Pressure = {0:.2f} hPa".format(sca_attr.pressure))
+        print("BME280 Humidity = {0:.2f} %%".format(sca_attr.humidity))
 
 
 if __name__ == "__main__":

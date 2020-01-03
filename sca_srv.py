@@ -177,8 +177,8 @@ class ScaSrv(object):
 
 
 if __name__ == '__main__':
-    afck_num_lists = [67]
-    links_per_gdpb = 2
+    afck_num_lists = [66]
+    links_per_gdpb = 1
     scaSrv_lists = []
 
     for afck_num_index in afck_num_lists:
