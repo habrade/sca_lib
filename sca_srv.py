@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 __author__ = "Sheng Dong"
-__email__ = "habrade@gmail.com"
+__email__ = "s.dong@mails.ccnu.edu.cn"
 
 
 class ScaSrv(object):

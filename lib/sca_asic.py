@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 __author__ = "Sheng Dong"
-__email__ = "habrade@gmail.com"
+__email__ = "s.dong@mails.ccnu.edu.cn"
 
 
 # define Python user-defined exceptions
