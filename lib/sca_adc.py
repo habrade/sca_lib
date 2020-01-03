@@ -16,9 +16,6 @@ class ScaAdc(object):
         super(ScaAdc, self).__init__()
         self._ScaAsic = sca_asic
 
-    def enable_adc(self):
-        return self._ScaAsic.send_command(SCA_CH_CTRL, SCA_CTRL_W_CRD, SCA_CTRL_CRD_ENADC)
-
     def start_conv(self):
         cmd = SCA_ADC_GO
         if self._ScaAsic.version == 0x01:
