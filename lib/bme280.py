@@ -3,7 +3,6 @@ import time
 
 from bme280_defs import *
 from sca_defs import *
-from sca_i2c import ScaI2c
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
@@ -13,11 +12,15 @@ __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
 
-class Bme280(ScaI2c):
-    def __init__(self, link, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
+class Bme280(object):
+    def __init__(self, sca_i2c, t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8,
                  h_mode=BME280_OSAMPLE_8,
-                 standby=BME280_STANDBY_250, set_filter=BME280_FILTER_off, sca_i2c_ch=SCA_CH_I2C1): # change here master out SCA_CH_I2C0 or SCA_CH_I2C1
-        super(Bme280, self).__init__(link, sca_i2c_ch)
+                 standby=BME280_STANDBY_250,
+                 set_filter=BME280_FILTER_off):  # change here master out SCA_CH_I2C0 or SCA_CH_I2C1
+        super(Bme280, self).__init__()
+
+        self._sca_i2c = sca_i2c
+
         # Check that t_mode is valid.
         if t_mode not in [BME280_OSAMPLE_1, BME280_OSAMPLE_2, BME280_OSAMPLE_4,
                           BME280_OSAMPLE_8, BME280_OSAMPLE_16]:
@@ -53,50 +56,50 @@ class Bme280(ScaI2c):
         self.t_fine = 0.0
         # self._initial_sensor()
 
-    def _initial_sensor(self):
-        self.set_frq(SCA_I2C_SPEED_1000)
-        self.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
+    def initial_sensor(self):
+        self._sca_i2c.set_frq(SCA_I2C_SPEED_1000)
+        self._sca_i2c.set_mode(SCA_I2C_MODE_OPEN_DRAIN)
         self.rst_dev()
         self._load_calibration()
 
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
+        self._sca_i2c.write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL, 0x24)  # Sleep mode
         time.sleep(0.002)
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONFIG, ((self._standby << 5) | (self._filter << 2)))
+        self._sca_i2c.write_reg(BME280_I2CADDR, BME280_REGISTER_CONFIG, ((self._standby << 5) | (self._filter << 2)))
         time.sleep(0.002)
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL_HUM, self._h_mode)  # Set Humidity Oversample
-        self._write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL,
-                        ((self._t_mode << 5) | (self._p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
+        self._sca_i2c.write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL_HUM, self._h_mode)  # Set Humidity Oversample
+        self._sca_i2c.write_reg(BME280_I2CADDR, BME280_REGISTER_CONTROL,
+                                ((self._t_mode << 5) | (
+                                        self._p_mode << 2) | 3))  # Set Temp/Pressure Oversample and enter Normal mode
 
     def _load_calibration(self):
 
-        self.dig_T1 = self._read_u16LE(BME280_I2CADDR, BME280_REGISTER_DIG_T1)
-        self.dig_T2 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_T2)
-        self.dig_T3 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_T3)
+        self.dig_T1 = self._sca_i2c.read_u16le(BME280_I2CADDR, BME280_REGISTER_DIG_T1)
+        self.dig_T2 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_T2)
+        self.dig_T3 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_T3)
 
-        self.dig_P1 = self._read_u16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P1)
-        self.dig_P2 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P2)
-        self.dig_P3 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P3)
-        self.dig_P4 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P4)
-        self.dig_P5 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P5)
-        self.dig_P6 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P6)
-        self.dig_P7 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P7)
-        self.dig_P8 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P8)
-        self.dig_P9 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_P9)
+        self.dig_P1 = self._sca_i2c.read_u16le(BME280_I2CADDR, BME280_REGISTER_DIG_P1)
+        self.dig_P2 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P2)
+        self.dig_P3 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P3)
+        self.dig_P4 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P4)
+        self.dig_P5 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P5)
+        self.dig_P6 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P6)
+        self.dig_P7 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P7)
+        self.dig_P8 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P8)
+        self.dig_P9 = self._sca_i2c.read_s16le(BME280_I2CADDR, BME280_REGISTER_DIG_P9)
 
-        self.dig_H1 = self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H1)
-        self.dig_H2 = self._read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_H2)
-        self.dig_H3 = self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H3)
-        self.dig_H6 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H7)
+        self.dig_H1 = self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H1)
+        self.dig_H2 = self._sca_i2c.read_s16LE(BME280_I2CADDR, BME280_REGISTER_DIG_H2)
+        self.dig_H3 = self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H3)
+        self.dig_H6 = self._sca_i2c.read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H7)
 
         try:
-            h4 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H4)
+            h4 = self._sca_i2c.read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H4)
             h4 = (h4 << 4)
-            self.dig_H4 = h4 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) & 0x0F)
+            self.dig_H4 = h4 | (self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) & 0x0F)
 
-            h5 = self._read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H6)
+            h5 = self._sca_i2c.read_s8(BME280_I2CADDR, BME280_REGISTER_DIG_H6)
             h5 = (h5 << 4)
-            self.dig_H5 = h5 | (self._read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
-
+            self.dig_H5 = h5 | (self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_DIG_H5) >> 4 & 0x0F)
 
             log.debug("dig_T1 = %d" % self.dig_T1)
             log.debug("dig_T2 = %d" % self.dig_T2)
@@ -127,7 +130,7 @@ class Bme280(ScaI2c):
             self.dig_H5 = 0
 
     def rst_dev(self):
-        return self._write_reg(BME280_I2CADDR, BME280_REGISTER_SOFTRESET, 0xB6)
+        return self._sca_i2c.write_reg(BME280_I2CADDR, BME280_REGISTER_SOFTRESET, 0xB6)
 
     # def set_sensor_mode(self, mode):
     #     mode_list = [BME280_MODE_NORMAL_SLEEP, BME280_MODE_SLEEP_NORMAL, BME280_MODE_SLEEP_FORCE]
@@ -139,7 +142,7 @@ class Bme280(ScaI2c):
 
     def read_id(self):
         try:
-            return self._read_u8(BME280_I2CADDR, BME280_REGISTER_CHIPID)
+            return self._sca_i2c.read_u8(BME280_I2CADDR, BME280_REGISTER_CHIPID)
         except TypeError:
             pass
 
@@ -149,10 +152,10 @@ class Bme280(ScaI2c):
         """Returns the raw (uncompensated) temperature from the sensor."""
         log.debug("First check whether BME280 Status OK!")
         try:
-            while (self._read_u8(BME280_I2CADDR,
-                                BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
+            while (self._sca_i2c.read_u8(BME280_I2CADDR,
+                                         BME280_REGISTER_STATUS) & 0x08):  # Wait for conversion to complete (TODO : add timeout)
                 time.sleep(0.002)
-            self.BME280Data = self._read_block(BME280_I2CADDR, BME280_REGISTER_DATA, 8)
+            self.BME280Data = self._sca_i2c.read_block(BME280_I2CADDR, BME280_REGISTER_DATA, 8)
         except TypeError:
             self.BME280Data = bytearray(8)
 
@@ -162,8 +165,6 @@ class Bme280(ScaI2c):
         raw = ((self.BME280Data[3] << 16) | (self.BME280Data[4] << 8) | self.BME280Data[5]) >> 4
         log.debug("raw temperature: %#x" % raw)
         return raw
-
-
 
     def read_raw_pressure(self):
         """Returns the raw (uncompensated) pressure level from the sensor."""
@@ -188,7 +189,7 @@ class Bme280(ScaI2c):
             UT = float(self.read_raw_temp())
 
             var1 = (UT / 16384.0 - float(self.dig_T1) / 1024.0) * \
-                float(self.dig_T2)
+                   float(self.dig_T2)
             var2 = ((UT / 131072.0 - float(self.dig_T1) / 8192.0) * (
                     UT / 131072.0 - float(self.dig_T1) / 8192.0)) * float(self.dig_T3)
             self.t_fine = int(var1 + var2)
@@ -221,7 +222,8 @@ class Bme280(ScaI2c):
             adc = float(self.read_raw_humidity())
             # print 'Raw humidity = {0:d}'.format (adc)
             h = float(self.t_fine) - 76800.0
-            h = (adc - (float(self.dig_H4) * 64.0 + float(self.dig_H5) / 16384.0 * h)) * (float(self.dig_H2) / 65536.0 * (
+            h = (adc - (float(self.dig_H4) * 64.0 + float(self.dig_H5) / 16384.0 * h)) * (
+                    float(self.dig_H2) / 65536.0 * (
                     1.0 + float(self.dig_H6) / 67108864.0 * h * (1.0 + float(self.dig_H3) / 67108864.0 * h)))
             h = h * (1.0 - float(self.dig_H1) * h / 524288.0)
             if h > 100:

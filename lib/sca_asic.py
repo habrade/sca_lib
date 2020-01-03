@@ -56,16 +56,14 @@ class ScaChannelCommandInTreatmentError(Error):
     print("SCA command error: Command in treatment")
 
 
-class Sca(object):
-    def __init__(self, link=0):
+class ScaAsic(object):
+    def __init__(self, hw, link=0):
         self.__sca_addr = 0x00
         self.__trans_id = 0x01
 
-        self._version = SCA_VERSION
-        self.__link = link
-
-    def set_hw(self, hw):
+        self.version = SCA_VERSION
         self.__hw = hw
+        self.__link = link
 
     def send_command(self, channel, command, data):
         node = self.__hw.getNode("GBT-SCA.txAddr%d" % self.__link)
@@ -102,12 +100,12 @@ class Sca(object):
         log.debug("    rxLen = %#02x\t" % self.get_reg_value("rxLen%d" % self.__link))
         log.debug("    rxErr = %#1x\t" % self.get_reg_value("rxErr%d" % self.__link))
 
-        rxErr = self.get_reg_value("rxErr%d" % self.__link)
-        if rxErr == 0:
+        rx_err = self.get_reg_value("rxErr%d" % self.__link)
+        if rx_err == 0:
             return True
         else:
             try:
-                self.check_error(rxErr)
+                self.check_error(rx_err)
             finally:
                 return False
 
@@ -156,14 +154,14 @@ class Sca(object):
     def read_sca_id(self):
         sca_id = 0x000000
 
-        readID_cmd = SCA_CTRL_R_ID_V2
-        if self._version == 0x01:
-            readID_cmd = SCA_CTRL_R_ID_V1
+        read_id_cmd = SCA_CTRL_R_ID_V2
+        if self.version == 0x01:
+            read_id_cmd = SCA_CTRL_R_ID_V1
 
-        if self.send_command(SCA_CH_ADC, readID_cmd, SCA_CTRL_DATA_R_ID):
+        if self.send_command(SCA_CH_ADC, read_id_cmd, SCA_CTRL_DATA_R_ID):
             sca_id = self.get_reg_value("rxData%d" % self.__link)
             log.debug("Link = %d \t SCA Version = %#02x \t SCA ID = %#06x" %
-                      (self.__link, self._version, sca_id))
+                      (self.__link, self.version, sca_id))
         else:
             log.error("read_sca_id: SCA command error")
         return sca_id

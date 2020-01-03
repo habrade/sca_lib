@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 import logging
 import threading
 import time
-import sys
 
 import pvaccess
 
@@ -17,25 +16,25 @@ __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
 
-class ScaSrv(Gdpb):
+class ScaSrv(object):
     def __init__(self, afck_num, link):
-        super(ScaSrv, self).__init__(afck_num, link)
+        super(ScaSrv, self).__init__()
 
         self.__afck_num = afck_num
         self.__link = link
-
+        self._gdpb = Gdpb(self.__afck_num, self.__link)
         # Reset SCA
-        self.send_reset()
+        self._gdpb.scaModule.send_reset()
         # Connect SCA chip
-        self.send_connect()
+        self._gdpb.scaModule.send_connect()
         # Enable ADC
-        self.enable_chn(SCA_CH_ADC, True)
+        self._gdpb.scaModule.enable_chn(SCA_CH_ADC, True)
         # Enable GPIO
-        self.enable_chn(SCA_CH_GPIO, True)
+        self._gdpb.scaModule.enable_chn(SCA_CH_GPIO, True)
         # Initial BME280
-        self.enable_chn(SCA_CH_I2C0, True)
-        self.enable_chn(SCA_CH_I2C1, True)
-        self._initial_sensor()
+        self._gdpb.scaModule.enable_chn(SCA_CH_I2C0, True)
+        self._gdpb.scaModule.enable_chn(SCA_CH_I2C1, True)
+        self._gdpb.scaModule.initial_sensor()
 
         self.__PREFIX = "labtest:Gdpb:%d:SCA:%d:" % (self.__afck_num, self.__link)
 
@@ -60,12 +59,13 @@ class ScaSrv(Gdpb):
         # self.create_threads()
 
     def read_sca_modules_ids(self):
-        sca_id = self.read_sca_id()
+        sca_id = self._gdpb.scaModule.read_sca_id()
         log.debug("SCA ID: {0:#x}".format(sca_id))
         # put to epics channel
         self.ca_sca_id.putInt(sca_id)
 
     def create_threads(self):
+        # global thread_function
         num_threads = 3
         threads = []
         for index_t in range(num_threads):
@@ -91,11 +91,11 @@ class ScaSrv(Gdpb):
         direction_set_2 = self.ca_gpio_direction_set_ch_15_0.get().getInt()
         direction_set = (direction_set_1 << 16) + direction_set_2
         log.debug("GPIO Direction Set to %#x" % direction_set)
-        self.set_direction(direction_set)
+        self._gdpb.scaModule.set_direction(direction_set)
         time.sleep(0.01)
         # GPIO Direction Get
         try:
-            direction_get = self.get_direction()
+            direction_get = self._gdpb.scaModule.get_direction()
             log.debug("GPIO Direction Get =  %#x" % direction_get)
             self.ca_gpio_direction_get_ch_31_16.putUShort(direction_get >> 16)
             self.ca_gpio_direction_get_ch_15_0.putUShort(direction_get & 0xFFFF)
@@ -107,11 +107,11 @@ class ScaSrv(Gdpb):
         pinout_set_2 = self.ca_gpio_pinout_set_ch_15_0.get().getInt()
         pinout_set = (pinout_set_1 << 16) + pinout_set_2
         log.debug("GPIO PINOUT Set to %#x" % pinout_set)
-        self.write_pin_out(pinout_set)
+        self._gdpb.scaModule.write_pin_out(pinout_set)
         time.sleep(0.01)
         # GPIO PinOut Get
         try:
-            pinout_get = self.read_pin_out()
+            pinout_get = self._gdpb.scaModule.read_pin_out()
             log.debug("GPIO PINOUT Get =  %#x" % pinout_get)
             self.ca_gpio_pinout_get_ch_31_16.putUShort(pinout_get >> 16)
             self.ca_gpio_pinout_get_ch_15_0.putUShort(pinout_get & 0xFFFF)
@@ -120,7 +120,7 @@ class ScaSrv(Gdpb):
         time.sleep(0.01)
         # GPIO PinIn Get
         try:
-            pinin_get = self.read_pin_in()
+            pinin_get = self._gdpb.scaModule.read_pin_in()
             log.debug("GPIO PININ Get =  %#x" % pinin_get)
             self.ca_gpio_pinin_get_ch_31_16.putUShort(pinin_get >> 16)
             self.ca_gpio_pinin_get_ch_15_0.putUShort(pinin_get & 0xFFFF)
@@ -130,8 +130,8 @@ class ScaSrv(Gdpb):
     def adc_thread_func(self):
         # read adc channels for 0 32
         for i in range(32):
-            self.w_sel(i)
-            adc_value = self.start_conv()
+            self._gdpb.scaModule.w_sel(i)
+            adc_value = self._gdpb.scaModule.start_conv()
             volt_value = float(1000 * adc_value * SCA_ADC_VREF) / (2 ** 12 - 1)
             # The maximum conversation rate is 3.5KHz(2.857ms)
             time.sleep(5 / 1000)
@@ -160,12 +160,12 @@ class ScaSrv(Gdpb):
         offset_h = 3.246
         do_cali = True
         if do_cali:
-            degrees = self.read_temperature() + offset_t
-            humidity = self.read_humidity() * factor_h + offset_h
+            degrees = self._gdpb.scaModule.read_temperature() + offset_t
+            humidity = self._gdpb.scaModule.read_humidity() * factor_h + offset_h
         else:
-            degrees = self.read_temperature()
-            humidity = self.read_humidity()
-        pascals = self.read_pressure()
+            degrees = self._gdpb.scaModule.read_temperature()
+            humidity = self._gdpb.scaModule.read_humidity()
+        pascals = self._gdpb.scaModule.read_pressure()
         hectopascals = pascals / 100
         # Data put to epics channel
         self.ca_bme280_degrees.putDouble(degrees)
@@ -181,10 +181,10 @@ if __name__ == '__main__':
     links_per_gdpb = 2
     scaSrv_lists = []
 
-    for afck_num in afck_num_lists:
-        for link in range(links_per_gdpb):
-            scaSrv_lists.append(ScaSrv(afck_num, link))
-            scaSrv_lists[link].read_sca_modules_ids()
+    for afck_num_index in afck_num_lists:
+        for link_index in range(links_per_gdpb):
+            scaSrv_lists.append(ScaSrv(afck_num_index, link_index))
+            scaSrv_lists[link_index].read_sca_modules_ids()
 
     while True:
         for scaSrv in scaSrv_lists:

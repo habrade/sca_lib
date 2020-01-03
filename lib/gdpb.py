@@ -12,8 +12,9 @@ __author__ = "Sheng Dong"
 __email__ = "habrade@gmail.com"
 
 
-class Gdpb(ScaModule):
+class Gdpb(object):
     def __init__(self, afck_num, link):
+        super(Gdpb, self).__init__(self.__link)
         assert isinstance(afck_num, int)
         assert isinstance(link, int)
         assert 0 <= link < 6, "Argument link out of range, should be from 0 to 5"
@@ -26,5 +27,4 @@ class Gdpb(ScaModule):
         self.__connection_mgr = uhal.ConnectionManager("file://" + self.connection_file_path)
         self.__hw = self.__connection_mgr.getDevice(self.device_id)
 
-        self.set_hw(self.__hw)
-        super(Gdpb, self).__init__(self.__link)
+        self.scaModule = ScaModule(self.__hw, self.__link)
