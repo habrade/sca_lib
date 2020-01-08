@@ -16,8 +16,8 @@ class ScaI2c(object):
     def __init__(self, sca_asic, chn):
         super(ScaI2c, self).__init__()
         self.__chn = chn
-        self._ScaAsic = sca_asic
-        self._ScaAsic.enable_chn(self.__chn, True)
+        self._sca_asic = sca_asic
+        # self._ScaAsic.enable_chn(self.__chn, True)
         self._ctrl_reg = self.r_ctrl_reg()
 
     @staticmethod
@@ -34,54 +34,54 @@ class ScaI2c(object):
         return status & 0x68
 
     def w_ctrl_reg(self, val):
-        return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_CTRL, val << 24)
+        return self._sca_asic.send_command(self.__chn, SCA_I2C_W_CTRL, val << 24)
 
     def r_ctrl_reg(self):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_CTRL, 0):
-            ctrl_reg = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_CTRL, 0):
+            ctrl_reg = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             return ctrl_reg
         else:
             log.error("r_ctrl_reg: SCA command error!")
             return -1
 
     def r_status(self):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_STATUS, 0):
-            return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_STATUS, 0):
+            return self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
         else:
             log.error("r_status: SCA command error!")
             return -1
 
     def w_mask(self, val):
-        return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_MASK, val << 24)
+        return self._sca_asic.send_command(self.__chn, SCA_I2C_W_MASK, val << 24)
 
     def r_mask(self):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_MASK, 0):
-            return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_MASK, 0):
+            return self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
         else:
             log.error("r_mask: SCA command error!")
             return -1
 
     def w_data0(self, data):
         log.debug("Write DATA0: %x" % data)
-        return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA0, data)
+        return self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA0, data)
 
     def w_data1(self, data):
         log.debug("Write DATA1: %x" % data)
-        return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA1, data)
+        return self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA1, data)
 
     def w_data2(self, data):
         log.debug("Write DATA2: %x" % data)
-        return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA2, data)
+        return self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA2, data)
 
     def w_data3(self, data):
         log.debug("Write DATA3: %x" % data)
-        return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA3, data)
+        return self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA3, data)
 
     def r_data0(self):
         data0 = 0
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_DATA0, 0):
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_DATA0, 0):
             try:
-                data0 = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link)
+                data0 = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link)
                 log.debug("Read DATA0 = %#x" % data0)
             except TypeError:
                 pass
@@ -91,9 +91,9 @@ class ScaI2c(object):
 
     def r_data1(self):
         data1 = 0
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_DATA1, 0):
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_DATA1, 0):
             try:
-                data1 = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link)
+                data1 = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link)
                 log.debug("Read DATA1 = %#x" % data1)
             except TypeError:
                 pass
@@ -103,9 +103,9 @@ class ScaI2c(object):
 
     def r_data2(self):
         data2 = 0
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_DATA2, 0):
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_DATA2, 0):
             try:
-                data2 = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link)
+                data2 = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link)
                 log.debug("Read DATA2 = %#x" % data2)
             except TypeError:
                 pass
@@ -115,9 +115,9 @@ class ScaI2c(object):
 
     def r_data3(self):
         data3 = 0
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_R_DATA3, 0):
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_R_DATA3, 0):
             try:
-                data3 = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link)
+                data3 = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link)
                 log.debug("Read DATA3 = %#x" % data3)
             except TypeError:
                 pass
@@ -128,16 +128,16 @@ class ScaI2c(object):
     def s_7b_w(self, addr, data):
         temp = (addr << 24) + (data << 16)
         log.debug("s_7b_w send data: %#x" % data)
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_S_7B_W, temp):
-            status = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_S_7B_W, temp):
+            status = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             return self._parse_status(status)
         else:
             log.error("s_7b_w: SCA command error!")
 
     def s_7b_r(self, addr):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_S_7B_R, addr << 24):
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_S_7B_R, addr << 24):
             # temp =  status + data
-            temp = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 16
+            temp = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 16
             status = (temp & 0xff00) >> 8
             data = (temp & 0xff)
             if self._parse_status(status) == 0:
@@ -150,29 +150,29 @@ class ScaI2c(object):
 
     def s_10b_w(self, addr, data):
         temp = (addr << 16) + (data << 8)
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_S_10B_W, temp):
-            status = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_S_10B_W, temp):
+            status = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             return self._parse_status(status)
         else:
             log.error("s_10b_w: SCA command error!")
 
     def s_10b_r(self, addr):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_S_10B_R, addr << 16):
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_S_10B_R, addr << 16):
             # Return status + data
-            temp = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 16
+            temp = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 16
             status = (temp & 0xff00) >> 8
             data = (temp & 0x00ff)
             if status == 0x04:
                 return data
             else:
                 log.error("s_10b_r: Error happened at this I2C read transaction, check status")
-            return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 16
+            return self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 16
         else:
             log.error("s_10b_r: SCA command error!")
 
     def m_7b_w(self, addr):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_M_7B_W, addr << 24):
-            status = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_M_7B_W, addr << 24):
+            status = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             if self._parse_status(status) == 0:
                 return True
             else:
@@ -184,8 +184,8 @@ class ScaI2c(object):
 
     def m_7b_r(self, addr):
         log.debug("Multi read(7 bits I2C) starting...")
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_M_7B_R, addr << 24):
-            status = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_M_7B_R, addr << 24):
+            status = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             if self._parse_status(status) == 0:
                 return True
             else:
@@ -196,8 +196,8 @@ class ScaI2c(object):
             return False
 
     def m_10b_w(self, addr):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_M_10B_W, addr << 24):
-            status = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_M_10B_W, addr << 24):
+            status = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             if self._parse_status(status) == 0:
                 return True
             else:
@@ -208,8 +208,8 @@ class ScaI2c(object):
             return False
 
     def m_10b_r(self, addr):
-        if self._ScaAsic.send_command(self.__chn, SCA_I2C_M_10B_R, addr << 24):
-            status = self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) >> 24
+        if self._sca_asic.send_command(self.__chn, SCA_I2C_M_10B_R, addr << 24):
+            status = self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
             if self._parse_status(status) == 0:
                 return True
             else:
@@ -226,7 +226,7 @@ class ScaI2c(object):
             log.debug("set_frq: Control reg in set frq, Old: %#x" % self._ctrl_reg)
             self._ctrl_reg = (frq << 0) | (self._ctrl_reg & 0xfc)
             log.debug("set_frq: Control reg in set frq, New: %#x" % self._ctrl_reg)
-            return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
+            return self._sca_asic.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
             raise Exception("set_frq: Frequency out of index")
 
@@ -236,7 +236,7 @@ class ScaI2c(object):
             log.debug("set_mode: Control reg in set mode, Old: %#x" % self._ctrl_reg)
             self._ctrl_reg = (mode << 7) | (self._ctrl_reg & 0x7f)
             log.debug("set_mode: Control reg in set mode, New: %#x" % self._ctrl_reg)
-            return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
+            return self._sca_asic.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
             raise Exception("set_mode: Mode out of index")
 
@@ -246,7 +246,7 @@ class ScaI2c(object):
             log.debug("set_trans_byte_length: Old ctrl_reg: %#x" % self._ctrl_reg)
             self._ctrl_reg = (nr_bytes << 2) | (self._ctrl_reg & 0x83)
             log.debug("set_trans_byte_length: New ctrl_reg: %#x" % self._ctrl_reg)
-            return self._ScaAsic.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
+            return self._sca_asic.send_command(self.__chn, SCA_I2C_W_CTRL, self._ctrl_reg << 24)
         else:
             raise Exception("set_trans_byte_length: Number of Bytes out of range, should be 1 to 16")
 
@@ -259,12 +259,12 @@ class ScaI2c(object):
             # log.debug("data = %x" % data)
             try:
                 if len(data) > 12:
-                    self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA3, struct.unpack('>I', data_temp[12:16])[0])
+                    self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA3, struct.unpack('>I', data_temp[12:16])[0])
                 if len(data) > 8:
-                    self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA2, struct.unpack('>I', data_temp[8:12])[0])
+                    self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA2, struct.unpack('>I', data_temp[8:12])[0])
                 if len(data) > 4:
-                    self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA1, struct.unpack('>I', data_temp[4:8])[0])
-                self._ScaAsic.send_command(self.__chn, SCA_I2C_W_DATA0, struct.unpack('>I', data_temp[0:4])[0])
+                    self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA1, struct.unpack('>I', data_temp[4:8])[0])
+                self._sca_asic.send_command(self.__chn, SCA_I2C_W_DATA0, struct.unpack('>I', data_temp[0:4])[0])
 
                 return True
             except TypeError:
