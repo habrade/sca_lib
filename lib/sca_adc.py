@@ -25,7 +25,6 @@ class ScaAdc(object):
             return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) & 0xFFF
         else:
             log.error("start_conv: Sca command error")
-            return -1
 
     def w_sel(self, sel):
         assert 0 <= sel << 31
@@ -45,7 +44,6 @@ class ScaAdc(object):
             return sel
         else:
             log.error("r_sel: Sca command error")
-            return -1
 
     def w_curr(self, curr):
         cmd = SCA_ADC_W_CURR
@@ -62,7 +60,6 @@ class ScaAdc(object):
             return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link)
         else:
             log.error("r_curr: Sca command error")
-            return -1
 
     def w_gain(self, gain):
         return self._ScaAsic.send_command(SCA_CH_ADC, SCA_ADC_W_GAIN, gain)
@@ -72,14 +69,12 @@ class ScaAdc(object):
             return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) & 0xFFFF
         else:
             log.error("r_gain: Sca command error")
-            return -1
 
     def r_raw(self):
         if self._ScaAsic.send_command(SCA_CH_ADC, SCA_ADC_R_RAW, 0):
             return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) & 0xFFF
         else:
             log.error("r_raw: Sca command error")
-            return -1
 
     def r_data(self):
         cmd = SCA_ADC_R_DATA
@@ -90,11 +85,9 @@ class ScaAdc(object):
             return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) & 0xFFF
         else:
             log.error("r_data: Sca command error")
-            return -1
 
     def r_ofs(self):
         if self._ScaAsic.send_command(SCA_CH_ADC, SCA_ADC_R_OFS, 0):
             return self._ScaAsic.get_reg_value("rxData%d" % self._ScaAsic.__link) & 0xFFF
         else:
             log.error("r_ofs: Sca command error")
-            return -1

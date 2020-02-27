@@ -42,14 +42,12 @@ class ScaI2c(object):
             return ctrl_reg
         else:
             log.error("r_ctrl_reg: SCA command error!")
-            return -1
 
     def r_status(self):
         if self._sca_asic.send_command(self.__chn, SCA_I2C_R_STATUS, 0):
             return self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
         else:
             log.error("r_status: SCA command error!")
-            return -1
 
     def w_mask(self, val):
         return self._sca_asic.send_command(self.__chn, SCA_I2C_W_MASK, val << 24)
@@ -59,7 +57,6 @@ class ScaI2c(object):
             return self._sca_asic.get_reg_value("rxData%d" % self._sca_asic.__link) >> 24
         else:
             log.error("r_mask: SCA command error!")
-            return -1
 
     def w_data0(self, data):
         log.debug("Write DATA0: %x" % data)
