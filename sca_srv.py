@@ -2,6 +2,7 @@
 import logging
 import threading
 import time
+import ConfigParser
 
 import pvaccess
 
@@ -177,9 +178,14 @@ class ScaSrv(object):
 
 
 if __name__ == '__main__':
-    afck_num_lists = [66]
-    links_per_gdpb = 1
-    scaSrv_lists = []
+    config = ConfigParser.RawConfigParser()
+    config.read('./config.ini')
+
+    afck_num_lists = config.get('config', 'afck_num_lists')
+    links_per_gdpb = config.get('config', 'links_per_gdpb')
+    scaSrv_lists = config.get('config', 'scaSrv_lists')
+
+    print afck_num_lists, links_per_gdpb, scaSrv_lists
 
     for afck_num_index in afck_num_lists:
         for link_index in range(links_per_gdpb):
