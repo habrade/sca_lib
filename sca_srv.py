@@ -181,9 +181,9 @@ if __name__ == '__main__':
     config = ConfigParser.RawConfigParser()
     config.read('./config.ini')
 
-    afck_num_lists = config.get('config', 'afck_num_lists')
-    links_per_gdpb = config.get('config', 'links_per_gdpb')
-    scaSrv_lists = config.get('config', 'scaSrv_lists')
+    afck_num_lists = config.get('CONFIG', 'afck_num_lists')
+    links_per_gdpb = config.get('CONFIG', 'links_per_gdpb')
+    scaSrv_lists = config.get('CONFIG', 'scaSrv_lists')
 
     print afck_num_lists, links_per_gdpb, scaSrv_lists
 
