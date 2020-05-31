@@ -17,8 +17,11 @@ ENV sdong_gitlab_token=9Hijhqyyv6bXQ_Ka_YUM
 RUN git clone https://sdong:${sdong_gitlab_token}@git.cbm.gsi.de/s.dong/sca_lib_py.git
 
 WORKDIR sca_lib_py
+
 RUN pip install -r requirements.txt
 
-RUN ["/bin/bash", "-c", "source /opt/ipbus-software/uhal/tests/setup.sh"]
+COPY entrypoint.sh /opt
+RUN ls /opt
+#ENTRYPOINT ["/opt/entrypoint.sh"]
 
-#ENTRYPOINT [ "./sca_srv.py" ]
+#CMD [ "./sca_srv.py" ]
