@@ -1,11 +1,11 @@
 import logging
 
-from bme280 import Bme280
-from sca_adc import ScaAdc
-from sca_asic import ScaAsic
-from sca_defs import *
-from sca_gpio import ScaGpio
-from sca_i2c import ScaI2c
+from .bme280 import Bme280
+from .sca_adc import ScaAdc
+from .sca_asic import ScaAsic
+from .sca_defs import *
+from .sca_gpio import ScaGpio
+from .sca_i2c import ScaI2c
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)

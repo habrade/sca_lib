@@ -1,8 +1,8 @@
 import logging
 import time
 
-from bme280_defs import *
-from sca_defs import *
+from .bme280_defs import *
+from .sca_defs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  %(name)s  %(levelname)s  %(message)s')
 log = logging.getLogger(__name__)
