@@ -1,5 +1,5 @@
 {
-  "afck_num_lists": "[66]",
-  "links_per_gdpb": "1",
-  "scaSrv_lists": "[]"
+  "afck_num_lists": [66],
+  "links_per_gdpb": 1,
+  "scaSrv_lists": []
 }
