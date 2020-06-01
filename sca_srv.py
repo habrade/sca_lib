@@ -182,10 +182,8 @@ if __name__ == '__main__':
     config.read('./config.ini')
 
     afck_num_lists = config.get('CONFIG', 'afck_num_lists')
-    links_per_gdpb = config.get('CONFIG', 'links_per_gdpb')
+    links_per_gdpb = config.getint('CONFIG', 'links_per_gdpb')
     scaSrv_lists = config.get('CONFIG', 'scaSrv_lists')
-
-    print afck_num_lists, links_per_gdpb, scaSrv_lists
 
     for afck_num_index in afck_num_lists:
         for link_index in range(links_per_gdpb):
