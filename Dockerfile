@@ -20,8 +20,7 @@ WORKDIR sca_lib_py
 
 RUN pip install -r requirements.txt
 
-COPY entrypoint.sh /opt
-RUN ls /opt
-#ENTRYPOINT ["/opt/entrypoint.sh"]
+COPY entrypoint.sh .
+#ENTRYPOINT ["entrypoint.sh"]
 
 #CMD [ "./sca_srv.py" ]
