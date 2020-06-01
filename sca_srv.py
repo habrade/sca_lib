@@ -1,8 +1,8 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 import logging
 import threading
 import time
-import ConfigParser
+import json
 
 import pvaccess
 
@@ -178,12 +178,12 @@ class ScaSrv(object):
 
 
 if __name__ == '__main__':
-    config = ConfigParser.RawConfigParser()
-    config.read('./config.ini')
+    with open('config.json', 'r') as f:
+        config = json.load(fp=f)
 
-    afck_num_lists = config.get('CONFIG', 'afck_num_lists')
-    links_per_gdpb = config.getint('CONFIG', 'links_per_gdpb')
-    scaSrv_lists = config.get('CONFIG', 'scaSrv_lists')
+    afck_num_lists = list(config["afck_num_lists"])
+    links_per_gdpb = int(config["links_per_gdpb"])
+    scaSrv_lists = list(config["scaSrv_lists"])
 
     for afck_num_index in afck_num_lists:
         for link_index in range(links_per_gdpb):
