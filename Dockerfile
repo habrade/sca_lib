@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
 COPY --from=habrade/ipbus-software:latest /opt/ipbus-software /opt/ipbus-software
 
 # Build and run IOC
+## Read-only Token
 ENV sdong_gitlab_token=9Hijhqyyv6bXQ_Ka_YUM
 RUN git clone https://sdong:${sdong_gitlab_token}@git.cbm.gsi.de/s.dong/sca_lib_py.git
 
@@ -21,6 +22,4 @@ WORKDIR sca_lib_py
 RUN pip install -r requirements.txt
 
 COPY entrypoint.sh .
-#ENTRYPOINT ["entrypoint.sh"]
-
-#CMD [ "./sca_srv.py" ]
+ENTRYPOINT ["./entrypoint.sh"]
