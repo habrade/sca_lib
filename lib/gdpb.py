@@ -1,4 +1,5 @@
 import logging
+import json
 
 import uhal
 
@@ -21,8 +22,16 @@ class Gdpb(object):
         self.__afck_num = afck_num
         self.__link = link
 
-        self.connection_file_path = "/opt/dpbcontrols/etc/ipbus_lab%d_gdpb_gbtx.xml" % self.__afck_num
-        self.device_id = "C0S00_gdpb%03d" % self.__afck_num
+        with open('config.json', 'r') as f:
+            config = json.load(fp=f)
+
+        connection_file_dir = config["connection_file_dir"]
+        experiment_name = config["experiment_name"]
+        connection_id = config["connection_id"]
+        # self.connection_file_path = "/opt/dpbcontrols/etc/ipbus_lab%d_gdpb_gbtx.xml" % self.__afck_num
+        self.connection_file_path = connection_file_dir + "ipbus_%s%d_gdpb_gbtx.xml" % (
+            experiment_name, self.__afck_num)
+        self.device_id = connection_id + "%03d" % self.__afck_num
 
         self.__connection_mgr = uhal.ConnectionManager("file://" + self.connection_file_path)
         self.__hw = self.__connection_mgr.getDevice(self.device_id)

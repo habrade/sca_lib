@@ -1,5 +1,9 @@
 {
   "afck_num_lists": [66],
   "links_per_gdpb": 1,
-  "scaSrv_lists": []
+  "scaSrv_lists": [],
+
+  "connection_file_dir": "/opt/dpbcontrols/etc/",
+  "experiment_name": "lab",
+  "connection_id": "C0S00_gdpb"
 }
